@@ -56,25 +56,20 @@ serviceThresholdReferenceDataDF = spark.read.format("csv").option("header", True
 serviceThresholdReferenceDataDF.printSchema()
 
 # Subset the customer master data for relevant attributes
-# ...Drop a few fields
-customerMasterDataInitialSubsetDF=customerMasterDataDF.drop("customerID","gender","SeniorCitizen","Partner","Dependents","OnlineSecurity","OnlineBackup","DeviceProtection","TechSupport","StreamingTV","StreamingMovies","Contract","PaperlessBilling","PaymentMethod","MonthlyCharges","TotalCharges")
-# ...Add a new field off of the Index attribute
-customerMasterDataInitialSubsetDF=customerMasterDataInitialSubsetDF.withColumn('customerID', customerMasterDataInitialSubsetDF.Index)
-# ...Drop the Index attribute
-customerMasterDataFinalSubsetDF=customerMasterDataInitialSubsetDF.drop(customerMasterDataInitialSubsetDF.Index)
+# ...Drop unnecessary fields and rename Index to customerID
+customerMasterDataFinalSubsetDF = customerMasterDataDF.drop("customerID","gender","SeniorCitizen","Partner","Dependents","OnlineSecurity","OnlineBackup","DeviceProtection","TechSupport","StreamingTV","StreamingMovies","Contract","PaperlessBilling","PaymentMethod","MonthlyCharges","TotalCharges").withColumnRenamed("Index", "customerID")
 customerMasterDataFinalSubsetDF.show(10,truncate=False)
 customerMasterDataFinalSubsetDF.printSchema()
 
 # Subset the service threshold reference data for relevant attributes, with some renaming
-serviceThresholdReferenceDataInitialDF=serviceThresholdReferenceDataDF.drop(serviceThresholdReferenceDataDF.Time)
-serviceThresholdReferenceDataInitialDF.createOrReplaceTempView("Services")
-serviceThresholdReferenceDataInitialDF2 = spark.sql('''select * from (SELECT  *,  ROW_NUMBER()  OVER(PARTITION BY CellName ORDER BY CellName) AS Rank FROM Services) as Service_Rank where Rank=1  ''')
-serviceThresholdReferenceDataFinalDF=serviceThresholdReferenceDataInitialDF2.drop(serviceThresholdReferenceDataInitialDF2.Rank).withColumnRenamed('maxUE_UL+DL', 'maxUE_UL_DL')
+# Use dropDuplicates rather than an expensive Window/ROW_NUMBER function to get unique records per CellName
+serviceThresholdReferenceDataFinalDF = serviceThresholdReferenceDataDF.drop("Time").dropDuplicates(["CellName"]).withColumnRenamed('maxUE_UL+DL', 'maxUE_UL_DL')
 serviceThresholdReferenceDataFinalDF.show(10,truncate=False)
 serviceThresholdReferenceDataFinalDF.printSchema()
 
 # Join the customer master data with the services threshold reference data
-consolidatedDataDF = customerMasterDataFinalSubsetDF.join(serviceThresholdReferenceDataFinalDF, customerMasterDataFinalSubsetDF.CellTower ==  serviceThresholdReferenceDataFinalDF.CellName, "inner")
+# Broadcast the smaller services threshold reference table during join to avoid an expensive data shuffle
+consolidatedDataDF = customerMasterDataFinalSubsetDF.join(F.broadcast(serviceThresholdReferenceDataFinalDF), customerMasterDataFinalSubsetDF.CellTower ==  serviceThresholdReferenceDataFinalDF.CellName, "inner")
 consolidatedDataDF.show(10,truncate=False)
 consolidatedDataDF.printSchema()
 

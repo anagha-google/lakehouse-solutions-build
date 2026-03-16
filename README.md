@@ -17,7 +17,7 @@ limitations under the License.*
 Welcome to the **Google Cloud Lakehouse Solution** repository! 
 
 ## Overview
-This is a repository of Lakehouse solutions powered by Google Cloud products with robust open-source support. 
+This is a repository of Lakehouse (horizontal) solutions powered by Google Cloud products with robust open-source support. 
 
 ## Motivation
 The primary motivation of this repository is to demystify the Lakehouse stack on Google Cloud. By providing concrete, deployable examples and solutions, we aim to share reference architectures, design patterns, and best practices for building scalable, modern data platforms on Google Cloud using an open ecosystem.
