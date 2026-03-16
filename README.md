@@ -14,7 +14,7 @@ limitations under the License.*
 
 # Google Cloud Lakehouse Solutions
 
-Welcome to the **Google Cloud Lakehouse Solution Samples** repository! 
+Welcome to the **Google Cloud Lakehouse Solution** repository! 
 
 ## Overview
 This is a repository of Lakehouse solutions powered by Google Cloud products with robust open-source support. 
