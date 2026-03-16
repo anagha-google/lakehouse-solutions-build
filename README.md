@@ -12,9 +12,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*
 
-# Google Cloud Lakehouse Solution Samples
+# Google Cloud Lakehouse Solutions
 
-Welcome to the **Google Cloud Lakehouse Solution Samples** repository! 
+Welcome to the **Google Cloud Lakehouse Solution** repository! 
 
 ## Overview
 This is a repository of Lakehouse solutions powered by Google Cloud products with robust open-source support. 
