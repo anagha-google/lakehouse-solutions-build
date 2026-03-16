@@ -30,13 +30,13 @@ This lab showcases running Apache Spark applications on GCP with Airflow orchest
 | Showcased | Detection of cell towers needing maintenance with Apache Spark |
 | Technical Use-case | Data engineering at scale |
 | Technology | Spark (PySpark) |
-| Product | Serverless Spark batches on Cloud Dataproc |
+| Product | Serverless Spark batches on Managed Spark |
 | Dataset | Telco Customer Churn Public (small) Dataset |
 | Process | Rule-based, thresholds-based anomaly detection |
-| Scheduling and Orchestration | Apache Airflow on Cloud Composer 3 |
+| Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
 | Focus| Data Engineering on Google Cloud |
 
-The goal of the lab is to demystify Managed Spark Serverless on GCP and orchestration of Spark on Managed Airflow on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. 
+The goal of the lab is to demystify Managed Spark Serverless on GCP and orchestration of Spark on Managed Airflow Serverless on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario running on managed services on Google Cloud.
 
 <hr>
 
@@ -85,7 +85,7 @@ Covered in section 3.1
 | Spark History Server |  Managed Apache Spark **Persistent** History Server |
 | Data Lake Metastore |  BigLake Metastore |
 | Data Lake File System |  Google Cloud Storage |
-| Scheduling and Orchestration | Apache Airflow on Cloud Composer 3 |
+| Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
 | Provisioning Automation | Terraform |
 
 
@@ -139,7 +139,7 @@ Read the lab - narrative below, review the code, and then start trying out the l
 ## 1. Clone this repo in Cloud Shell
 
 ```
-git clone https://github.com/anagha-google/dataproc-labs.git
+git clone https://github.com/anagha-google/lakehouse-solutions-build.git
 ```
 
 <hr>
@@ -152,7 +152,7 @@ The Terraform in this section updates organization policies and enables Google A
 ```
 PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
 
-cd ~/dataproc-labs/1-dataproc-serverless-with-terraform/provisioning-automation/foundations-tf
+cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/foundations-tf
 ```
 
 2. Run the Terraform for organization policy edits and enabling Google APIs
@@ -166,7 +166,7 @@ terraform apply \
 Wait till the provisioning completes - ~5 minutes. In a separate cloud shell tab, you can tail the output file for execution state through completion-
 
 ```
-tail -f  ~/dataproc-labs/1-dataproc-serverless-with-terraform/provisioning-automation/foundations-tf/s8s-foundations-tf.output
+tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/foundations-tf/s8s-foundations-tf.output
 ```
 
 <hr>
@@ -181,7 +181,7 @@ In this section, we will provision-
 3. BigQuery dataset
 4. Persistent Spark History Server
 5. Dataproc Metastore
-6. Cloud Composer 3
+6. Managed Airflow Serverless
 7. User Managed Service Account
 8. Requisite IAM permissions
 9. Copy of code, data, etc into buckets
@@ -214,7 +214,7 @@ gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
 ### 3.3. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
-cd ~/dataproc-labs/1-dataproc-serverless-with-terraform/provisioning-automation/core-tf/terraform
+cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
 
 PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
 PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d':' -f2 |  tr -d "'" | xargs`
@@ -246,7 +246,7 @@ terraform apply \
 Takes ~50 minutes to complete. In a separate cloud shell tab, you can tail the output file for execution state through completion-
 
 ```
-tail -f ~/dataproc-labs/1-dataproc-serverless-with-terraform/provisioning-automation/core-tf/terraform/s8s-core-tf.output
+tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform/s8s-core-tf.output
 ```
 
 <br>
@@ -1121,7 +1121,7 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 
 <hr>
 
-## 6. Automate orchestration with Apache Airflow powered by Cloud Composer 3
+## 6. Automate orchestration with Apache Airflow powered by Managed Airflow Serverless
 
 ### 6.1. The data engineering pipeline
 

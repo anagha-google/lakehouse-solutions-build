@@ -12,12 +12,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*
 
-# Google Cloud Lakehouse Solution Samples
+# Google Cloud Lakehouse Solutions
 
-Welcome to the **Google Cloud Lakehouse Solution Samples** repository! 
+Welcome to the **Google Cloud Lakehouse Solution** repository! 
 
 ## Overview
-This is a repository of Lakehouse solutions powered by Google Cloud products with robust open-source support. 
+This is a repository of Lakehouse (horizontal) solutions powered by Google Cloud products with robust open-source support. 
 
 ## Motivation
 The primary motivation of this repository is to demystify the Lakehouse stack on Google Cloud. By providing concrete, deployable examples and solutions, we aim to share reference architectures, design patterns, and best practices for building scalable, modern data platforms on Google Cloud using an open ecosystem.
@@ -40,8 +40,11 @@ Clone the repo and follow the step-by-step instructions for an end-to-end develo
 **Option 2 - Instructor-led workshop:** <br>
 If you are a Google Cloud customer, you can reach out to your Google account team, and ask for an (no-cost) instructor-led workshop running on your GCP project (you will be responsible for GCP consumption).
 
-**Time commitment:** <br>
-Expect to spend ~2 hours to fully understand, read product documentation and execute the spark-serverless-quickstart tutorial.
+**Option 3 - Strapped for time? Read like a book:** <br>
+The repo is rich with visuals and documentation, and can be read like a book.
+
+**Time commitment for each option:** <br>
+The time commitment depends on the option chosen, solution chosen, and is documented in the solution's README.md file.
 
 <hr>
 
@@ -59,9 +62,9 @@ L200 - L300
 <hr>
 
 ## Solutions
-| Solution | Description |
-| :--- | :--- |
-| [Managed Spark Serverless Quickstart](./spark-serverless-quickstart/) | A quickstart guide to running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services. |
+| # | Solution | Description | Technical Stack |
+| :-- | :--- | :--- | :--- |
+| 1. | [Managed Spark Serverless Quickstart](./spark-serverless-quickstart/) | A quickstart guide to running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services. | PySpark on Managed Spark Serverless Managed Airflow Serverless, BigQuery, Cloud Storage, Terraform |
 
 <hr>
 
