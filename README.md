@@ -40,8 +40,11 @@ Clone the repo and follow the step-by-step instructions for an end-to-end develo
 **Option 2 - Instructor-led workshop:** <br>
 If you are a Google Cloud customer, you can reach out to your Google account team, and ask for an (no-cost) instructor-led workshop running on your GCP project (you will be responsible for GCP consumption).
 
-**Time commitment:** <br>
-Expect to spend ~2 hours to fully understand, read product documentation and execute the spark-serverless-quickstart tutorial.
+**Option 3 - Strapped for time? Read like a book:** <br>
+The repo is rich with visuals and documentation, and can be read like a book.
+
+**Time commitment for each option:** <br>
+The time commitment depends on the option chosen, solution chosen, and is documented in the solution's README.md file.
 
 <hr>
 
