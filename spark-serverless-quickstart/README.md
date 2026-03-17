@@ -17,9 +17,9 @@ limitations under the License.*
 
 # Solution 1: Introduction to Managed Spark Serverless and Orchestration with Airflow on Managed Airflow on Google Cloud Platform
 
-## 0. About the lab
+## 1.0. About the lab
 
-### 0.1. Abstract
+### 1.1. Abstract
 This lab showcases running Apache Spark applications on GCP with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow on Google Cloud Platform.
 
 
@@ -40,19 +40,19 @@ The goal of the lab is to demystify Managed Spark Serverless on GCP and orchestr
 
 <hr>
 
-### 0.2. Duration 
+### 1.2. Duration
 It takes ~1.5 hours to complete and is fully scrpited, including with Terraform for provisioning.
 
 
 <hr>
 
-### 0.3. Resources provisioned
+### 1.3. Resources provisioned
 Covered in section 3.1
 
 
 <hr>
 
-### 0.4. Prerequisites
+### 1.4. Prerequisites
 
 - A pre-created project
 - You need to have organization admin rights, and project owner privileges or work with privileged users to complete provisioning.
@@ -60,7 +60,7 @@ Covered in section 3.1
 
 <hr>
 
-### 0.5. Lab format
+### 1.5. Lab format
 
 - Includes Terraform for provisioning automation
 - Is fully scripted - the entire solution is provided, and with instructions
@@ -69,7 +69,7 @@ Covered in section 3.1
 
 <hr>
 
-### 0.6. Audience
+### 1.6. Audience
 
 - A quick read for architects
 - Targeted for hands on practitioners, especially data engineers
@@ -77,7 +77,7 @@ Covered in section 3.1
 
 <hr>
 
-### 0.7. Features covered
+### 1.7. Features covered
 
 | Functionality | Feature | 
 | -- | :--- | 
@@ -91,7 +91,7 @@ Covered in section 3.1
 
 <hr>
 
-### 0.8. Lab Architecture
+### 1.8. Lab Architecture
 
 
 ![README](./images/s8s-qs-04.png)   
@@ -99,7 +99,7 @@ Covered in section 3.1
 
 <hr>
 
-### 0.9. The data
+### 1.9. The data
 
 
 
@@ -108,26 +108,26 @@ Covered in section 3.1
 
 <hr>
 
-### 0.10. The relationships between the data entities
+### 1.10. The relationships between the data entities
 
 
 ![README](images/s8s-qs-02.png)   
 <br><br>
 
-### 0.11. The data engineering pipeline
+### 1.11. The data engineering pipeline
 
 ![README](images/s8s-qs-17.png)   
 <br><br>
 
 
-### 0.12. Lab Flow
+### 1.12. Lab Flow
 
 ![README](images/s8s-qs-01.png)   
 <br><br>
 
 <hr>
 
-### 0.13. For success
+### 1.13. For success
 
 Read the lab - narrative below, review the code, and then start trying out the lab.
 
@@ -136,7 +136,7 @@ Read the lab - narrative below, review the code, and then start trying out the l
 
 <hr>
 
-## 1. Clone this repo in Cloud Shell
+## 2.0. Clone this repo in Cloud Shell
 
 ```
 git clone https://github.com/anagha-google/lakehouse-solutions-build.git
@@ -144,7 +144,7 @@ git clone https://github.com/anagha-google/lakehouse-solutions-build.git
 
 <hr>
 
-## 2. Foundational provisioning automation with Terraform 
+## 3.0. Foundational provisioning automation with Terraform
 
 The Terraform in this section updates organization policies and enables Google APIs.
 
@@ -171,26 +171,25 @@ tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-au
 
 <hr>
 
-## 3. Lab resources provisioning automation with Terraform 
+## 4.0. Lab resources provisioning automation with Terraform
 
-### 3.1. Resources provisioned
+### 4.1. Resources provisioned
 In this section, we will provision-
 
 1. Network, subnet, firewall rule
 2. Storage buckets for code, datasets, and for use with the services
 3. BigQuery dataset
 4. Persistent Spark History Server
-5. Dataproc Metastore
-6. Managed Airflow Serverless
-7. User Managed Service Account
-8. Requisite IAM permissions
-9. Copy of code, data, etc into buckets
-10. Import of Airflow DAG
-11. Configuration of Airflow variables
+5. Managed Airflow Serverless
+6. User Managed Service Account
+7. Requisite IAM permissions
+8. Copy of code, data, etc into buckets
+9. Import of Airflow DAG
+10. Configuration of Airflow variables
 
 <hr>
 
-### 3.2. Initialize active gcloud configuration
+### 4.2. Initialize active gcloud configuration
 
 Run the following commands in Cloud Shell to authenticate and configure your active project:
 
@@ -211,7 +210,7 @@ gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
 
 <hr>
 
-### 3.3. Run the terraform scripts
+### 4.3. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
 cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
@@ -253,7 +252,7 @@ tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-aut
 
 <hr>
 
-## 4. Explore the resources provisioned
+## 5.0. Explore the resources provisioned
 
 Paste the following variables in Cloud Shell-
 ```
@@ -263,7 +262,7 @@ PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d'
 
 <br>
 
-### 4.1. GCS bucket for code
+### 5.1. GCS bucket for code
 
 Run this command in Cloud Shell-
 ```
@@ -272,7 +271,7 @@ gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/scripts
 
 <br>
 
-### 4.2. GCS bucket for data
+### 5.2. GCS bucket for data
 
 Run this command in Cloud Shell-
 ```
@@ -281,13 +280,13 @@ gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/datasets
 
 <br>
 
-### 4.3. BigQuery dataset
+### 5.3. BigQuery dataset
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
 <br>
 
-### 4.4. Persistent Spark History Server (PHS)
+### 5.4. Persistent Spark History Server (PHS)
 Validate the creation of the PHS from the Cloud Console, Dataproc UI -> Clusters
 
 - The PHS has a name prefix - "s8s-sphs-"
@@ -295,7 +294,7 @@ Validate the creation of the PHS from the Cloud Console, Dataproc UI -> Clusters
 
 <br>
 
-### 4.5. Cloud Composer environment
+### 5.5. Cloud Composer environment
 From the Cloud Console, navigate to the Cloud Composer service and 
 
 - Browse all the tabs of the deployed "environment".
@@ -309,7 +308,7 @@ We will first run the Spark jobs individually and get familiar with the Serverle
 
 <hr>
 
-## 5. Run the Spark jobs individually
+## 6.0. Run the Spark jobs individually
 
 Paste the following variables in Cloud Shell
 ```
@@ -337,11 +336,11 @@ echo $SPARK_SERVERLESS_RUNTIME_VERSION
 
 <hr>
 
-### 5.1. Curate customer master data
+### 6.1. Curate customer master data
 
 In this section, from PySpark, we transform customer master data (parquet) and service threshold data (CSV) and join them, and persist to GCS.<br><br>
 
-#### 5.1.1. Abstract of the Pyspark script
+#### 6.1.1. Abstract of the Pyspark script
 This script -<br>
 (a) Reads the customer master data<br>
 (b) Reads the service threshold data<br>
@@ -354,13 +353,13 @@ This script -<br>
 
 <hr>
 
-#### 5.1.2. Code
+#### 6.1.2. Code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/curate_customer_data.py) <br>
 
 <hr>
 
-#### 5.1.3. Run the command below in Cloud Shell
+#### 6.1.3. Run the command below in Cloud Shell
 ```
 gcloud dataproc batches submit \
 --project $PROJECT_ID \
@@ -376,7 +375,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 
 <br>
 
-#### 5.1.4. Review execution in the Managed Spark batches UI
+#### 6.1.4. Review execution in the Managed Spark batches UI
 Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 
@@ -385,7 +384,7 @@ Switch to Dataproc to check the execution under "batches". You should see a batc
 ![README](images/s8s-qs-14.png)   
 <br><br>
 
-#### 5.1.5. Take a quick read of the console output that is just FYI
+#### 6.1.5. Take a quick read of the console output that is just FYI
 
 ```
 A) Customer data schema:
@@ -537,12 +536,12 @@ root
  
  <br>
  
-#### 5.1.7. Review the complete output in the Managed Spark Serverless batches UI for the job
+#### 6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
 
 ![README](images/s8s-qs-12.png)   
 <br><br>
  
-#### 5.1.6. Review the results in Cloud Storage
+#### 6.1.7. Review the results in Cloud Storage
  
  ```
  gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/customer_augmented
@@ -557,7 +556,7 @@ gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/_SUCCE
 gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
 
-#### 5.1.7. Review the execution logs in the Managed Spark History Server 
+#### 6.1.8. Review the execution logs in the Managed Spark History Server
 
 From the Dataproc "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
  
@@ -568,12 +567,12 @@ From the Dataproc "batches" UI, click on the job that is running/completed and a
 
 <hr>
 
-### 5.2. Curate telecom performance data
+### 6.2. Curate telecom performance data
 In this section, from PySpark, we transform telco customer churn data, join with the augmented customer data, and persist to GCS.<br>
 
 Review the [code](cell-tower-anomaly-detection/00-scripts/curate_telco_performance_data.py) first.<br>
 
-#### 5.2.1. Abstract of the Pyspark script
+#### 6.2.1. Abstract of the Pyspark script
 This script -<br>
 (a) Reads the curated customer data<br>
 (b) Reads the telco customer churn data<br>
@@ -586,12 +585,12 @@ This script -<br>
 ![README](images/s8s-qs-06.png)   
 <br><br>
 
-#### 5.2.2. The PySpark code
+#### 6.2.2. The PySpark code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/curate_telco_performance_data.py) <br>
 
 
-#### 5.2.3. Execute the command below
+#### 6.2.3. Execute the command below
 ```
 gcloud dataproc batches submit \
 --project $PROJECT_ID \
@@ -607,13 +606,13 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_telco_performance_data.py \
 
 <br>
 
-#### 5.2.4. Review execution in the Managed Spark batches UI
+#### 6.2.4. Review execution in the Managed Spark batches UI
 Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-curate-telco-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 <br>
 
 
-#### 5.2.5. Take a quick read of the console output that is just FYI
+#### 6.2.5. Take a quick read of the console output that is just FYI
 
 ```
 
@@ -768,7 +767,7 @@ only showing top 20 rows
 
 <br>
 
-#### 5.2.6. List the results in the GCS bucket
+#### 6.2.6. List the results in the GCS bucket
 ```
 gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/telco_performance_augmented
 ```
@@ -795,12 +794,12 @@ This output will be used in subsequent steps.
 
 <hr>
 
-### 5.3. Calculate Cell Tower performance metrics by customer
+### 6.3. Calculate Cell Tower performance metrics by customer
 In this section, from PySpark, we analyze the curated telecom data, and calculate the KPIs by customer.<br>
 
 Review the [code](cell-tower-anomaly-detection/00-scripts/kpis_by_customer.py) first.<br>
 
-#### 5.3.1. Abstract of the Pyspark script
+#### 6.3.1. Abstract of the Pyspark script
 This script -<br>
 (a) Reads the curated telecom data <br>
 (b) Add a number of derived metrics <br>
@@ -815,13 +814,13 @@ This script -<br>
 
 <hr>
 
-#### 5.3.2. The PySpark code
+#### 6.3.2. The PySpark code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/kpis_by_customer.py) <br>
 
 <hr>
 
-#### 5.3.3. Execute the command below
+#### 6.3.3. Execute the command below
 ```
 gcloud dataproc batches submit \
 --project $PROJECT_ID \
@@ -837,7 +836,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_customer.py \
 
 <hr>
 
-#### 5.3.4. Take a quick read of the console output that is just FYI
+#### 6.3.4. Take a quick read of the console output that is just FYI
 
 ```
 root
@@ -904,7 +903,7 @@ only showing top 3 rows
 Note the defect count which is a netric derived that indicates issues with the cell tower.<br>
 
 
-#### 5.3.5. List the results in the GCS bucket
+#### 6.3.5. List the results in the GCS bucket
 ```
 gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_customer
 ```
@@ -921,7 +920,7 @@ This output will be used in subsequent steps.
 
 <br>
 
-### 5.3.6. Analyze results in BigQuery
+#### 6.3.6. Analyze results in BigQuery
 
 Run the query below-
 ```
@@ -936,12 +935,12 @@ select customerID,CellName, defect_count from `cell_tower_reporting_mart.kpis_by
 <hr>
 
 
-### 5.4. Calculate performance metrics by Cell Tower and flag towers needing maintenance
+### 6.4. Calculate performance metrics by Cell Tower and flag towers needing maintenance
 In this section, from PySpark, we analyze the curated telecom data, and calculate the KPIs by customer and cell tower to flag cell towers needing maintenance.<br>
 
 Review the [code](cell-tower-anomaly-detection/00-scripts/kpis_by_customer.py) first.<br>
 
-#### 5.4.1. Abstract of the Pyspark script
+#### 6.4.1. Abstract of the Pyspark script
 This script -<br>
 (a) Reads the curated telecom data <br>
 (b) Add a number of derived metrics by cell tower <br>
@@ -957,14 +956,14 @@ This script -<br>
 <hr>
 
 
-#### 5.4.2. The PySpark code
+#### 6.4.2. The PySpark code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/kpis_by_cell_tower.py) <br>
 
 <hr>
 
 
-#### 5.4.3. Execute the command below
+#### 6.4.3. Execute the command below
 ```
 gcloud dataproc batches submit \
 --project $PROJECT_ID \
@@ -980,7 +979,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_cell_tower.py \
 ```
 <br>
 
-#### 5.4.4. Take a quick read of the console output that is just FYI
+#### 6.4.4. Take a quick read of the console output that is just FYI
 
 ```
 root
@@ -1092,7 +1091,7 @@ only showing top 20 rows
 A metric has been added called "Maintenance_Required" to reflect defects beyond a threshold.<br>
 
 
-#### 5.4.5. List the results in the GCS bucket-
+#### 6.4.5. List the results in the GCS bucket-
 ```
 gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_cell_tower
 ```
@@ -1107,7 +1106,7 @@ This output will be used in subsequent steps.
 
 <br>
 
-#### 5.4.6. Analyze results in BigQuery
+#### 6.4.6. Analyze results in BigQuery
 
 Run the query below-
 ```
@@ -1121,16 +1120,16 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 
 <hr>
 
-## 6. Automate orchestration with Apache Airflow powered by Managed Airflow Serverless
+## 7.0. Automate orchestration with Apache Airflow powered by Managed Airflow Serverless
 
-### 6.1. The data engineering pipeline
+### 7.1. The data engineering pipeline
 
 ![README](images/s8s-qs-16.png)   
 <br><br>
 
 <hr>
 
-### 6.2. Architecture
+### 7.2. Architecture
 
 ![README](images/s8s-qs-17.png)   
 <br><br>
@@ -1138,7 +1137,7 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 <hr>
 
 
-### 6.3. Review the Airflow DAG code
+### 7.3. Review the Airflow DAG code
 
 Review the code to understand the DAG construct, variables and how serverless Spark jobs are invoked.
 [Code](provisioning-automation/core-tf/scripts/composer-dag/pipeline.py)
@@ -1147,7 +1146,7 @@ Review the code to understand the DAG construct, variables and how serverless Sp
 
 <hr>
 
-### 6.4. Review the Airflow environment and Terraform imported Airflow variables in the Cloud Composer UI
+### 7.4. Review the Airflow environment and Terraform imported Airflow variables in the Cloud Composer UI
 
 Familaize yourself with the UI of Cloud Composer service. And then navigate to the "Environment Variables" tab and review the variables supplied at provision time that get used in the DAG at runtime.
 
@@ -1159,18 +1158,18 @@ Familaize yourself with the UI of Cloud Composer service. And then navigate to t
 
 <hr>
 
-### 6.5. Open the Airflow UI from the Cloud Composer UI on Cloud Console
+### 7.5. Open the Airflow UI from the Cloud Composer UI on Cloud Console
 Familaize yourself with the UI if new to Airflow
 
  ![README](images/s8s-qs-10.png)   
 <br><br>
 
-### 6.6. Run the DAG for Cell Tower Anomaly Detection
+### 7.6. Run the DAG for Cell Tower Anomaly Detection
 
  ![README](images/s8s-qs-11.png)   
 <br><br>
 
-### 6.7. Review the job execution in the Managed Spark "Batches" UI
+### 7.7. Review the job execution in the Managed Spark "Batches" UI
 
 ![README](images/s8s-qs-15.png)   
 <br><br>
@@ -1182,7 +1181,7 @@ Familaize yourself with the UI if new to Airflow
 
 
 ##### =====================================================================================================
-##### THIS CONCLUDES THE LAB - CELL TOWER ANOMALY DETECTION WITH DATAPROC SERVERLESS
+##### THIS CONCLUDES THE LAB - CELL TOWER ANOMALY DETECTION WITH MANAGED SPARK SERVERLESS
 ##### SHUT DOWN THE LAB TO AVOID BILLING, UNLESS YOU ARE WORKING ON OTHER LABS
 ##### =====================================================================================================
 
