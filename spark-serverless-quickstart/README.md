@@ -320,7 +320,7 @@ VPC_NM=VPC=s8s-vpc-$PROJECT_NBR
 SPARK_SERVERLESS_SUBNET=spark-snet
 PERSISTENT_HISTORY_SERVER_NM=s8s-sphs-${PROJECT_NBR}
 UMSA_FQN=s8s-lab-sa@$PROJECT_ID.iam.gserviceaccount.com
-CODE_AND_DATA_BUCKET=qs-s8s_data_and_code_bucket-${PROJECT_NBR}
+CODE_AND_DATA_BUCKET=qs-s8s-data_and_code_bucket-${PROJECT_NBR}
 SPARK_SERVERLESS_RUNTIME_VERSION=3.0
 
 
@@ -551,10 +551,10 @@ root
  
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
 
 #### 6.1.8. Review the execution logs in the Managed Spark History Server
