@@ -267,7 +267,7 @@ CODE_AND_DATA_BUCKET="qs-s8s_data_and_code_bucket-${PROJECT_NBR}"
 
 Run this command in Cloud Shell-
 ```
-gsutil ls -r gs://$CODE_AND_DATA_BUCKET/scripts
+gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 ```
 
 <br>
@@ -276,7 +276,7 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/scripts
 
 Run this command in Cloud Shell-
 ```
-gsutil ls -r gs://$CODE_AND_DATA_BUCKET/datasets
+gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 ```
 
 <br>
