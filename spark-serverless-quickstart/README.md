@@ -258,6 +258,7 @@ Paste the following variables in Cloud Shell-
 ```
 PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
 PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d':' -f2 |  tr -d "'" | xargs`
+CODE_AND_DATA_BUCKET="gs://qs-s8s_data_and_code_bucket-${PROJECT_NBR}"
 ```
 
 <br>
@@ -266,7 +267,7 @@ PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d'
 
 Run this command in Cloud Shell-
 ```
-gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/scripts
+gsutil ls -r gs://$CODE_AND_DATA_BUCKET/scripts
 ```
 
 <br>
@@ -275,7 +276,7 @@ gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/scripts
 
 Run this command in Cloud Shell-
 ```
-gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/datasets
+gsutil ls -r gs://$CODE_AND_DATA_BUCKET/datasets
 ```
 
 <br>
