@@ -36,6 +36,7 @@ phs_server=Variable.get("phs")
 code_bucket=Variable.get("code_bucket")
 bq_dataset=Variable.get("bq_dataset")
 umsa=Variable.get("umsa")
+spark_runtime_version = Variable.get("spark_runtime_version", default_var="3.0")
 
 # Define DAG name
 dag_name= "cell_tower_anomaly_detection"
@@ -62,92 +63,67 @@ BATCH_CONFIG1 = {
         "main_python_file_uri": curate_customer_script,
         "args": [
           code_bucket
-        ],
-        "jar_file_uris": [
-      "gs://spark-lib/bigquery/spark-bigquery-with-dependencies_2.12-0.22.2.jar"
-    ]
+        ]
     },
     "environment_config":{
         "execution_config":{
-              "service_account": service_account_id,
-            "subnetwork_uri": subnet
-            },
-        "peripherals_config": {
-            "spark_history_server_config": {
-                "dataproc_cluster": f"projects/{project_id}/regions/{region}/clusters/{phs_server}"
-                }
-            },
-        },
+            "service_account": service_account_id,
+            "subnetwork_uri": subnet,
+            "version": spark_runtime_version
+        }
+    }
 }
+
 BATCH_CONFIG2 = {
     "pyspark_batch": {
         "main_python_file_uri": curate_telco_performance_metrics_script,
         "args": [
-        code_bucket
-        ],
-        "jar_file_uris": [
-      "gs://spark-lib/bigquery/spark-bigquery-with-dependencies_2.12-0.22.2.jar"
-    ]
+          code_bucket
+        ]
     },
     "environment_config":{
         "execution_config":{
-        "service_account": service_account_id,
-            "subnetwork_uri": subnet
-            },
-        "peripherals_config": {
-            "spark_history_server_config": {
-                "dataproc_cluster": f"projects/{project_id}/regions/{region}/clusters/{phs_server}"
-                }
-            },
-        },
+            "service_account": service_account_id,
+            "subnetwork_uri": subnet,
+            "version": spark_runtime_version
+        }
+    }
 }
+
 BATCH_CONFIG3 = {
     "pyspark_batch": {
         "main_python_file_uri": kpis_by_customer_script,
         "args": [
-        project_id,
-        bq_dataset,
-        code_bucket
-        ],
-        "jar_file_uris": [
-      "gs://spark-lib/bigquery/spark-bigquery-with-dependencies_2.12-0.22.2.jar"
-    ]
+          project_id,
+          bq_dataset,
+          code_bucket
+        ]
     },
     "environment_config":{
         "execution_config":{
-        "service_account": service_account_id,
-            "subnetwork_uri": subnet
-            },
-        "peripherals_config": {
-            "spark_history_server_config": {
-                "dataproc_cluster": f"projects/{project_id}/regions/{region}/clusters/{phs_server}"
-                }
-            },
-        },
+            "service_account": service_account_id,
+            "subnetwork_uri": subnet,
+            "version": spark_runtime_version
+        }
+    }
 }
+
 BATCH_CONFIG4 = {
     "pyspark_batch": {
         "main_python_file_uri": kpis_by_cell_tower_script,
         "args": [
-        project_id,
-        bq_dataset,
-        code_bucket
-        ],
-        "jar_file_uris": [
-      "gs://spark-lib/bigquery/spark-bigquery-with-dependencies_2.12-0.22.2.jar"
-    ]
+          project_id,
+          bq_dataset,
+          code_bucket
+        ]
     },
     "environment_config":{
         "execution_config":{
-        "service_account": service_account_id,
-            "subnetwork_uri": subnet
-            },
-        "peripherals_config": {
-            "spark_history_server_config": {
-                "dataproc_cluster": f"projects/{project_id}/regions/{region}/clusters/{phs_server}"
-                }
-            },
-        },
+            "service_account": service_account_id,
+            "subnetwork_uri": subnet,
+            "version": spark_runtime_version
+        }
+    }
 }
 
 

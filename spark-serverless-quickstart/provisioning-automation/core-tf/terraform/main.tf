@@ -27,10 +27,6 @@ umsa                        = "s8s-lab-sa"
 umsa_fqn                    = "${local.umsa}@${local.project_id}.iam.gserviceaccount.com"
 s8s_spark_bucket            = "qs-s8s-spark-bucket-${local.project_nbr}"
 s8s_spark_bucket_fqn        = "gs://qs-s8s-spark-${local.project_nbr}"
-s8s_spark_sphs_nm           = "qs-s8s-sphs-${local.project_nbr}"
-s8s_spark_sphs_version      = "2.3"
-s8s_spark_sphs_bucket       = "qs-s8s-sphs-${local.project_nbr}"
-s8s_spark_sphs_bucket_fqn   = "gs://qs-s8s-sphs-${local.project_nbr}"
 vpc_nm                      = "qs-s8s-vpc-${local.project_nbr}"
 spark_subnet_nm             = "spark-snet"
 spark_subnet_cidr           = "10.0.0.0/16"
@@ -39,6 +35,7 @@ bq_datamart_ds              = "cell_tower_reporting_mart"
 CC_GMSA_FQN                 = "service-${local.project_nbr}@cloudcomposer-accounts.iam.gserviceaccount.com"
 GCE_GMSA_FQN                = "${local.project_nbr}-compute@developer.gserviceaccount.com"
 CLOUD_COMPOSER3_IMG_VERSION = "${var.cloud_composer_image_version}"
+S8S_SPARK_RUNTIME_VERSION   = "${var.spark_runtime_version}"
 
 }
 
@@ -269,6 +266,7 @@ resource "time_sleep" "sleep_after_network_and_firewall_creation" {
 
 resource "google_storage_bucket" "s8s_spark_bucket_creation" {
   name                              = local.s8s_spark_bucket
+  project                           = local.project_id
   location                          = local.location
   uniform_bucket_level_access       = true
   force_destroy                     = true
@@ -277,18 +275,10 @@ resource "google_storage_bucket" "s8s_spark_bucket_creation" {
   ]
 }
 
-resource "google_storage_bucket" "s8s_spark_sphs_bucket_creation" {
-  name                              = local.s8s_spark_sphs_bucket
-  location                          = local.location
-  uniform_bucket_level_access       = true
-  force_destroy                     = true
-  depends_on = [
-      time_sleep.sleep_after_network_and_firewall_creation
-  ]
-}
 
 resource "google_storage_bucket" "s8s_data_and_code_bucket_creation" {
   name                              = local.s8s_data_and_code_bucket
+  project                           = local.project_id
   location                          = local.location
   uniform_bucket_level_access       = true
   force_destroy                     = true
@@ -306,7 +296,6 @@ resource "time_sleep" "sleep_after_bucket_creation" {
   create_duration = "60s"
   depends_on = [
     google_storage_bucket.s8s_data_and_code_bucket_creation,
-    google_storage_bucket.s8s_spark_sphs_bucket_creation,
     google_storage_bucket.s8s_spark_bucket_creation
 
   ]
@@ -376,66 +365,14 @@ resource "time_sleep" "sleep_after_network_and_storage_steps" {
   ]
 }
 
-/******************************************
-9a. PHS creation
-******************************************/
 
-# Docs: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dataproc_cluster
-
-resource "google_dataproc_cluster" "sphs_creation" {
-  provider = google-beta
-  name     = local.s8s_spark_sphs_nm
-  region   = local.location
-
-  cluster_config {
-    
-    endpoint_config {
-        enable_http_port_access = true
-    }
-
-    staging_bucket = local.s8s_spark_bucket
-    
-    # Override or set some custom properties
-    software_config {
-      image_version = local.s8s_spark_sphs_version
-      override_properties = {
-        "dataproc:dataproc.allow.zero.workers"=true
-        "dataproc:job.history.to-gcs.enabled"=true
-        "spark:spark.history.fs.logDirectory"="${local.s8s_spark_sphs_bucket_fqn}/*/spark-job-history"
-        "mapred:mapreduce.jobhistory.read-only.dir-pattern"="${local.s8s_spark_sphs_bucket_fqn}/*/mapreduce-job-history/done"
-      }      
-    }
-    gce_cluster_config {
-      subnetwork =  "projects/${local.project_id}/regions/${local.location}/subnetworks/${local.spark_subnet_nm}" 
-      service_account = local.umsa_fqn
-      service_account_scopes = [
-        "cloud-platform"
-      ]
-    }
-  }
-  depends_on = [
-    module.administrator_role_grants,
-    module.vpc_creation,
-    time_sleep.sleep_after_network_and_storage_steps
-  ]  
-}
-
-/*******************************************
-Introducing sleep to minimize errors from
-dependencies having not completed
-********************************************/
-resource "time_sleep" "sleep_after_phs_creation" {
-  create_duration = "180s"
-  depends_on = [
-      google_dataproc_cluster.sphs_creation
-  ]
-}
 
 /******************************************
 9b. BigQuery dataset creation
 ******************************************/
 
 resource "google_bigquery_dataset" "bq_dataset_creation" {
+  project                     = local.project_id
   dataset_id                  = local.bq_datamart_ds
   location                    = "US"
 }
@@ -445,6 +382,7 @@ resource "google_bigquery_dataset" "bq_dataset_creation" {
 ******************************************/
 
 resource "google_composer_environment" "cloud_composer_env_creation" {
+  project = local.project_id
   name   = "${local.project_id}-cc3"
   region = local.location
   provider = google-beta
@@ -454,12 +392,12 @@ resource "google_composer_environment" "cloud_composer_env_creation" {
       image_version = local.CLOUD_COMPOSER3_IMG_VERSION 
       env_variables = {
         AIRFLOW_VAR_CODE_BUCKET = "${local.s8s_data_and_code_bucket}"
-        AIRFLOW_VAR_PHS = "${local.s8s_spark_sphs_nm}"
         AIRFLOW_VAR_PROJECT_ID = "${local.project_id}"
         AIRFLOW_VAR_REGION = "${local.location}"
         AIRFLOW_VAR_SUBNET = "${local.spark_subnet_nm}"
         AIRFLOW_VAR_BQ_DATASET = "${local.bq_datamart_ds}"
         AIRFLOW_VAR_UMSA = "${local.umsa}"
+        AIRFLOW_VAR_SPARK_RUNTIME_VERSION = "${local.S8S_SPARK_RUNTIME_VERSION}"
       }
     }
 
@@ -471,7 +409,7 @@ resource "google_composer_environment" "cloud_composer_env_creation" {
   }
 
   depends_on = [
-    time_sleep.sleep_after_phs_creation
+    time_sleep.sleep_after_network_and_storage_steps
   ] 
 
   timeouts {
@@ -528,9 +466,6 @@ output "SPARK_SERVERLESS_SUBNET" {
   value = local.spark_subnet_nm
 }
 
-output "PERSISTENT_HISTORY_SERVER_NM" {
-  value = local.s8s_spark_sphs_nm
-}
 
 output "UMSA_FQN" {
   value = local.umsa_fqn
