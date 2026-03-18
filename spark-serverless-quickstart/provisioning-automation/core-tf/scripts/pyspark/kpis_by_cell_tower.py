@@ -54,110 +54,67 @@ spark =SparkSession.builder.appName("KPIs-By-Cell-Tower").config('spark.jars', '
 curatedTelcoPerformanceDataDF = spark.read.format("parquet").option("header", True).option("inferSchema",True).load(augmentedTelcoPerformanceDataDir)
 curatedTelcoPerformanceDataDF.printSchema()
 
-# KPIs at cell tower grain level on top of KPIs by customer grain
+# Layer2 slicing: KPIs at cell tower grain level on top of KPIs by customer grain
 # ...Drop months
 curatedTelcoPerformanceDataDF=curatedTelcoPerformanceDataDF.drop(curatedTelcoPerformanceDataDF.months)
 # ...Create a temp view
 curatedTelcoPerformanceDataDF.createOrReplaceTempView("telco_perf_by_customer_unaggregated")
-# ...Derive month natively without SQL Context
-from pyspark.sql.window import Window
-curatedTelcoPerformanceDataAugDF1 = curatedTelcoPerformanceDataDF.withColumn(
-    "month", 
-    F.row_number().over(Window.partitionBy("Customer_ID").orderBy("Customer_ID"))
-)
-# Define the base metrics to average
-cols_to_avg = [
-    "PRBUsageUL", "PRBUsageDL", "meanThr_DL", "meanThr_UL", "maxThr_DL", "maxThr_UL",
-    "meanUE_DL", "meanUE_UL", "maxUE_DL", "maxUE_UL", "maxUE_UL_DL", "Unusual",
-    "roam_Mean", "change_mou", "drop_vce_Mean", "drop_dat_Mean", "blck_vce_Mean",
-    "blck_dat_Mean", "plcd_vce_Mean", "plcd_dat_Mean", "comp_vce_Mean", "comp_dat_Mean",
-    "peak_vce_Mean", "peak_dat_Mean", "mou_peav_Mean", "mou_pead_Mean", "opk_vce_Mean",
-    "opk_dat_Mean", "mou_opkv_Mean", "mou_opkd_Mean", "drop_blk_Mean", "callfwdv_Mean",
-    "callwait_Mean"
-]
+# ...Derive month
+curatedTelcoPerformanceDataAugDF1 = spark.sql('''select *,  ROW_NUMBER()  OVER(PARTITION BY customerID ORDER BY customerID) AS month from telco_perf_by_customer_unaggregated''')
+# ...Create a temp view
+curatedTelcoPerformanceDataAugDF1.createOrReplaceTempView("telco_perf_by_customer_unaggregated_with_month")
 
-# Calculate averages of metrics by Customer_ID,CellName,tenure,PhoneService,MultipleLines,InternetService
+# Calculate averages of metrics by customerID,CellName,tenure,PhoneService,MultipleLines,InternetService
 # for customers signed up for phone service
-agg_exprs = [F.avg(c).alias(f"avg_{c}") for c in cols_to_avg]
-
-curatedTelcoPerformanceAggrDF = curatedTelcoPerformanceDataAugDF1 \
-    .filter(col("PhoneService") == 'Yes') \
-    .groupBy("Customer_ID", "CellName", "tenure", "PhoneService", "MultipleLines", "InternetService") \
-    .agg(*agg_exprs)
+curatedTelcoPerformanceAggrDF = spark.sql('''select customerID,CellName,tenure,PhoneService,MultipleLines,InternetService,avg(PRBUsageUL) as avg_PRBUsageUL,avg(PRBUsageDL) as avg_PRBUsageDL,avg(meanThr_DL) as avg_meanThr_DL,avg(meanThr_UL) as avg_meanThr_UL,avg(maxThr_DL) as avg_maxThr_DL,avg(maxThr_UL) as avg_maxThr_UL,avg(meanUE_DL) as avg_meanUE_DL,avg(meanUE_UL) as avg_meanUE_UL,avg(maxUE_DL) as avg_maxUE_DL,avg(maxUE_UL) as avg_maxUE_UL,avg(maxUE_UL_DL) as avg_maxUE_UL_DL,avg(Unusual) as avg_Unusual,avg(roam_Mean) as avg_roam_Mean,avg(change_mou) as avg_change_mou,avg(drop_vce_Mean) as avg_drop_vce_Mean,avg(drop_dat_Mean) as avg_drop_dat_Mean,avg(blck_vce_Mean) as avg_blck_vce_Mean,avg(blck_dat_Mean) as avg_blck_dat_Mean,avg(plcd_vce_Mean) as avg_plcd_vce_Mean,avg(plcd_dat_Mean) as avg_plcd_dat_Mean,avg(comp_vce_Mean) as avg_comp_vce_Mean,avg(comp_dat_Mean) as avg_comp_dat_Mean,avg(peak_vce_Mean) as avg_peak_vce_Mean,avg(peak_dat_Mean) as avg_peak_dat_Mean,avg(mou_peav_Mean) as avg_mou_peav_Mean,avg(mou_pead_Mean) as avg_mou_pead_Mean,avg(opk_vce_Mean) as avg_opk_vce_Mean,avg(opk_dat_Mean) as avg_opk_dat_Mean,avg(mou_opkv_Mean) as avg_mou_opkv_Mean,avg(mou_opkd_Mean) as avg_mou_opkd_Mean,avg(drop_blk_Mean) as avg_drop_blk_Mean,avg(callfwdv_Mean) as avg_callfwdv_Mean,avg(callwait_Mean) as avg_callwait_Mean  from telco_perf_by_customer_unaggregated_with_month where PhoneService = 'Yes'  group by customerID,CellName,tenure,PhoneService,MultipleLines,InternetService  ''')
+# ...Create a temp view
+curatedTelcoPerformanceAggrDF.createOrReplaceTempView("telco_perf_by_customer_aggregated")
 
 # Calculate averages of metrics by cell tower name
-cell_tower_agg_exprs = [F.count("Customer_ID").alias("Customer_ID_count")] + \
-                       [F.avg(f"avg_{c}").alias(f"avg_{c}") for c in cols_to_avg]
+aggregatedTelcoPerformanceByCellTowerDF = spark.sql('''select CellName,count(customerID) as customerID_count,avg(avg_PRBUsageUL) as avg_PRBUsageUL,avg(avg_PRBUsageDL) as avg_PRBUsageDL,avg(avg_meanThr_DL) as avg_meanThr_DL,avg(avg_meanThr_UL) as avg_meanThr_UL,avg(avg_maxThr_DL) as avg_maxThr_DL,avg(avg_maxThr_UL) as avg_maxThr_UL,avg(avg_meanUE_DL) as avg_meanUE_DL,avg(avg_meanUE_UL) as avg_meanUE_UL,avg(avg_maxUE_DL) as avg_maxUE_DL,avg(avg_maxUE_UL) as avg_maxUE_UL,avg(avg_maxUE_UL_DL) as avg_maxUE_UL_DL,avg(avg_Unusual) as avg_Unusual,avg(avg_roam_Mean) as avg_roam_Mean,avg(avg_change_mou) as avg_change_mou,avg(avg_drop_vce_Mean) as avg_drop_vce_Mean,avg(avg_drop_dat_Mean) as avg_drop_dat_Mean,avg(avg_blck_vce_Mean) as avg_blck_vce_Mean,avg(avg_blck_dat_Mean) as avg_blck_dat_Mean,avg(avg_plcd_vce_Mean) as avg_plcd_vce_Mean,avg(avg_plcd_dat_Mean) as avg_plcd_dat_Mean,avg(avg_comp_vce_Mean) as avg_comp_vce_Mean,avg(avg_comp_dat_Mean) as avg_comp_dat_Mean,avg(avg_peak_vce_Mean) as avg_peak_vce_Mean,avg(avg_peak_dat_Mean) as avg_peak_dat_Mean,avg(avg_mou_peav_Mean) as avg_mou_peav_Mean,avg(avg_mou_pead_Mean) as avg_mou_pead_Mean,avg(avg_opk_vce_Mean) as avg_opk_vce_Mean,avg(avg_opk_dat_Mean) as avg_opk_dat_Mean,avg(avg_mou_opkv_Mean) as avg_mou_opkv_Mean,avg(avg_mou_opkd_Mean) as avg_mou_opkd_Mean,avg(avg_drop_blk_Mean) as avg_drop_blk_Mean,avg(avg_callfwdv_Mean) as avg_callfwdv_Mean,avg(avg_callwait_Mean) as avg_callwait_Mean  from telco_perf_by_customer_aggregated group by CellName''')
 
-aggregatedTelcoPerformanceByCellTowerDF = curatedTelcoPerformanceAggrDF \
-    .groupBy("CellName") \
-    .agg(*cell_tower_agg_exprs)
+# Augment with cell tower grain performance metrics
+slice2DF1=aggregatedTelcoPerformanceByCellTowerDF.withColumn('service_stability_voice_calls',aggregatedTelcoPerformanceByCellTowerDF.avg_peak_vce_Mean/aggregatedTelcoPerformanceByCellTowerDF.avg_opk_vce_Mean   )
+slice2DF2=slice2DF1.withColumn('service_stability_data_calls',slice2DF1.avg_peak_dat_Mean/slice2DF1.avg_opk_dat_Mean )
+slice2DF3=slice2DF2.withColumn('Incomplete_voice_calls',slice2DF2.avg_plcd_vce_Mean -slice2DF2.avg_comp_vce_Mean )
+slice2DF4=slice2DF3.withColumn('Incomplete_data_calls',slice2DF3.avg_plcd_dat_Mean -slice2DF3.avg_comp_dat_Mean )
 
-# # Augment with cell tower grain performance metrics
-DF1 = aggregatedTelcoPerformanceByCellTowerDF.select(
-    "*",
-    (col("avg_peak_vce_Mean") / col("avg_opk_vce_Mean")).alias("service_stability_voice_calls"),
-    (col("avg_peak_dat_Mean") / col("avg_opk_dat_Mean")).alias("service_stability_data_calls"),
-    (col("avg_plcd_vce_Mean") - col("avg_comp_vce_Mean")).alias("Incomplete_voice_calls"),
-    (col("avg_plcd_dat_Mean") - col("avg_comp_dat_Mean")).alias("Incomplete_data_calls")
-)
-
-# Compute global averages ONE TIME instead of triggering dozens of `collect()` jobs
-metrics_to_avg = [
-    "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_maxThr_DL", "avg_maxThr_UL", 
-    "avg_meanUE_DL", "avg_meanUE_UL", "avg_maxUE_DL", "avg_maxUE_UL", 
-    "avg_maxUE_UL_DL", "avg_drop_vce_Mean", "avg_drop_dat_Mean", 
-    "avg_blck_vce_Mean", "avg_blck_dat_Mean", "avg_meanThr_DL", "avg_meanThr_UL", 
-    "avg_roam_Mean", "avg_change_mou", "avg_peak_vce_Mean", "avg_peak_dat_Mean", 
-    "avg_opk_vce_Mean", "avg_opk_dat_Mean", "avg_drop_blk_Mean", "avg_callfwdv_Mean", 
-    "service_stability_voice_calls", "service_stability_data_calls"
-]
-
-global_avgs_row = DF1.select([avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
-
-greater_is_one = [
-    "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_maxThr_DL", "avg_maxThr_UL", 
-    "avg_meanUE_DL", "avg_meanUE_UL", "avg_maxUE_DL", "avg_maxUE_UL", 
-    "avg_maxUE_UL_DL", "avg_drop_vce_Mean", "avg_drop_dat_Mean", 
-    "avg_blck_vce_Mean", "avg_blck_dat_Mean"
-]
-less_is_one = [
-    "avg_meanThr_DL", "avg_meanThr_UL", "avg_roam_Mean", "avg_change_mou", 
-    "avg_peak_vce_Mean", "avg_peak_dat_Mean", "avg_opk_vce_Mean", "avg_opk_dat_Mean", 
-    "avg_drop_blk_Mean", "avg_callfwdv_Mean", "service_stability_voice_calls", 
-    "service_stability_data_calls"
-]
-
-threshold_cols = []
-for c in greater_is_one:
-    out_col = "change_mouL_Thrsld" if c == "avg_change_mou" else c + "_Thrsld"
-    threshold_cols.append(when(col(c) > lit(global_avgs_row[c]), 1).otherwise(0).alias(out_col))
-
-for c in less_is_one:
-    out_col = "change_mouL_Thrsld" if c == "avg_change_mou" else c + "_Thrsld"
-    threshold_cols.append(when(col(c) < lit(global_avgs_row[c]), 1).otherwise(0).alias(out_col))
-
-# Add all threshold columns in one operation
-DF2 = DF1.select("*", *threshold_cols)
-DF2.show(3, truncate=False)
+slice2DF5=slice2DF4.withColumn('PRBUsageUL_Thrsld',when(col("avg_PRBUsageUL") < str(slice2DF4.select(avg("avg_PRBUsageUL")).collect()[0][0]), 0)             .when(col("avg_PRBUsageUL") >str(slice2DF4.select(avg("avg_PRBUsageUL")).collect()[0][0]),1) )
+slice2DF6=slice2DF5.withColumn('PRBUsageDL_Thrsld', when(col("avg_PRBUsageDL") < str(slice2DF4.select(avg("avg_PRBUsageDL")).collect()[0][0]), 0)              .when(col("avg_PRBUsageDL") > str(slice2DF4.select(avg("avg_PRBUsageDL")).collect()[0][0]), 1))
+slice2DF7=slice2DF6.withColumn('meanThr_DL_Thrsld', when(col("avg_meanThr_DL") < str(slice2DF4.select(avg("avg_meanThr_DL")).collect()[0][0]), 1)              .when(col("avg_meanThr_DL") > str(slice2DF4.select(avg("avg_meanThr_DL")).collect()[0][0]), 0) )
+slice2DF8=slice2DF7.withColumn('meanThr_UL_Thrsld', when(col("avg_meanThr_UL") < str(slice2DF4.select(avg("avg_meanThr_UL")).collect()[0][0]), 1)              .when(col("avg_meanThr_UL") > str(slice2DF4.select(avg("avg_meanThr_UL")).collect()[0][0]), 0) )
+slice2DF9=slice2DF8.withColumn('maxThr_DL_Thrsld', when(col("avg_maxThr_DL") < str(slice2DF4.select(avg("avg_maxThr_DL")).collect()[0][0]), 0)              .when(col("avg_maxThr_DL") > str(slice2DF4.select(avg("avg_maxThr_DL")).collect()[0][0]), 1))
+slice2DF10=slice2DF9.withColumn('maxThr_UL_Thrsld', when(col("avg_maxThr_UL") <str(slice2DF4.select(avg("avg_maxThr_UL")).collect()[0][0]), 0)              .when(col("avg_maxThr_UL") > str(slice2DF4.select(avg("avg_maxThr_UL")).collect()[0][0]), 1))
+slice2DF11=slice2DF10.withColumn('meanUE_DL_Thrsld', when(col("avg_meanUE_DL") < str(slice2DF4.select(avg("avg_meanUE_DL")).collect()[0][0]), 0)             .when(col("avg_meanUE_DL") > str(slice2DF4.select(avg("avg_meanUE_DL")).collect()[0][0]), 1))
+slice2DF12=slice2DF11.withColumn('meanUE_UL_Thrsld', when(col("avg_meanUE_UL") < str(slice2DF4.select(avg("avg_meanUE_UL")).collect()[0][0]), 0)              .when(col("avg_meanUE_UL") >str(slice2DF4.select(avg("avg_meanUE_UL")).collect()[0][0]), 1) )
+slice2DF13=slice2DF12.withColumn('maxUE_DL_Thrsld',when(col("avg_maxUE_DL") < str(slice2DF4.select(avg("avg_maxUE_DL")).collect()[0][0]), 0)              .when(col("avg_maxUE_DL") > str(slice2DF4.select(avg("avg_maxUE_DL")).collect()[0][0]), 1))
+slice2DF14=slice2DF13.withColumn('maxUE_UL_Thrsld', when(col("avg_maxUE_UL") < str(slice2DF4.select(avg("avg_maxUE_UL")).collect()[0][0]), 0)              .when(col("avg_maxUE_UL") > str(slice2DF4.select(avg("avg_maxUE_UL")).collect()[0][0]), 1) )
+slice2DF15=slice2DF14.withColumn('maxUE_UL_DL_Thrsld', when(col("avg_maxUE_UL_DL") < str(slice2DF4.select(avg("avg_maxUE_UL_DL")).collect()[0][0]), 0)              .when(col("avg_maxUE_UL_DL") > str(slice2DF4.select(avg("avg_maxUE_UL_DL")).collect()[0][0]), 1) )
+slice2DF16=slice2DF15.withColumn('roam_Mean_Thrsld', when(col("avg_roam_Mean") < str(slice2DF4.select(avg("avg_roam_Mean")).collect()[0][0]), 1)              .when(col("avg_roam_Mean") > str(slice2DF4.select(avg("avg_roam_Mean")).collect()[0][0]), 0) )
+slice2DF17=slice2DF16.withColumn('change_mouL_Thrsld', when(col("avg_change_mou") < str(slice2DF4.select(avg("avg_change_mou")).collect()[0][0]), 1)              .when(col("avg_change_mou") > str(slice2DF4.select(avg("avg_change_mou")).collect()[0][0]), 0) )
+slice2DF18=slice2DF17.withColumn('drop_vce_Mean_Thrsld', when(col("avg_drop_vce_Mean") < str(slice2DF4.select(avg("avg_drop_vce_Mean")).collect()[0][0]), 0)              .when(col("avg_drop_vce_Mean") > str(slice2DF4.select(avg("avg_drop_vce_Mean")).collect()[0][0]), 1))
+slice2DF19=slice2DF18.withColumn('drop_dat_Mean_Thrsld', when(col("avg_drop_dat_Mean") < str(slice2DF4.select(avg("avg_drop_dat_Mean")).collect()[0][0]), 0)              .when(col("avg_drop_dat_Mean") > str(slice2DF4.select(avg("avg_drop_dat_Mean")).collect()[0][0]), 1) )
+slice2DF20=slice2DF19.withColumn('blck_vce_Mean_Thrsld', when(col("avg_blck_vce_Mean") < str(slice2DF4.select(avg("avg_blck_vce_Mean")).collect()[0][0]), 0)              .when(col("avg_blck_vce_Mean") > str(slice2DF4.select(avg("avg_blck_vce_Mean")).collect()[0][0]), 1) )
+slice2DF21=slice2DF20.withColumn('blck_dat_Mean_Thrsld', when(col("avg_blck_dat_Mean") < str(slice2DF4.select(avg("avg_blck_dat_Mean")).collect()[0][0]), 0)              .when(col("avg_blck_dat_Mean") > str(slice2DF4.select(avg("avg_blck_dat_Mean")).collect()[0][0]), 1) )
+slice2DF22=slice2DF21.withColumn('peak_vce_Mean_Thrsld', when(col("avg_peak_vce_Mean") < str(slice2DF4.select(avg("avg_peak_vce_Mean")).collect()[0][0]), 1)              .when(col("avg_peak_vce_Mean") > str(slice2DF4.select(avg("avg_peak_vce_Mean")).collect()[0][0]), 0) )
+slice2DF23=slice2DF22.withColumn('peak_dat_Mean_Thrsld', when(col("avg_peak_dat_Mean") < str(slice2DF4.select(avg("avg_peak_dat_Mean")).collect()[0][0]), 1)              .when(col("avg_peak_dat_Mean") > str(slice2DF4.select(avg("avg_peak_dat_Mean")).collect()[0][0]), 0))
+slice2DF24=slice2DF23.withColumn('opk_vce_Mean_Thrsld', when(col("avg_opk_vce_Mean") < str(slice2DF4.select(avg("avg_opk_vce_Mean")).collect()[0][0]), 1)              .when(col("avg_opk_vce_Mean") > str(slice2DF4.select(avg("avg_opk_vce_Mean")).collect()[0][0]), 0) )
+slice2DF25=slice2DF24.withColumn('opk_dat_Mean_Thrsld', when(col("avg_opk_dat_Mean") < str(slice2DF4.select(avg("avg_opk_dat_Mean")).collect()[0][0]), 1)              .when(col("avg_opk_dat_Mean") > str(slice2DF4.select(avg("avg_opk_dat_Mean")).collect()[0][0]), 0))
+slice2DF26=slice2DF25.withColumn('drop_blk_Mean_Thrsld',  when(col("avg_drop_blk_Mean") < str(slice2DF4.select(avg("avg_drop_blk_Mean")).collect()[0][0]), 1)              .when(col("avg_drop_blk_Mean") > str(slice2DF4.select(avg("avg_drop_blk_Mean")).collect()[0][0]), 0) )
+slice2DF27=slice2DF26.withColumn('callfwdv_Mean_Thrsld', when(col("avg_callfwdv_Mean") < str(slice2DF4.select(avg("avg_callfwdv_Mean")).collect()[0][0]), 1)              .when(col("avg_callfwdv_Mean") > str(slice2DF4.select(avg("avg_callfwdv_Mean")).collect()[0][0]), 0))
+slice2DF28=slice2DF27.withColumn('service_stability_voice_calls_Thrsld', when(col("service_stability_voice_calls")> str(slice2DF4.select(avg("service_stability_voice_calls")).collect()[0][0]) , 0)              .when(col("service_stability_voice_calls")< str(slice2DF4.select(avg("service_stability_voice_calls")).collect()[0][0]), 1))
+slice2DF29=slice2DF28.withColumn('service_stability_data_calls_Thrsld', when(col("service_stability_data_calls")> str(slice2DF4.select(avg("service_stability_data_calls")).collect()[0][0]), 0)              .when(col("service_stability_data_calls")< str(slice2DF4.select(avg("service_stability_data_calls")).collect()[0][0]), 1))
+slice2DF29.show(3,truncate=False)
 
 # Based on the performance check verifying whether the Maintainence for the cell tower required or not
 # ...Replace nulls
-DF3 = DF2.fillna(value=0)
+slice2DF30=slice2DF29.fillna(value =0)
 
 # ...Calculate defect count
-thrsld_column_names = [c + "_Thrsld" if c != "avg_change_mou" else "change_mouL_Thrsld" for c in greater_is_one + less_is_one]
-defect_expr = col(thrsld_column_names[0])
-for c in thrsld_column_names[1:]:
-    defect_expr = defect_expr + col(c)
-
-DF4 = DF3.withColumn("defect_count", defect_expr)
+slice2DF31 = slice2DF30.withColumn("defect_count",col("PRBUsageUL_Thrsld")+col("PRBUsageDL_Thrsld")+col("meanThr_DL_Thrsld")+col("meanThr_UL_Thrsld")+col("maxThr_DL_Thrsld")+col("maxThr_UL_Thrsld")+col("meanUE_DL_Thrsld")+col("meanUE_UL_Thrsld")+col("maxUE_DL_Thrsld")+col("maxUE_UL_Thrsld")+col("maxUE_UL_DL_Thrsld")+col("roam_Mean_Thrsld")+col("change_mouL_Thrsld")+col("drop_vce_Mean_Thrsld")+col("drop_dat_Mean_Thrsld")+col("blck_vce_Mean_Thrsld")+col("blck_dat_Mean_Thrsld")+col("peak_vce_Mean_Thrsld")+col("peak_dat_Mean_Thrsld")+col("opk_vce_Mean_Thrsld")+col("opk_dat_Mean_Thrsld")+col("drop_blk_Mean_Thrsld")+col("callfwdv_Mean_Thrsld")+col("service_stability_voice_calls_Thrsld")+col("service_stability_data_calls_Thrsld"))
 
 # ...Calculate if maintenance is required (defect >= 15)
-finalDF = DF4.withColumn(
-    "Maintainence_Required", 
-    when(col("defect_count") >= 15, "Required").otherwise("Not Required")
-)
+finalDF= slice2DF31.withColumn("Maintainence_Required",when(col("defect_count")>=15,"Required").otherwise("Not Required"))
 
 # ...Record count
 finalDF.count()
