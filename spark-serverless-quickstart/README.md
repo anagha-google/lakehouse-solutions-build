@@ -223,6 +223,7 @@ GCP_REGION="us-central1"
 DEPLOYER_ACCOUNT_NAME=$GCP_ACCOUNT_NAME
 ORG_ID=`gcloud organizations list --format="value(name)"`
 CC3_IMAGE_VERSION="composer-3-airflow-2.10.5-build.29"
+S8S_SPARK_RUNTIME_VERSION="3.0"
 
 ```
 
@@ -236,6 +237,7 @@ terraform apply \
   -var="gcp_account_name=${GCP_ACCOUNT_NAME}" \
   -var="deployment_service_account_name=${DEPLOYER_ACCOUNT_NAME}" \
   -var="org_id=${ORG_ID}" \
+  -var="spark_runtime_version=${S8S_SPARK_RUNTIME_VERSION}" \
   -var="cloud_composer_image_version=${CC3_IMAGE_VERSION}" \
   -var="gcp_region=${GCP_REGION}" \
   -auto-approve >> s8s-core-tf.output
