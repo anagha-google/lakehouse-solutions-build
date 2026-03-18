@@ -36,10 +36,7 @@ CC_GMSA_FQN                 = "service-${local.project_nbr}@cloudcomposer-accoun
 GCE_GMSA_FQN                = "${local.project_nbr}-compute@developer.gserviceaccount.com"
 CLOUD_COMPOSER3_IMG_VERSION = "${var.cloud_composer_image_version}"
 S8S_SPARK_RUNTIME_VERSION   = "${var.spark_runtime_version}"
-
 }
-
-
 
 /******************************************
 1. User Managed Service Account Creation
@@ -302,7 +299,7 @@ resource "time_sleep" "sleep_after_bucket_creation" {
 }
 
 /******************************************
-8a. Copy of Pyspark scripts to s8s_data_and_code_bucket
+8a. Copy the Pyspark scripts to s8s_data_and_code_bucket
  *****************************************/
 
 resource "google_storage_bucket_object" "pyspark_scripts_upload_to_gcs" {
