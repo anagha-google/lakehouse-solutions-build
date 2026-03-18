@@ -64,7 +64,7 @@ telecomCustomerChurnFinalDF = telecomCustomerChurnRawDataDF.select(
     "callwait_Mean", "months", "uniqsubs", "actvsubs", "area", "dualband", 
     "forgntvl", 
     col("Customer_ID").alias("customer_ID_original"),
-    substring("Customer_ID", 4, 7).alias("customer_ID")
+    substring("Customer_ID", 4, 7).alias("Customer_ID")
 )
 
 # Quick visual
@@ -73,9 +73,9 @@ telecomCustomerChurnFinalDF.show(10, truncate=False)
 # Join the curated customer data with the telecom network performance data based on customer ID
 consolidatedDataDF = curatedCustomerDataDF.join(
     telecomCustomerChurnFinalDF, 
-    curatedCustomerDataDF.customerID == telecomCustomerChurnFinalDF.customer_ID, 
+    curatedCustomerDataDF.Customer_ID == telecomCustomerChurnFinalDF.Customer_ID, 
     "inner"
-).drop(telecomCustomerChurnFinalDF.customer_ID)
+).drop(telecomCustomerChurnFinalDF.Customer_ID)
 
 consolidatedDataDF.show(truncate=False)
 

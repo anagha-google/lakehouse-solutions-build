@@ -56,8 +56,8 @@ serviceThresholdReferenceDataDF = spark.read.format("csv").option("header", True
 serviceThresholdReferenceDataDF.printSchema()
 
 # Subset the customer master data for relevant attributes
-# ...Drop unnecessary fields and rename Index to customerID
-customerMasterDataFinalSubsetDF = customerMasterDataDF.drop("customerID","gender","SeniorCitizen","Partner","Dependents","OnlineSecurity","OnlineBackup","DeviceProtection","TechSupport","StreamingTV","StreamingMovies","Contract","PaperlessBilling","PaymentMethod","MonthlyCharges","TotalCharges").withColumnRenamed("Index", "customerID")
+# ...Drop unnecessary fields and rename Index to Customer_ID
+customerMasterDataFinalSubsetDF = customerMasterDataDF.drop("customerID","gender","SeniorCitizen","Partner","Dependents","OnlineSecurity","OnlineBackup","DeviceProtection","TechSupport","StreamingTV","StreamingMovies","Contract","PaperlessBilling","PaymentMethod","MonthlyCharges","TotalCharges").withColumnRenamed("Index", "Customer_ID")
 customerMasterDataFinalSubsetDF.show(10,truncate=False)
 customerMasterDataFinalSubsetDF.printSchema()
 

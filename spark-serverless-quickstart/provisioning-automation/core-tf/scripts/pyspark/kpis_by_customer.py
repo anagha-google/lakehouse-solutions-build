@@ -64,7 +64,7 @@ curatedTelcoPerformanceDataDF.createOrReplaceTempView("telco_perf_by_customer_un
 from pyspark.sql.window import Window
 curatedTelcoPerformanceDataAugDF1 = curatedTelcoPerformanceDataDF.withColumn(
     "month", 
-    F.row_number().over(Window.partitionBy("customer_ID").orderBy("customer_ID"))
+    F.row_number().over(Window.partitionBy("Customer_ID").orderBy("Customer_ID"))
 )
 # Define the base metrics to average
 cols_to_avg = [
@@ -77,13 +77,13 @@ cols_to_avg = [
     "callwait_Mean"
 ]
 
-# Calculate averages of metrics by customer_ID,CellName,tenure,PhoneService,MultipleLines,InternetService
+# Calculate averages of metrics by Customer_ID,CellName,tenure,PhoneService,MultipleLines,InternetService
 # for customers signed up for phone service
 agg_exprs = [F.avg(c).alias(f"avg_{c}") for c in cols_to_avg]
 
 curatedTelcoPerformanceAggrDF = curatedTelcoPerformanceDataAugDF1 \
     .filter(col("PhoneService") == 'Yes') \
-    .groupBy("customer_ID", "CellName", "tenure", "PhoneService", "MultipleLines", "InternetService") \
+    .groupBy("Customer_ID", "CellName", "tenure", "PhoneService", "MultipleLines", "InternetService") \
     .agg(*agg_exprs)
 
 # Augment with customer grain performance metrics
