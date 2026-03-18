@@ -179,13 +179,12 @@ In this section, we will provision-
 1. Network, subnet, firewall rule
 2. Storage buckets for code, datasets, and for use with the services
 3. BigQuery dataset
-4. Persistent Spark History Server
-5. Managed Airflow Serverless
-6. User Managed Service Account
-7. Requisite IAM permissions
-8. Copy of code, data, etc into buckets
-9. Import of Airflow DAG
-10. Configuration of Airflow variables
+4. Managed Airflow Serverless
+5. User Managed Service Account
+6. Requisite IAM permissions
+7. Copy of code, data, etc into buckets
+8. Import of Airflow DAG
+9. Configuration of Airflow variables
 
 <hr>
 
@@ -289,15 +288,9 @@ Validate the creation of the BigQuery dataset called cell_tower_reporting_mart f
 
 <br>
 
-### 5.4. Persistent Spark History Server (PHS)
-Validate the creation of the PHS from the Cloud Console, Dataproc UI -> Clusters
 
-- The PHS has a name prefix - "s8s-sphs-"
-- Navigate to web interfaces, then "Spark History Server" and familiarize yourself with the UI
 
-<br>
-
-### 5.5. Cloud Composer environment
+### 5.4. Cloud Composer environment
 From the Cloud Console, navigate to the Cloud Composer service and 
 
 - Browse all the tabs of the deployed "environment".
@@ -320,7 +313,6 @@ PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d'
 LOCATION=us-central1
 VPC_NM=VPC=s8s-vpc-$PROJECT_NBR
 SPARK_SERVERLESS_SUBNET=spark-snet
-PERSISTENT_HISTORY_SERVER_NM=s8s-sphs-${PROJECT_NBR}
 UMSA_FQN=s8s-lab-sa@$PROJECT_ID.iam.gserviceaccount.com
 CODE_AND_DATA_BUCKET=qs-s8s-data_and_code_bucket-${PROJECT_NBR}
 SPARK_SERVERLESS_RUNTIME_VERSION=3.0
@@ -331,7 +323,6 @@ echo $PROJECT_NBR
 echo $LOCATION
 echo $VPC_NM
 echo $SPARK_SERVERLESS_SUBNET
-echo $PERSISTENT_HISTORY_SERVER_NM
 echo $UMSA_FQN
 echo $CODE_AND_DATA_BUCKET
 echo $SPARK_SERVERLESS_RUNTIME_VERSION
@@ -371,7 +362,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-curate-customer-master-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $CODE_AND_DATA_BUCKET
 ```
@@ -602,7 +592,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-curate-cell-tower-metrics-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_telco_performance_data.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $CODE_AND_DATA_BUCKET
 ```
@@ -832,7 +821,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-kpis-by-customer-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_customer.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $PROJECT_ID "cell_tower_reporting_mart" $CODE_AND_DATA_BUCKET
 ```
@@ -975,7 +963,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-kpis-by-cell-tower-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_cell_tower.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $PROJECT_ID "cell_tower_reporting_mart" $CODE_AND_DATA_BUCKET
 
