@@ -46,3 +46,9 @@ variable "gcp_region" {
  description = "The GCP region you want to use"
  default     = "us-central1"
 }
+
+variable "spark_runtime_version" {
+  description = "The runtime version for Dataproc Serverless"
+  default     = "3.0"
+}
+

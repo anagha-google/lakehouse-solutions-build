@@ -179,13 +179,12 @@ In this section, we will provision-
 1. Network, subnet, firewall rule
 2. Storage buckets for code, datasets, and for use with the services
 3. BigQuery dataset
-4. Persistent Spark History Server
-5. Managed Airflow Serverless
-6. User Managed Service Account
-7. Requisite IAM permissions
-8. Copy of code, data, etc into buckets
-9. Import of Airflow DAG
-10. Configuration of Airflow variables
+4. Managed Airflow Serverless
+5. User Managed Service Account
+6. Requisite IAM permissions
+7. Copy of code, data, etc into buckets
+8. Import of Airflow DAG
+9. Configuration of Airflow variables
 
 <hr>
 
@@ -223,6 +222,7 @@ GCP_REGION="us-central1"
 DEPLOYER_ACCOUNT_NAME=$GCP_ACCOUNT_NAME
 ORG_ID=`gcloud organizations list --format="value(name)"`
 CC3_IMAGE_VERSION="composer-3-airflow-2.10.5-build.29"
+S8S_SPARK_RUNTIME_VERSION="3.0"
 
 ```
 
@@ -236,6 +236,7 @@ terraform apply \
   -var="gcp_account_name=${GCP_ACCOUNT_NAME}" \
   -var="deployment_service_account_name=${DEPLOYER_ACCOUNT_NAME}" \
   -var="org_id=${ORG_ID}" \
+  -var="spark_runtime_version=${S8S_SPARK_RUNTIME_VERSION}" \
   -var="cloud_composer_image_version=${CC3_IMAGE_VERSION}" \
   -var="gcp_region=${GCP_REGION}" \
   -auto-approve >> s8s-core-tf.output
@@ -258,6 +259,7 @@ Paste the following variables in Cloud Shell-
 ```
 PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
 PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d':' -f2 |  tr -d "'" | xargs`
+CODE_AND_DATA_BUCKET="qs-s8s-data_and_code_bucket-${PROJECT_NBR}"
 ```
 
 <br>
@@ -266,7 +268,7 @@ PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d'
 
 Run this command in Cloud Shell-
 ```
-gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/scripts
+gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 ```
 
 <br>
@@ -275,7 +277,7 @@ gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/scripts
 
 Run this command in Cloud Shell-
 ```
-gsutil ls -r gs://s8s_data_and_code_bucket-${PROJECT_NBR}/datasets
+gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 ```
 
 <br>
@@ -286,15 +288,9 @@ Validate the creation of the BigQuery dataset called cell_tower_reporting_mart f
 
 <br>
 
-### 5.4. Persistent Spark History Server (PHS)
-Validate the creation of the PHS from the Cloud Console, Dataproc UI -> Clusters
 
-- The PHS has a name prefix - "s8s-sphs-"
-- Navigate to web interfaces, then "Spark History Server" and familiarize yourself with the UI
 
-<br>
-
-### 5.5. Cloud Composer environment
+### 5.4. Cloud Composer environment
 From the Cloud Console, navigate to the Cloud Composer service and 
 
 - Browse all the tabs of the deployed "environment".
@@ -317,9 +313,8 @@ PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d'
 LOCATION=us-central1
 VPC_NM=VPC=s8s-vpc-$PROJECT_NBR
 SPARK_SERVERLESS_SUBNET=spark-snet
-PERSISTENT_HISTORY_SERVER_NM=s8s-sphs-${PROJECT_NBR}
 UMSA_FQN=s8s-lab-sa@$PROJECT_ID.iam.gserviceaccount.com
-CODE_AND_DATA_BUCKET=s8s_data_and_code_bucket-${PROJECT_NBR}
+CODE_AND_DATA_BUCKET=qs-s8s-data_and_code_bucket-${PROJECT_NBR}
 SPARK_SERVERLESS_RUNTIME_VERSION=3.0
 
 
@@ -328,7 +323,6 @@ echo $PROJECT_NBR
 echo $LOCATION
 echo $VPC_NM
 echo $SPARK_SERVERLESS_SUBNET
-echo $PERSISTENT_HISTORY_SERVER_NM
 echo $UMSA_FQN
 echo $CODE_AND_DATA_BUCKET
 echo $SPARK_SERVERLESS_RUNTIME_VERSION
@@ -368,7 +362,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-curate-customer-master-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $CODE_AND_DATA_BUCKET
 ```
@@ -550,10 +543,10 @@ root
  
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
 
 #### 6.1.8. Review the execution logs in the Managed Spark History Server
@@ -599,7 +592,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-curate-cell-tower-metrics-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_telco_performance_data.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $CODE_AND_DATA_BUCKET
 ```
@@ -829,7 +821,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-kpis-by-customer-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_customer.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $PROJECT_ID "cell_tower_reporting_mart" $CODE_AND_DATA_BUCKET
 ```
@@ -972,7 +963,6 @@ gcloud dataproc batches submit \
 --batch s8s-spark-kpis-by-cell-tower-$RANDOM \
 gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_cell_tower.py \
 --subnet projects/$PROJECT_ID/regions/$LOCATION/subnetworks/$SPARK_SERVERLESS_SUBNET \
---history-server-cluster=projects/$PROJECT_ID/regions/$LOCATION/clusters/$PERSISTENT_HISTORY_SERVER_NM \
 --service-account $UMSA_FQN \
 -- $PROJECT_ID "cell_tower_reporting_mart" $CODE_AND_DATA_BUCKET
 
