@@ -109,7 +109,11 @@ metrics_to_avg = [
     "service_stability_voice_calls", "service_stability_data_calls"
 ]
 
-global_avgs_row = DF2.select([avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
+try:
+    global_avgs_row = DF2.select([avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
+except (IndexError, AttributeError) as e:
+    print(f"WARNING: No data found for metrics in DF2. Defaulting to 0 for threshold comparisons. Details: {e}")
+    global_avgs_row = {c: 0 for c in metrics_to_avg}
 
 greater_is_one = [
     "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_maxThr_DL", "avg_maxThr_UL", 
