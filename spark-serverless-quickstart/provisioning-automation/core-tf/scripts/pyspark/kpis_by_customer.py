@@ -64,7 +64,7 @@ curatedTelcoPerformanceDataDF.createOrReplaceTempView("telco_perf_by_customer_un
 from pyspark.sql.window import Window
 curatedTelcoPerformanceDataAugDF1 = curatedTelcoPerformanceDataDF.withColumn(
     "month", 
-    F.row_number().over(Window.partitionBy("customerID").orderBy("customerID"))
+    F.row_number().over(Window.partitionBy("customer_ID").orderBy("customer_ID"))
 )
 # Define the base metrics to average
 cols_to_avg = [
@@ -77,13 +77,13 @@ cols_to_avg = [
     "callwait_Mean"
 ]
 
-# Calculate averages of metrics by customerID,CellName,tenure,PhoneService,MultipleLines,InternetService
+# Calculate averages of metrics by customer_ID,CellName,tenure,PhoneService,MultipleLines,InternetService
 # for customers signed up for phone service
 agg_exprs = [F.avg(c).alias(f"avg_{c}") for c in cols_to_avg]
 
 curatedTelcoPerformanceAggrDF = curatedTelcoPerformanceDataAugDF1 \
     .filter(col("PhoneService") == 'Yes') \
-    .groupBy("customerID", "CellName", "tenure", "PhoneService", "MultipleLines", "InternetService") \
+    .groupBy("customer_ID", "CellName", "tenure", "PhoneService", "MultipleLines", "InternetService") \
     .agg(*agg_exprs)
 
 # Augment with customer grain performance metrics
@@ -109,7 +109,11 @@ metrics_to_avg = [
     "service_stability_voice_calls", "service_stability_data_calls"
 ]
 
-global_avgs_row = DF2.select([avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
+try:
+    global_avgs_row = DF2.select([avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
+except (IndexError, AttributeError) as e:
+    print(f"WARNING: No data found for metrics in DF2. Defaulting to 0 for threshold comparisons. Details: {e}")
+    global_avgs_row = {c: 0 for c in metrics_to_avg}
 
 greater_is_one = [
     "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_maxThr_DL", "avg_maxThr_UL", 
