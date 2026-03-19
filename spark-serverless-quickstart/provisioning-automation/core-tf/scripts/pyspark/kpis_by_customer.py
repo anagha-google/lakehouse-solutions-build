@@ -41,14 +41,14 @@ bqDatasetName=sys.argv[2]
 sourceBucketName=sys.argv[3]
 
 # Source data definition
-curatedTelcoPerformanceDataDir="gs://"+sourceBucketName+"/output_data/telco_performance_augmented/part*"
+curatedTelcoPerformanceDataDir="gs://"+sourceBucketName+"/output_data/telco_performance_augmented/"
 
 # Output directory declaration
 outputGCSURI="gs://"+sourceBucketName+"/output_data/kpis_by_customer"
 
 
 # Get or create a Spark session
-spark =SparkSession.builder.appName("KPIs-By-Customer").config('spark.jars', 'gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar').getOrCreate()
+spark =SparkSession.builder.appName("KPIs-By-Customer").getOrCreate()
 
 # Read the source data into a dataframe
 curatedTelcoPerformanceDataDF = spark.read.format("parquet").option("header", True).option("inferSchema",True).load(curatedTelcoPerformanceDataDir)

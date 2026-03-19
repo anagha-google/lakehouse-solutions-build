@@ -42,7 +42,7 @@ bqDatasetName=sys.argv[2]
 sourceBucketName=sys.argv[3]
 
 # Source data definition
-augmentedTelcoPerformanceDataDir="gs://"+sourceBucketName+"/output_data/telco_performance_augmented/part*"
+augmentedTelcoPerformanceDataDir="gs://"+sourceBucketName+"/output_data/telco_performance_augmented/*"
 
 # Output directory declaration
 outputGCSURI="gs://"+sourceBucketName+"/output_data/kpis_by_cell_tower"
