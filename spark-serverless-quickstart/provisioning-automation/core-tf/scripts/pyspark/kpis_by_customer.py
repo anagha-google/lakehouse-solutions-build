@@ -55,7 +55,7 @@ curatedTelcoPerformanceDataDF = spark.read.format("parquet").option("header", Tr
 curatedTelcoPerformanceDataDF.printSchema()
 #curatedTelcoPerformanceDataDF.show(3,truncate=False)
 
-# Layer 1 slicing - Avg of performance metrics at customer granularity level
+# Avg of performance metrics at customer granularity level
 curatedTelcoPerformanceDataDF=curatedTelcoPerformanceDataDF.drop(curatedTelcoPerformanceDataDF.months)
 # Create a temp view
 curatedTelcoPerformanceDataDF.createOrReplaceTempView("telco_perf_by_customer_unaggregated")
