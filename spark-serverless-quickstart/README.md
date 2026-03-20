@@ -83,7 +83,7 @@ Covered in section 3.3.1
 | -- | :--- | 
 | Provisioning Automation | Terraform for enabling Google APIs, service account creation, IAM permissions, organizational policy updates, network and firewall rules creation, storage buckets creation, file uploads to buckets, provisioning of Managed Airflow 3.0 environment |
 | Data Engineering |  Submitting Managed Apache Spark Serverless  **batches**, viewing the execution on the Cloud Console |
-| Scheduling and Orchestration | Executing a DAG on Apache Airflow on Managed Airflow Serverless |
+| Scheduling and Orchestration | Executing an Apache Airflow DAG on Managed Airflow Serverless |
 
 
 <hr>
