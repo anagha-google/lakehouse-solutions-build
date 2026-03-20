@@ -20,7 +20,7 @@ limitations under the License.*
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab showcases running Apache Spark applications on GCP with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow on Google Cloud Platform.
+This lab showcases running Apache Spark applications on GCP with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow Serverless on Google Cloud Platform.
 
 
 |  |  | 
@@ -36,7 +36,7 @@ This lab showcases running Apache Spark applications on GCP with Airflow orchest
 | Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
 | Focus| Data Engineering on Google Cloud |
 
-The goal of the lab is to demystify Managed Spark Serverless on GCP and orchestration of Spark on Managed Airflow Serverless on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario running on managed services on Google Cloud.
+The goal of the lab is to demystify **Managed Spark Serverless** on GCP and orchestration of Spark on Managed Airflow Serverless on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario of running on managed services on Google Cloud.
 
 <hr>
 
@@ -82,12 +82,9 @@ Covered in section 3.1
 | Functionality | Feature | 
 | -- | :--- | 
 | Spark platform |  Managed Apache Spark Serverless  **batches** |
-| Spark History Server |  Managed Apache Spark **Persistent** History Server |
-| Data Lake Metastore |  BigLake Metastore |
 | Data Lake File System |  Google Cloud Storage |
 | Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
 | Provisioning Automation | Terraform |
-
 
 <hr>
 
@@ -100,8 +97,6 @@ Covered in section 3.1
 <hr>
 
 ### 1.9. The data
-
-
 
 ![README](images/s8s-qs-03.png)   
 <br><br>
