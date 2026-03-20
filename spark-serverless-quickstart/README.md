@@ -20,7 +20,7 @@ limitations under the License.*
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab is introductory in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow Serverless on Google Cloud Platform with a minimum viable sample.
+This lab is introductory in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow Serverless on Google Cloud Platform with a minimum viable sample. The goal of the lab is to demystify **Managed Spark Serverless** on GCP and demystify orchestration of Spark with Apache Airflow on **Managed Airflow Serverless** on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This repository hosts other labs that focus further on performance, operations and such.
 
 
 |  |  | 
@@ -37,7 +37,6 @@ This lab is introductory in nature and showcases running Apache Spark applicatio
 | Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
 
 
-The goal of the lab is to demystify **Managed Spark Serverless** on GCP and demystify orchestration of Spark with Apache Airflow on **Managed Airflow Serverless** on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario of running on managed services on Google Cloud.
 
 <hr>
 
@@ -48,7 +47,7 @@ It takes ~1.5 hours to complete and is fully scrpited, including with Terraform 
 <hr>
 
 ### 1.3. Resources provisioned
-Covered in section 3.1
+Covered in section 3.3.1
 
 
 <hr>
@@ -132,8 +131,39 @@ Read the lab - narrative below, review the code, and then start trying out the l
 The code in this lab was originally developed by Tek Systems for Google Cloud.
 
 <hr>
+
 # 2. PRODUCT HIGHLIGHTS
+
+## 2.1. Managed Spark Servreless
+
+### About
+Use Managed Spark Serverless to run Spark batch workloads without provisioning and managing your own cluster. Specify workload parameters, and then submit the workload to the service. The service will run the workload on a managed compute infrastructure, autoscaling resources as needed. Managed Spark Serverless charges apply only to the time when the workload is executing.
+
+### Supported workload types
+There are two ways to run Managed Spark Serverless workloads: batch workloads and interactive sessions.
+
+#### Batch workloads
+Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. 
+
+#### Interactive sessions
+Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. You can create a notebook session in the following ways:
+
+- Run PySpark code in BigQuery Studio notebooks. Open a BigQuery Python notebook to create a Spark-Connect-based Serverless for Apache Spark interactive session. Each BigQuery notebook can have only one active Serverless for Apache Spark session associated with it.
+  
+- Use the Dataproc JupyterLab plugin to create multiple Jupyter notebook sessions from templates that you create and manage. When you install the plugin on a local machine or Compute Engine VM, different cards that correspond to different Spark kernel configurations appear on the JupyterLab launcher page. Click a card to create a Serverless for Apache Spark notebook session, then start writing and testing your code in the notebook.
+
+The Dataproc JupyterLab plugin also lets you use the JupyterLab launcher page to take the following actions:
+Create Dataproc on Compute Engine clusters.
+Submit jobs to Dataproc on Compute Engine clusters.
+View Google Cloud and Spark logs.
+
+## 2.2. Managed Airflow Servreless
+
+
+
 <hr>
+
+
 
 
 <hr>
