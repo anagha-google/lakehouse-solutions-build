@@ -25,7 +25,7 @@ This lab is introductory in nature and showcases running Apache Spark applicatio
 
 |  |  | 
 | -- | :--- | 
-| Focus| Data Engineering on Google Cloud |
+| Focus| **Data Engineering on Google Cloud with Apache Spark** |
 | Use case |  Anomaly Detection |
 | Domain |  Telecommunications |
 | Showcased | Detection of cell towers needing maintenance with Apache Spark |
@@ -131,12 +131,16 @@ Read the lab - narrative below, review the code, and then start trying out the l
 
 The code in this lab was originally developed by Tek Systems for Google Cloud.
 
+<hr>
+# 2. PRODUCT HIGHLIGHTS
+<hr>
+
 
 <hr>
-# LAB
+# 3. LAB
 <hr>
 
-## 2.0. Clone this repo in Cloud Shell
+## 3.1. Clone this repo in Cloud Shell
 
 ```
 git clone https://github.com/anagha-google/lakehouse-solutions-build.git
@@ -144,7 +148,7 @@ git clone https://github.com/anagha-google/lakehouse-solutions-build.git
 
 <hr>
 
-## 3.0. Foundational provisioning automation with Terraform
+## 3.2. Foundational provisioning automation with Terraform
 
 The Terraform in this section updates organization policies and enables Google APIs.
 
@@ -171,9 +175,9 @@ tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-au
 
 <hr>
 
-## 4.0. Lab resources provisioning automation with Terraform
+## 3.3. Lab resources provisioning automation with Terraform
 
-### 4.1. Resources provisioned
+### 3.3.1. Resources provisioned
 In this section, we will provision-
 
 1. Network, subnet, firewall rule
@@ -188,7 +192,7 @@ In this section, we will provision-
 
 <hr>
 
-### 4.2. Initialize active gcloud configuration
+### 3.3.2. Initialize active gcloud configuration
 
 Run the following commands in Cloud Shell to authenticate and configure your active project:
 
@@ -209,7 +213,7 @@ gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
 
 <hr>
 
-### 4.3. Run the terraform scripts
+### 3.3.3. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
 cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
@@ -253,7 +257,7 @@ tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-aut
 
 <hr>
 
-## 5.0. Explore the resources provisioned
+## 3.4. Explore the resources provisioned
 
 Paste the following variables in Cloud Shell-
 ```
@@ -264,7 +268,7 @@ CODE_AND_DATA_BUCKET="qs-s8s-data_and_code_bucket-${PROJECT_NBR}"
 
 <br>
 
-### 5.1. GCS bucket for code
+### 3.4.1. GCS bucket for code
 
 Run this command in Cloud Shell-
 ```
@@ -273,7 +277,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 
 <br>
 
-### 5.2. GCS bucket for data
+### 3.4.2. GCS bucket for data
 
 Run this command in Cloud Shell-
 ```
@@ -282,7 +286,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 
 <br>
 
-### 5.3. BigQuery dataset
+### 3.4.3. BigQuery dataset
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
@@ -290,7 +294,7 @@ Validate the creation of the BigQuery dataset called cell_tower_reporting_mart f
 
 
 
-### 5.4. Cloud Composer environment
+### 3.4.4. Cloud Composer environment
 From the Cloud Console, navigate to the Cloud Composer service and 
 
 - Browse all the tabs of the deployed "environment".
@@ -304,7 +308,7 @@ We will first run the Spark jobs individually and get familiar with the Serverle
 
 <hr>
 
-## 6.0. Run the Spark jobs individually
+## 3.5. Run the Spark jobs individually
 
 Paste the following variables in Cloud Shell
 ```
