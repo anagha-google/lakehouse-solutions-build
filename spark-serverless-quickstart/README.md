@@ -15,28 +15,29 @@ limitations under the License.*
 
 <hr>
 
-# Solution 1: Introduction to Managed Spark Serverless and Orchestration with Airflow on Managed Airflow on Google Cloud Platform
+# Technical Solution 1: Managed Spark Serverless for data engineering and Orchestration with Airflow on Managed Airflow on Google Cloud Platform
 
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab showcases running Apache Spark applications on GCP with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow Serverless on Google Cloud Platform.
+This lab is introductory in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow Serverless on Google Cloud Platform with a minimum viable sample.
 
 
 |  |  | 
 | -- | :--- | 
+| Focus| Data Engineering on Google Cloud |
 | Use case |  Anomaly Detection |
 | Domain |  Telecommunications |
 | Showcased | Detection of cell towers needing maintenance with Apache Spark |
+| Process | Rule-based, thresholds-based anomaly detection |
+| Dataset | Kaggle Telco Customer Churn Public (small) Dataset |
 | Technical Use-case | Data engineering at scale |
 | Technology | Spark (PySpark) |
-| Product | Serverless Spark batches on Managed Spark |
-| Dataset | Telco Customer Churn Public (small) Dataset |
-| Process | Rule-based, thresholds-based anomaly detection |
-| Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
-| Focus| Data Engineering on Google Cloud |
+| Data Engineering Product | Apache Spark on Managed Spark Serverless |
+| Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
 
-The goal of the lab is to demystify **Managed Spark Serverless** on GCP and orchestration of Spark on Managed Airflow Serverless on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario of running on managed services on Google Cloud.
+
+The goal of the lab is to demystify **Managed Spark Serverless** on GCP and demystify orchestration of Spark with Apache Airflow on **Managed Airflow Serverless** on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario of running on managed services on Google Cloud.
 
 <hr>
 
@@ -126,9 +127,13 @@ Covered in section 3.1
 
 Read the lab - narrative below, review the code, and then start trying out the lab.
 
+### 1.14. Credits
+
+The code in this lab was originally developed by Tek Systems for Google Cloud.
+
 
 <hr>
-
+# LAB
 <hr>
 
 ## 2.0. Clone this repo in Cloud Shell
