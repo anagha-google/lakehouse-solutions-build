@@ -32,7 +32,6 @@ import random
 project_id = models.Variable.get("project_id")
 region = models.Variable.get("region")
 subnet=models.Variable.get("subnet")
-phs_server=Variable.get("phs")
 code_bucket=Variable.get("code_bucket")
 bq_dataset=Variable.get("bq_dataset")
 umsa=Variable.get("umsa")
@@ -138,14 +137,14 @@ with models.DAG(
         project_id=project_id,
         region=region,
         batch=BATCH_CONFIG1,
-        batch_id=BATCH_ID + "-dej-customer",
+        batch_id=BATCH_ID + "-dej-curate-customer",
     )
     curate_telco_performance_metrics = DataprocCreateBatchOperator(
         task_id="Curate_Telco_Performance_Metrics",
         project_id=project_id,
         region=region,
         batch=BATCH_CONFIG2,
-        batch_id=BATCH_ID + "-dej-telco",
+        batch_id=BATCH_ID + "-dej-curate-telco",
     )
     calc_kpis_by_customer = DataprocCreateBatchOperator(
         task_id="Calc_KPIs_By_Customer",
