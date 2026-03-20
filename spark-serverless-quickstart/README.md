@@ -36,7 +36,7 @@ This lab is introductory in nature and showcases running Apache Spark applicatio
 | Data Engineering Product | Apache Spark on Managed Spark Serverless |
 | Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
 
-
+You will run 4 Spark jobs and learn to view execution in the Managed Spark console. You will then run the same 4 Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console.
 
 <hr>
 
@@ -81,10 +81,10 @@ Covered in section 3.3.1
 
 | Functionality | Feature | 
 | -- | :--- | 
-| Spark platform |  Managed Apache Spark Serverless  **batches** |
-| Data Lake File System |  Google Cloud Storage |
-| Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
-| Provisioning Automation | Terraform |
+| Provisioning Automation | Terraform for service account creation, IAM permissions, organizational policy updates, network and firewall rules creation, storage buckets creation, file uploads to buckets, provisioning of Managed Airflow 3.0 environment |
+| Data Engineering |  Submitting Managed Apache Spark Serverless  **batches**, viewing the execution on the Cloud Console |
+| Scheduling and Orchestration | Executing a DAG on Apache Airflow on Managed Airflow Serverless |
+
 
 <hr>
 
@@ -132,7 +132,7 @@ The code in this lab was originally developed by Tek Systems for Google Cloud.
 
 <hr>
 
-# 2. PRODUCT HIGHLIGHTS
+# 2. Product Highlights
 
 ## 2.1. Managed Spark Servreless
 
@@ -153,13 +153,23 @@ Write and run code in Jupyter notebooks during a Serverless for Apache Spark int
 - Use the Dataproc JupyterLab plugin to create multiple Jupyter notebook sessions from templates that you create and manage. When you install the plugin on a local machine or Compute Engine VM, different cards that correspond to different Spark kernel configurations appear on the JupyterLab launcher page. Click a card to create a Serverless for Apache Spark notebook session, then start writing and testing your code in the notebook.
 
 The Dataproc JupyterLab plugin also lets you use the JupyterLab launcher page to take the following actions:
-Create Dataproc on Compute Engine clusters.
-Submit jobs to Dataproc on Compute Engine clusters.
-View Google Cloud and Spark logs.
+- Create Dataproc on Compute Engine clusters.
+- Submit jobs to Dataproc on Compute Engine clusters.
+- View Google Cloud and Spark logs.
+
+[Learn more](https://docs.cloud.google.com/dataproc-serverless/docs/overview)
+
+<hr>
 
 ## 2.2. Managed Airflow Servreless
 
+Cloud Composer is a fully managed workflow orchestration service, enabling you to create, schedule, monitor, and manage workflow pipelines that span across clouds and on-premises data centers.
 
+Cloud Composer is built on the popular Apache Airflow open source project and operates using the Python programming language.
+
+By using Cloud Composer instead of a local instance of Apache Airflow, you can benefit from the best of Airflow with no installation or management overhead. Cloud Composer helps you create managed Airflow environments quickly and use Airflow-native tools, such as the powerful Airflow web interface and command-line tools, so you can focus on your workflows and not your infrastructure.
+
+[Learn more](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview)
 
 <hr>
 
