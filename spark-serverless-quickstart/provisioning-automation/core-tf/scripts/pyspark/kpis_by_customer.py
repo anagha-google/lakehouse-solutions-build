@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # ======================================================================================
 # ABOUT
 # In this PySpark script, perform analytics on the augmented telco customer churn data
@@ -42,78 +41,53 @@ bqDatasetName=sys.argv[2]
 sourceBucketName=sys.argv[3]
 
 # Source data definition
-curatedTelcoPerformanceDataDir="gs://"+sourceBucketName+"/output_data/telco_performance_augmented/part*"
+curatedTelcoPerformanceDataDir="gs://"+sourceBucketName+"/output_data/telco_performance_augmented/"
 
 # Output directory declaration
 outputGCSURI="gs://"+sourceBucketName+"/output_data/kpis_by_customer"
 
 
 # Get or create a Spark session
-spark =SparkSession.builder.appName("KPIs-By-Customer").config('spark.jars', 'gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar').getOrCreate()
+spark =SparkSession.builder.appName("KPIs-By-Customer").getOrCreate()
 
 # Read the source data into a dataframe
 curatedTelcoPerformanceDataDF = spark.read.format("parquet").option("header", True).option("inferSchema",True).load(curatedTelcoPerformanceDataDir)
 curatedTelcoPerformanceDataDF.printSchema()
 #curatedTelcoPerformanceDataDF.show(3,truncate=False)
 
-# Layer 1 slicing - Avg of performance metrics at customer granularity level
+# Avg of performance metrics at customer granularity level
 curatedTelcoPerformanceDataDF=curatedTelcoPerformanceDataDF.drop(curatedTelcoPerformanceDataDF.months)
 # Create a temp view
 curatedTelcoPerformanceDataDF.createOrReplaceTempView("telco_perf_by_customer_unaggregated")
-# Derive month natively without SQL Context
-from pyspark.sql.window import Window
-curatedTelcoPerformanceDataAugDF1 = curatedTelcoPerformanceDataDF.withColumn(
-    "month", 
-    F.row_number().over(Window.partitionBy("customer_ID").orderBy("customer_ID"))
-)
-# Define the base metrics to average
-cols_to_avg = [
-    "PRBUsageUL", "PRBUsageDL", "meanThr_DL", "meanThr_UL", "maxThr_DL", "maxThr_UL",
-    "meanUE_DL", "meanUE_UL", "maxUE_DL", "maxUE_UL", "maxUE_UL_DL", "Unusual",
-    "roam_Mean", "change_mou", "drop_vce_Mean", "drop_dat_Mean", "blck_vce_Mean",
-    "blck_dat_Mean", "plcd_vce_Mean", "plcd_dat_Mean", "comp_vce_Mean", "comp_dat_Mean",
-    "peak_vce_Mean", "peak_dat_Mean", "mou_peav_Mean", "mou_pead_Mean", "opk_vce_Mean",
-    "opk_dat_Mean", "mou_opkv_Mean", "mou_opkd_Mean", "drop_blk_Mean", "callfwdv_Mean",
-    "callwait_Mean"
-]
-
-# Calculate averages of metrics by customer_ID,CellName,tenure,PhoneService,MultipleLines,InternetService
+# Derive month
+curatedTelcoPerformanceDataAugDF1 = spark.sql('''select *,  ROW_NUMBER()  OVER(PARTITION BY customerID ORDER BY customerID) AS month FROM telco_perf_by_customer_unaggregated''')
+# Create a temp view
+curatedTelcoPerformanceDataAugDF1.createOrReplaceTempView("telco_perf_by_customer_unaggregated_with_month")
+# Calculate averages of metrics by customerID,CellName,tenure,PhoneService,MultipleLines,InternetService
 # for customers signed up for phone service
-agg_exprs = [F.avg(c).alias(f"avg_{c}") for c in cols_to_avg]
-
-curatedTelcoPerformanceAggrDF = curatedTelcoPerformanceDataAugDF1 \
-    .filter(col("PhoneService") == 'Yes') \
-    .groupBy("customer_ID", "CellName", "tenure", "PhoneService", "MultipleLines", "InternetService") \
-    .agg(*agg_exprs)
+curatedTelcoPerformanceAggrDF= spark.sql('''select customerID,CellName,tenure,PhoneService,MultipleLines,InternetService,avg(PRBUsageUL) as avg_PRBUsageUL,avg(PRBUsageDL) as avg_PRBUsageDL,avg(meanThr_DL) as avg_meanThr_DL,avg(meanThr_UL) as avg_meanThr_UL,avg(maxThr_DL) as avg_maxThr_DL,avg(maxThr_UL) as 	avg_maxThr_UL,avg(meanUE_DL) as avg_meanUE_DL,avg(meanUE_UL) as avg_meanUE_UL,avg(maxUE_DL) as avg_maxUE_DL,avg(maxUE_UL) as avg_maxUE_UL,avg(maxUE_UL_DL) as avg_maxUE_UL_DL,avg(Unusual) as avg_Unusual,avg(roam_Mean) as avg_roam_Mean,avg(change_mou) as avg_change_mou,avg(drop_vce_Mean) as avg_drop_vce_Mean,avg(drop_dat_Mean) as avg_drop_dat_Mean,avg(blck_vce_Mean) as avg_blck_vce_Mean,avg(blck_dat_Mean) as avg_blck_dat_Mean,avg(plcd_vce_Mean) as avg_plcd_vce_Mean,avg(plcd_dat_Mean) as avg_plcd_dat_Mean,avg(comp_vce_Mean) as avg_comp_vce_Mean,avg(comp_dat_Mean) as avg_comp_dat_Mean,avg(peak_vce_Mean) as avg_peak_vce_Mean,avg(peak_dat_Mean) as avg_peak_dat_Mean,avg(mou_peav_Mean) as avg_mou_peav_Mean,avg(mou_pead_Mean) as avg_mou_pead_Mean,avg(opk_vce_Mean) as avg_opk_vce_Mean,avg(opk_dat_Mean) as avg_opk_dat_Mean,avg(mou_opkv_Mean) as avg_mou_opkv_Mean,avg(mou_opkd_Mean) as avg_mou_opkd_Mean,avg(drop_blk_Mean) as avg_drop_blk_Mean,avg(callfwdv_Mean) as avg_callfwdv_Mean,avg(callwait_Mean) as avg_callwait_Mean  from telco_perf_by_customer_unaggregated_with_month where PhoneService = 'Yes'  group by customerID,CellName,tenure,PhoneService,MultipleLines,InternetService  ''')
 
 # Augment with customer grain performance metrics
-DF1 = curatedTelcoPerformanceAggrDF.select(
-    "*",
-    (col("avg_plcd_vce_Mean") - col("avg_comp_vce_Mean")).alias("incomplete_voice_calls"),
-    (col("avg_plcd_dat_Mean") - col("avg_comp_dat_Mean")).alias("incomplete_data_calls"),
-    (col("avg_peak_vce_Mean") / col("avg_opk_vce_Mean")).alias("service_stability_voice_calls"),
-    (col("avg_peak_dat_Mean") / col("avg_opk_dat_Mean")).alias("service_stability_data_calls")
-)
+slice1DF1=curatedTelcoPerformanceAggrDF.withColumn('incomplete_voice_calls',curatedTelcoPerformanceAggrDF.avg_plcd_vce_Mean - curatedTelcoPerformanceAggrDF.avg_comp_vce_Mean )
+slice1DF2=slice1DF1.withColumn('incomplete_data_calls',curatedTelcoPerformanceAggrDF.avg_plcd_dat_Mean - curatedTelcoPerformanceAggrDF.avg_comp_dat_Mean )
+slice1DF3=slice1DF2.withColumn('service_stability_voice_calls',curatedTelcoPerformanceAggrDF.avg_peak_vce_Mean/curatedTelcoPerformanceAggrDF.avg_opk_vce_Mean   )
+slice1DF4=slice1DF3.withColumn('service_stability_data_calls',curatedTelcoPerformanceAggrDF.avg_peak_dat_Mean/curatedTelcoPerformanceAggrDF.avg_opk_dat_Mean   )
 
 # Replace nulls with 0 across columns
-DF2 = DF1.fillna(value=0)
+slice1DF5=slice1DF4.fillna(value =0)
 
-# Compute global averages ONE TIME instead of triggering dozens of `collect()` jobs
+# Calculate global averages ONE TIME to avoid redundant Spark jobs
 metrics_to_avg = [
-    "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_maxThr_DL", "avg_maxThr_UL", 
-    "avg_meanUE_DL", "avg_meanUE_UL", "avg_maxUE_DL", "avg_maxUE_UL", 
-    "avg_maxUE_UL_DL", "avg_drop_vce_Mean", "avg_drop_dat_Mean", 
-    "avg_blck_vce_Mean", "avg_blck_dat_Mean", "avg_meanThr_DL", "avg_meanThr_UL", 
-    "avg_roam_Mean", "avg_change_mou", "avg_peak_vce_Mean", "avg_peak_dat_Mean", 
+    "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_meanThr_DL", "avg_meanThr_UL", 
+    "avg_maxThr_DL", "avg_maxThr_UL", "avg_meanUE_DL", "avg_meanUE_UL", 
+    "avg_maxUE_DL", "avg_maxUE_UL", "avg_maxUE_UL_DL", 
+    "avg_roam_Mean", "avg_change_mou", "avg_drop_vce_Mean", "avg_drop_dat_Mean", 
+    "avg_blck_vce_Mean", "avg_blck_dat_Mean", "avg_peak_vce_Mean", "avg_peak_dat_Mean", 
     "avg_opk_vce_Mean", "avg_opk_dat_Mean", "avg_drop_blk_Mean", "avg_callfwdv_Mean", 
     "service_stability_voice_calls", "service_stability_data_calls"
 ]
 
-try:
-    global_avgs_row = DF2.select([avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
-except (IndexError, AttributeError) as e:
-    print(f"WARNING: No data found for metrics in DF2. Defaulting to 0 for threshold comparisons. Details: {e}")
-    global_avgs_row = {c: 0 for c in metrics_to_avg}
+global_avgs_row = slice1DF5.select([F.avg(c).alias(c) for c in metrics_to_avg]).collect()[0].asDict()
 
 greater_is_one = [
     "avg_PRBUsageUL", "avg_PRBUsageDL", "avg_maxThr_DL", "avg_maxThr_UL", 
@@ -121,6 +95,7 @@ greater_is_one = [
     "avg_maxUE_UL_DL", "avg_drop_vce_Mean", "avg_drop_dat_Mean", 
     "avg_blck_vce_Mean", "avg_blck_dat_Mean"
 ]
+
 less_is_one = [
     "avg_meanThr_DL", "avg_meanThr_UL", "avg_roam_Mean", "avg_change_mou", 
     "avg_peak_vce_Mean", "avg_peak_dat_Mean", "avg_opk_vce_Mean", "avg_opk_dat_Mean", 
@@ -130,27 +105,23 @@ less_is_one = [
 
 threshold_cols = []
 for c in greater_is_one:
-    out_col = "change_mouL_Thrsld" if c == "avg_change_mou" else c + "_Thrsld"
-    threshold_cols.append(when(col(c) > lit(global_avgs_row[c]), 1).otherwise(0).alias(out_col))
+    threshold_cols.append(F.when(F.col(c) > F.lit(global_avgs_row[c]), 1).otherwise(0).alias(c + "_Thrsld"))
 
 for c in less_is_one:
     out_col = "change_mouL_Thrsld" if c == "avg_change_mou" else c + "_Thrsld"
-    threshold_cols.append(when(col(c) < lit(global_avgs_row[c]), 1).otherwise(0).alias(out_col))
+    threshold_cols.append(F.when(F.col(c) < F.lit(global_avgs_row[c]), 1).otherwise(0).alias(out_col))
 
-# Add derived columns that are customer grain performance metrics of 0's and 1s
-DF3 = DF2.select("*", *threshold_cols)
-
-# Replace nulls with 0 across columns
-DF3 = DF3.fillna(value=0)
+# Add all threshold columns in one select and replace nulls with 0
+finalDF = slice1DF5.select("*", *threshold_cols).fillna(value=0)
 
 # Add a defect count column which sums up the various metrics that are either 0 or 1
-thrsld_column_names = [c + "_Thrsld" if c != "avg_change_mou" else "change_mouL_Thrsld" for c in greater_is_one + less_is_one]
-defect_expr = col(thrsld_column_names[0])
-for c in thrsld_column_names[1:]:
-    defect_expr = defect_expr + col(c)
+thrsld_columns = [F.col(c + "_Thrsld" if c != "avg_change_mou" else "change_mouL_Thrsld") for c in greater_is_one + less_is_one]
+defect_expr = thrsld_columns[0]
+for col_expr in thrsld_columns[1:]:
+    defect_expr = defect_expr + col_expr
 
-finalDF = DF3.withColumn("defect_count", defect_expr)
-finalDF.show(3,truncate = False)
+finalDF = finalDF.withColumn("defect_count", defect_expr)
+finalDF.show(3, truncate=False)
 
 # Record count
 finalDF.count()
@@ -168,6 +139,3 @@ format = 'PARQUET', uris = ['"""+outputGCSURI+"""/*.parquet'] );
 bq_client = bigquery.Client(project=projectID)
 job = bq_client.query(query)
 job.result()
-
-
-

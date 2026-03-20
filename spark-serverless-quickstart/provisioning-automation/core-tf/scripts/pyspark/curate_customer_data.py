@@ -56,13 +56,13 @@ serviceThresholdReferenceDataDF = spark.read.format("csv").option("header", True
 serviceThresholdReferenceDataDF.printSchema()
 
 # Subset the customer master data for relevant attributes
+# ...Drop a few fields
 # ...Drop unnecessary fields and rename Index to customerID
 customerMasterDataFinalSubsetDF = customerMasterDataDF.drop("customerID","gender","SeniorCitizen","Partner","Dependents","OnlineSecurity","OnlineBackup","DeviceProtection","TechSupport","StreamingTV","StreamingMovies","Contract","PaperlessBilling","PaymentMethod","MonthlyCharges","TotalCharges").withColumnRenamed("Index", "customerID")
 customerMasterDataFinalSubsetDF.show(10,truncate=False)
 customerMasterDataFinalSubsetDF.printSchema()
 
 # Subset the service threshold reference data for relevant attributes, with some renaming
-# Use dropDuplicates rather than an expensive Window/ROW_NUMBER function to get unique records per CellName
 serviceThresholdReferenceDataFinalDF = serviceThresholdReferenceDataDF.drop("Time").dropDuplicates(["CellName"]).withColumnRenamed('maxUE_UL+DL', 'maxUE_UL_DL')
 serviceThresholdReferenceDataFinalDF.show(10,truncate=False)
 serviceThresholdReferenceDataFinalDF.printSchema()

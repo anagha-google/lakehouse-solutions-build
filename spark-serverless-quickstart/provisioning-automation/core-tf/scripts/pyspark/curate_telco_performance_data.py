@@ -52,32 +52,21 @@ curatedCustomerDataDF = spark.read.format("parquet").option("header", True).opti
 
 # Read the telecom customer churn data from GCS
 telecomCustomerChurnRawDataDF = spark.read.format("csv").option("header", True).option("inferschema",True).load(telcoCustomerChurnDataDir)
-#telecomCustomerChurnRawDataDF.printSchema()
+telecomCustomerChurnRawDataDF.printSchema()
 
-# Subset the telecom customer churn/performance data for relevant attributes, proactively omitting 'churn'.
-# We also fold the column renaming and substring extraction directly into this single projection for better optimization.
+# Subset the telecom customer churn/performance data for relevant attributes
+# ... Create subset
 telecomCustomerChurnFinalDF = telecomCustomerChurnRawDataDF.select(
-    "roam_Mean", "change_mou", "drop_vce_Mean", "drop_dat_Mean", "blck_vce_Mean", 
-    "blck_dat_Mean", "plcd_vce_Mean", "plcd_dat_Mean", "comp_vce_Mean", "comp_dat_Mean", 
-    "peak_vce_Mean", "peak_dat_Mean", "mou_peav_Mean", "mou_pead_Mean", "opk_vce_Mean", 
-    "opk_dat_Mean", "mou_opkv_Mean", "mou_opkd_Mean", "drop_blk_Mean", "callfwdv_Mean", 
-    "callwait_Mean", "months", "uniqsubs", "actvsubs", "area", "dualband", 
-    "forgntvl", 
+    "roam_Mean","change_mou","drop_vce_Mean","drop_dat_Mean","blck_vce_Mean","blck_dat_Mean","plcd_vce_Mean","plcd_dat_Mean","comp_vce_Mean","comp_dat_Mean","peak_vce_Mean","peak_dat_Mean","mou_peav_Mean","mou_pead_Mean","opk_vce_Mean","opk_dat_Mean","mou_opkv_Mean","mou_opkd_Mean","drop_blk_Mean","callfwdv_Mean","callwait_Mean","months","uniqsubs","actvsubs","area","dualband","forgntvl",
     col("Customer_ID").alias("customer_ID_original"),
     substring("Customer_ID", 4, 7).alias("customer_ID")
 )
-
-# Quick visual
-telecomCustomerChurnFinalDF.show(10, truncate=False)
+# ... Quick visual
+telecomCustomerChurnFinalDF.show(10,truncate=False)
 
 # Join the curated customer data with the telecom network performance data based on customer ID
-consolidatedDataDF = curatedCustomerDataDF.join(
-    telecomCustomerChurnFinalDF, 
-    curatedCustomerDataDF.customerID == telecomCustomerChurnFinalDF.customer_ID, 
-    "inner"
-).drop(telecomCustomerChurnFinalDF.customer_ID)
-
+consolidatedDataDF = curatedCustomerDataDF.join(telecomCustomerChurnFinalDF, curatedCustomerDataDF.customerID ==  telecomCustomerChurnFinalDF.customer_ID, "inner").drop(telecomCustomerChurnFinalDF.customer_ID)
 consolidatedDataDF.show(truncate=False)
 
 # Persist the augmented telecom tower performance data to GCS
-consolidatedDataDF.write.parquet(os.path.join(outputGCSURI, "telco_performance_augmented"), mode="overwrite")
+consolidatedDataDF.write.parquet(os.path.join(outputGCSURI, "telco_performance_augmented"), mode = "overwrite")
