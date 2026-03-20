@@ -81,7 +81,7 @@ Covered in section 3.3.1
 
 | Functionality | Feature | 
 | -- | :--- | 
-| Provisioning Automation | Terraform for service account creation, IAM permissions, organizational policy updates, network and firewall rules creation, storage buckets creation, file uploads to buckets, provisioning of Managed Airflow 3.0 environment |
+| Provisioning Automation | Terraform for enabling Google APIs, service account creation, IAM permissions, organizational policy updates, network and firewall rules creation, storage buckets creation, file uploads to buckets, provisioning of Managed Airflow 3.0 environment |
 | Data Engineering |  Submitting Managed Apache Spark Serverless  **batches**, viewing the execution on the Cloud Console |
 | Scheduling and Orchestration | Executing a DAG on Apache Airflow on Managed Airflow Serverless |
 
@@ -125,6 +125,8 @@ Covered in section 3.3.1
 ### 1.13. For success
 
 Read the lab - narrative below, review the code, and then start trying out the lab.
+
+<hr>
 
 ### 1.14. Credits
 
@@ -175,9 +177,10 @@ By using Cloud Composer instead of a local instance of Apache Airflow, you can b
 
 
 
-
 <hr>
-# 3. LAB
+
+# 3. Lab
+
 <hr>
 
 ## 3.1. Clone this repo in Cloud Shell
