@@ -15,7 +15,7 @@ limitations under the License.*
 
 <hr>
 
-# Technical Solution 1: Managed Spark Serverless for data engineering and Orchestration with Airflow on Managed Airflow on Google Cloud Platform
+# Technical Solution 1: Data Engineering at Scale with Apache Spark
 
 ## 1.0. About the lab
 
