@@ -15,28 +15,28 @@ limitations under the License.*
 
 <hr>
 
-# Solution 1: Introduction to Managed Spark Serverless and Orchestration with Airflow on Managed Airflow on Google Cloud Platform
+# Technical Solution 1: Data Engineering at Scale with Managed Apache Spark on Google Cloud
 
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab showcases running Apache Spark applications on GCP with Airflow orchestration on managed services - Managed Spark Serverless and Managed Airflow on Google Cloud Platform.
+This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed Spark Serverless** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. 
 
 
 |  |  | 
 | -- | :--- | 
+| Focus| **Data Engineering on Google Cloud with Apache Spark** |
 | Use case |  Anomaly Detection |
 | Domain |  Telecommunications |
 | Showcased | Detection of cell towers needing maintenance with Apache Spark |
+| Process | Rule-based, thresholds-based anomaly detection |
+| Dataset | Kaggle Telco Customer Churn Public (small) Dataset |
 | Technical Use-case | Data engineering at scale |
 | Technology | Spark (PySpark) |
-| Product | Serverless Spark batches on Managed Spark |
-| Dataset | Telco Customer Churn Public (small) Dataset |
-| Process | Rule-based, thresholds-based anomaly detection |
-| Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
-| Focus| Data Engineering on Google Cloud |
+| Data Engineering Product | Apache Spark on Managed Spark Serverless |
+| Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
 
-The goal of the lab is to demystify Managed Spark Serverless on GCP and orchestration of Spark on Managed Airflow Serverless on GCP through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. Its not about high performance tuning and more about showing how the pieces fit together in a real world scenario running on managed services on Google Cloud.
+You will run 4 Spark jobs and learn to view execution in the Managed Spark console. You will then run the same 4 Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console.
 
 <hr>
 
@@ -47,7 +47,7 @@ It takes ~1.5 hours to complete and is fully scrpited, including with Terraform 
 <hr>
 
 ### 1.3. Resources provisioned
-Covered in section 3.1
+Covered in section 3.3.1
 
 
 <hr>
@@ -81,12 +81,9 @@ Covered in section 3.1
 
 | Functionality | Feature | 
 | -- | :--- | 
-| Spark platform |  Managed Apache Spark Serverless  **batches** |
-| Spark History Server |  Managed Apache Spark **Persistent** History Server |
-| Data Lake Metastore |  BigLake Metastore |
-| Data Lake File System |  Google Cloud Storage |
-| Scheduling and Orchestration | Apache Airflow on Managed Airflow Serverless |
-| Provisioning Automation | Terraform |
+| Provisioning Automation | Terraform for enabling Google APIs, service account creation, IAM permissions, organizational policy updates, network and firewall rules creation, storage buckets creation, file uploads to buckets, provisioning of Managed Airflow 3.0 environment |
+| Data Engineering |  Submitting Managed Apache Spark Serverless  **batches**, viewing the execution on the Cloud Console |
+| Scheduling and Orchestration | Executing an Apache Airflow DAG on Managed Airflow Serverless |
 
 
 <hr>
@@ -100,8 +97,6 @@ Covered in section 3.1
 <hr>
 
 ### 1.9. The data
-
-
 
 ![README](images/s8s-qs-03.png)   
 <br><br>
@@ -131,12 +126,64 @@ Covered in section 3.1
 
 Read the lab - narrative below, review the code, and then start trying out the lab.
 
+<hr>
+
+### 1.14. Credits
+
+The code in this lab was originally developed by Tek Systems for Google Cloud.
 
 <hr>
 
+# 2. Product Highlights
+
+## 2.1. Managed Spark Servreless
+
+### About
+Use Managed Spark Serverless to run Spark batch workloads without provisioning and managing your own cluster. Specify workload parameters, and then submit the workload to the service. The service will run the workload on a managed compute infrastructure, autoscaling resources as needed. Managed Spark Serverless charges apply only to the time when the workload is executing.
+
+### Supported workload types
+There are two ways to run Managed Spark Serverless workloads: batch workloads and interactive sessions.
+
+#### Batch workloads
+Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. 
+
+#### Interactive sessions
+Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. You can create a notebook session in the following ways:
+
+- Run PySpark code in BigQuery Studio notebooks. Open a BigQuery Python notebook to create a Spark-Connect-based Serverless for Apache Spark interactive session. Each BigQuery notebook can have only one active Serverless for Apache Spark session associated with it.
+  
+- Use the Dataproc JupyterLab plugin to create multiple Jupyter notebook sessions from templates that you create and manage. When you install the plugin on a local machine or Compute Engine VM, different cards that correspond to different Spark kernel configurations appear on the JupyterLab launcher page. Click a card to create a Serverless for Apache Spark notebook session, then start writing and testing your code in the notebook.
+
+The Dataproc JupyterLab plugin also lets you use the JupyterLab launcher page to take the following actions:
+- Create Dataproc on Compute Engine clusters.
+- Submit jobs to Dataproc on Compute Engine clusters.
+- View Google Cloud and Spark logs.
+
+[Learn more](https://docs.cloud.google.com/dataproc-serverless/docs/overview)
+
 <hr>
 
-## 2.0. Clone this repo in Cloud Shell
+## 2.2. Managed Airflow Servreless
+
+Cloud Composer is a fully managed workflow orchestration service, enabling you to create, schedule, monitor, and manage workflow pipelines that span across clouds and on-premises data centers.
+
+Cloud Composer is built on the popular Apache Airflow open source project and operates using the Python programming language.
+
+By using Cloud Composer instead of a local instance of Apache Airflow, you can benefit from the best of Airflow with no installation or management overhead. Cloud Composer helps you create managed Airflow environments quickly and use Airflow-native tools, such as the powerful Airflow web interface and command-line tools, so you can focus on your workflows and not your infrastructure.
+
+[Learn more](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview)
+
+<hr>
+
+
+
+<hr>
+
+# 3. Lab
+
+<hr>
+
+## 3.1. Clone this repo in Cloud Shell
 
 ```
 git clone https://github.com/anagha-google/lakehouse-solutions-build.git
@@ -144,7 +191,7 @@ git clone https://github.com/anagha-google/lakehouse-solutions-build.git
 
 <hr>
 
-## 3.0. Foundational provisioning automation with Terraform
+## 3.2. Foundational provisioning automation with Terraform
 
 The Terraform in this section updates organization policies and enables Google APIs.
 
@@ -171,24 +218,26 @@ tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-au
 
 <hr>
 
-## 4.0. Lab resources provisioning automation with Terraform
+## 3.3. Lab resources provisioning automation with Terraform
 
-### 4.1. Resources provisioned
+### 3.3.1. Resources provisioned
 In this section, we will provision-
 
 1. Network, subnet, firewall rule
 2. Storage buckets for code, datasets, and for use with the services
 3. BigQuery dataset
 4. Managed Airflow Serverless
-5. User Managed Service Account
-6. Requisite IAM permissions
+5. User Managed Service Account (UMSA)
+6. Requisite IAM permissions for the UMSA and yourself* 
 7. Copy of code, data, etc into buckets
 8. Import of Airflow DAG
 9. Configuration of Airflow variables
 
+*IAM permissions for yourself in case you want to go the console route instead of programmatic.
+
 <hr>
 
-### 4.2. Initialize active gcloud configuration
+### 3.3.2. Initialize active gcloud configuration
 
 Run the following commands in Cloud Shell to authenticate and configure your active project:
 
@@ -209,7 +258,7 @@ gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
 
 <hr>
 
-### 4.3. Run the terraform scripts
+### 3.3.3. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
 cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
@@ -253,7 +302,7 @@ tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-aut
 
 <hr>
 
-## 5.0. Explore the resources provisioned
+## 3.4. Explore the resources provisioned
 
 Paste the following variables in Cloud Shell-
 ```
@@ -264,7 +313,7 @@ CODE_AND_DATA_BUCKET="qs-s8s-data_and_code_bucket-${PROJECT_NBR}"
 
 <br>
 
-### 5.1. GCS bucket for code
+### 3.4.1. GCS bucket for code
 
 Run this command in Cloud Shell-
 ```
@@ -273,7 +322,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 
 <br>
 
-### 5.2. GCS bucket for data
+### 3.4.2. GCS bucket for data
 
 Run this command in Cloud Shell-
 ```
@@ -282,7 +331,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 
 <br>
 
-### 5.3. BigQuery dataset
+### 3.4.3. BigQuery dataset
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
@@ -290,7 +339,7 @@ Validate the creation of the BigQuery dataset called cell_tower_reporting_mart f
 
 
 
-### 5.4. Cloud Composer environment
+### 3.4.4. Cloud Composer environment
 From the Cloud Console, navigate to the Cloud Composer service and 
 
 - Browse all the tabs of the deployed "environment".
@@ -304,7 +353,7 @@ We will first run the Spark jobs individually and get familiar with the Serverle
 
 <hr>
 
-## 6.0. Run the Spark jobs individually
+## 3.5. Run the Spark jobs individually
 
 Paste the following variables in Cloud Shell
 ```
