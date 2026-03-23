@@ -227,11 +227,13 @@ In this section, we will provision-
 2. Storage buckets for code, datasets, and for use with the services
 3. BigQuery dataset
 4. Managed Airflow Serverless
-5. User Managed Service Account
-6. Requisite IAM permissions
+5. User Managed Service Account (UMSA)
+6. Requisite IAM permissions for the UMSA and yourself* 
 7. Copy of code, data, etc into buckets
 8. Import of Airflow DAG
 9. Configuration of Airflow variables
+
+*IAM permissions for yourself in case you want to go the console route instead of programmatic.
 
 <hr>
 
