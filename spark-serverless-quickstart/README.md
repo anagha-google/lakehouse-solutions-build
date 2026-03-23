@@ -271,7 +271,7 @@ GCP_REGION="us-central1"
 DEPLOYER_ACCOUNT_NAME=$GCP_ACCOUNT_NAME
 ORG_ID=`gcloud organizations list --format="value(name)"`
 CC3_IMAGE_VERSION="composer-3-airflow-2.10.5-build.29"
-S8S_SPARK_RUNTIME_VERSION="3.0"
+S8S_SPARK_RUNTIME_VERSION="2.3"
 
 ```
 
