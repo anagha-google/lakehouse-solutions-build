@@ -15,7 +15,7 @@ limitations under the License.*
 
 <hr>
 
-# Technical Solution 1: Data Engineering at Scale with Apache Spark
+# Technical Solution 1: Data Engineering at Scale with Managed Apache Spark on Google Cloud
 
 ## 1.0. About the lab
 
