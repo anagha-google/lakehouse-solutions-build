@@ -236,7 +236,7 @@ The Terraform in this section updates organization policies and enables Google A
 ```
 PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
 
-cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/foundations-tf
+cd ~/lakehouse-solutions-build/solutions/spark-serverless-quickstart/provisioning-automation/foundations-tf
 ```
 
 2. Run the Terraform for organization policy edits and enabling Google APIs
@@ -250,7 +250,7 @@ terraform apply \
 Wait till the provisioning completes - ~5 minutes. In a separate cloud shell tab, you can tail the output file for execution state through completion-
 
 ```
-tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/foundations-tf/s8s-foundations-tf.output
+tail -f  ~/lakehouse-solutions-build/solutions/spark-serverless-quickstart/provisioning-automation/foundations-tf/s8s-foundations-tf.output
 ```
 
 <hr>
@@ -278,7 +278,7 @@ In this section, we will provision-
 ### 3.4.2. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
-cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
+cd ~/lakehouse-solutions-build/solutions/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
 
 PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
 PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d':' -f2 |  tr -d "'" | xargs`
@@ -312,7 +312,7 @@ terraform apply \
 Takes ~50 minutes to complete. In a separate cloud shell tab, you can tail the output file for execution state through completion-
 
 ```
-tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform/s8s-core-tf.output
+tail -f ~/lakehouse-solutions-build/solutions/spark-serverless-quickstart/provisioning-automation/core-tf/terraform/s8s-core-tf.output
 ```
 
 <br>
