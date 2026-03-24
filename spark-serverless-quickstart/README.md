@@ -60,7 +60,7 @@ The hands-on lab takes ~1.5 hours to complete
 <hr>
 
 ### 1.5. Resources provisioned
-Covered in section 3.3.1
+Covered in sections 3.3 and 3.4
 
 <hr>
 
@@ -333,7 +333,10 @@ Run this command in Cloud Shell-
 gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 ```
 
-<br>
+![README](images/s8s-qs-351.png)   
+<br><br>
+
+<hr>
 
 ### 3.5.2. GCS bucket for data
 
@@ -342,13 +345,19 @@ Run this command in Cloud Shell-
 gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 ```
 
-<br>
+![README](images/s8s-qs-352.png)   
+<br><br>
+
+<hr>
 
 ### 3.5.3. BigQuery dataset
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
-<br>
+![README](images/s8s-qs-353.png)   
+<br><br>
+
+<hr>
 
 
 
@@ -363,6 +372,9 @@ From the Cloud Console, navigate to the Managed Airflow service and
 We will first run the Spark jobs individually and get familiar with the Serverless Spark functionality and then run the precreated Airflow DAG that orchestrates the sample Spark jobs on Managed Airflow service.
 
 <br>
+
+![README](images/s8s-qs-354.png)   
+<br><br>
 
 <hr>
 
