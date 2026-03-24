@@ -44,6 +44,9 @@ You will run 4 Spark jobs and learn to view execution in the Managed Spark conso
 - Is fully scripted - the entire solution is provided, and with instructions
 - Is self-paced/self-service
 
+<hr>
+
+
 ### 1.3. Duration
 The hands-on lab takes ~1.5 hours to complete
 
@@ -54,6 +57,7 @@ The hands-on lab takes ~1.5 hours to complete
 - A pre-created project
 - You need to have organization admin rights, project owner privileges or work with privileged users to complete provisioning.
 
+<hr>
 
 ### 1.5. Resources provisioned
 Covered in section 3.3.1
@@ -80,34 +84,45 @@ Covered in section 3.3.1
 
 ### 1.8. Lab Architecture
 
+#### 1.8.1. Reference Architecture
 
-![README](./images/s8s-qs-04.png)   
+![README](./images/s8s-qs-04a.png)   
 <br><br>
 
 <hr>
 
-### 1.9. The data
+#### 1.8.2. Solution Architecture
+
+![README](./images/s8s-qs-04b.png)   
+<br><br>
+
+<hr>
+
+### 1.9. Lab Flow
+
+![README](images/s8s-qs-01.png)   
+<br><br>
+
+<hr>
+
+### 1.10. The data
 
 ![README](images/s8s-qs-03.png)   
 <br><br>
 
 <hr>
 
-### 1.10. The relationships between the data entities
+### 1.11. The relationships between the data entities
 
 
 ![README](images/s8s-qs-02.png)   
 <br><br>
 
-### 1.11. The data engineering pipeline
+<hr>
+
+### 1.12. The data engineering pipeline
 
 ![README](images/s8s-qs-17.png)   
-<br><br>
-
-
-### 1.12. Lab Flow
-
-![README](images/s8s-qs-01.png)   
 <br><br>
 
 <hr>
@@ -126,6 +141,8 @@ The code in this lab was originally developed by Tek Systems for Google Cloud.
 
 # 2. Product Highlights
 
+This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless](). Reading the blog is recommended for full understanding of Managed Spark Serverless product. The following is an overview of the product.
+
 ## 2.1. Managed Spark Servreless
 
 ### About
@@ -135,7 +152,7 @@ Use Managed Spark Serverless to run Spark batch workloads without provisioning a
 There are two ways to run Managed Spark Serverless workloads: batch workloads and interactive sessions.
 
 #### Batch workloads
-Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. 
+Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. **This is the feature covered in this hands-on lab.** 
 
 #### Interactive sessions
 Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. You can create a notebook session in the following ways:
@@ -164,8 +181,6 @@ By using Cloud Composer instead of a local instance of Apache Airflow, you can b
 [Learn more](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview)
 
 <hr>
-
-
 
 <hr>
 
