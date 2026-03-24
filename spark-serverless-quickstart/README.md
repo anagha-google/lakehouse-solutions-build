@@ -179,11 +179,11 @@ The Dataproc JupyterLab plugin also lets you use the JupyterLab launcher page to
 
 ## 2.2. Managed Airflow Servreless
 
-Cloud Composer is a fully managed workflow orchestration service, enabling you to create, schedule, monitor, and manage workflow pipelines that span across clouds and on-premises data centers.
+Managed Airflow service is a fully managed workflow orchestration service, enabling you to create, schedule, monitor, and manage workflow pipelines that span across clouds and on-premises data centers.
 
-Cloud Composer is built on the popular Apache Airflow open source project and operates using the Python programming language.
+Managed Airflow service is built on the popular Apache Airflow open source project and operates using the Python programming language.
 
-By using Cloud Composer instead of a local instance of Apache Airflow, you can benefit from the best of Airflow with no installation or management overhead. Cloud Composer helps you create managed Airflow environments quickly and use Airflow-native tools, such as the powerful Airflow web interface and command-line tools, so you can focus on your workflows and not your infrastructure.
+By using Managed Airflow service instead of a local instance of Apache Airflow, you can benefit from the best of Airflow with no installation or management overhead. Managed Airflow service helps you create managed Airflow environments quickly and use Airflow-native tools, such as the powerful Airflow web interface and command-line tools, so you can focus on your workflows and not your infrastructure.
 
 [Learn more](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview)
 
@@ -1261,9 +1261,9 @@ Review the code to understand the DAG construct, variables and how serverless Sp
 
 <hr>
 
-### 7.4. Review the Airflow environment and Terraform imported Airflow variables in the Cloud Composer UI
+### 7.4. Review the Airflow environment and Terraform imported Airflow variables in the Managed Airflow service UI
 
-Familaize yourself with the UI of Cloud Composer service. And then navigate to the "Environment Variables" tab and review the variables supplied at provision time that get used in the DAG at runtime.
+Familiarize yourself with the UI of Managed Airflow service. And then navigate to the "Environment Variables" tab and review the variables supplied at provision time that get used in the DAG at runtime.
 
  ![README](images/s8s-qs-09.png)   
 <br><br>
@@ -1273,7 +1273,7 @@ Familaize yourself with the UI of Cloud Composer service. And then navigate to t
 
 <hr>
 
-### 7.5. Open the Airflow UI from the Cloud Composer UI on Cloud Console
+### 7.5. Open the Airflow UI from the Managed Airflow service UI on Cloud Console
 Familaize yourself with the UI if new to Airflow
 
  ![README](images/s8s-qs-10.png)   
