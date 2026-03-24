@@ -35,7 +35,7 @@ subnet=models.Variable.get("subnet")
 code_bucket=Variable.get("code_bucket")
 bq_dataset=Variable.get("bq_dataset")
 umsa=Variable.get("umsa")
-spark_runtime_version = Variable.get("spark_runtime_version", default_var="3.0")
+spark_runtime_version = Variable.get("spark_runtime_version", default_var="2.3")
 
 # Define DAG name
 dag_name= "cell_tower_anomaly_detection"
@@ -49,15 +49,13 @@ curate_telco_performance_metrics_script= "gs://"+code_bucket+"/scripts/pyspark/c
 kpis_by_customer_script= "gs://"+code_bucket+"/scripts/pyspark/kpis_by_customer.py"
 kpis_by_cell_tower_script= "gs://"+code_bucket+"/scripts/pyspark/kpis_by_cell_tower.py"
 
-# This is to add a random suffix to the serverless Spark batch ID that needs to be unique each run 
-# ...Define the random module
-S = 10  # number of characters in the string.
-# call random.choices() string module to find the string in Uppercase + numeric data.
-ran = ''.join(random.choices(string.digits, k = S))
+# This is to add a random value to the serverless Spark batch ID that needs to be unique each run 
+numDigits = 5  # number of digits in the random value.
+random_suffix = ''.join(random.choices(string.digits, k = numDigits))
 
-BATCH_ID = "s8s-spark-demo-batch-"+str(ran)
+BATCH_ID_PREFIX = "s8s-spark-STUB-"+str(random_suffix)+"-airflow"
 
-BATCH_CONFIG1 = {
+CURATE_CUSTOMER_BATCH_CONFIG = {
     "pyspark_batch": {
         "main_python_file_uri": curate_customer_script,
         "args": [
@@ -67,13 +65,16 @@ BATCH_CONFIG1 = {
     "environment_config":{
         "execution_config":{
             "service_account": service_account_id,
-            "subnetwork_uri": subnet,
-            "version": spark_runtime_version
-        }
-    }
+            "subnetwork_uri": subnet
+        },
+        
+    },
+    "runtime_config": {
+        "version": spark_runtime_version
+    },
 }
 
-BATCH_CONFIG2 = {
+CURATE_TELCO_PERFORMANCE_METRICS_BATCH_CONFIG = {
     "pyspark_batch": {
         "main_python_file_uri": curate_telco_performance_metrics_script,
         "args": [
@@ -83,13 +84,16 @@ BATCH_CONFIG2 = {
     "environment_config":{
         "execution_config":{
             "service_account": service_account_id,
-            "subnetwork_uri": subnet,
-            "version": spark_runtime_version
-        }
-    }
+            "subnetwork_uri": subnet
+        },
+        
+    },
+    "runtime_config": {
+        "version": spark_runtime_version
+    },
 }
 
-BATCH_CONFIG3 = {
+CALC_KPIS_BY_CUSTOMER_BATCH_CONFIG = {
     "pyspark_batch": {
         "main_python_file_uri": kpis_by_customer_script,
         "args": [
@@ -101,13 +105,15 @@ BATCH_CONFIG3 = {
     "environment_config":{
         "execution_config":{
             "service_account": service_account_id,
-            "subnetwork_uri": subnet,
-            "version": spark_runtime_version
-        }
-    }
+            "subnetwork_uri": subnet
+        },
+    },
+    "runtime_config": {
+        "version": spark_runtime_version
+    },
 }
 
-BATCH_CONFIG4 = {
+CALC_KPIS_BY_CELL_TOWER_BATCH_CONFIG = {
     "pyspark_batch": {
         "main_python_file_uri": kpis_by_cell_tower_script,
         "args": [
@@ -119,10 +125,12 @@ BATCH_CONFIG4 = {
     "environment_config":{
         "execution_config":{
             "service_account": service_account_id,
-            "subnetwork_uri": subnet,
-            "version": spark_runtime_version
-        }
-    }
+            "subnetwork_uri": subnet
+        },
+    },
+    "runtime_config": {
+        "version": spark_runtime_version
+    },
 }
 
 
@@ -136,29 +144,29 @@ with models.DAG(
         task_id="Curate_Customer_Master_Data",
         project_id=project_id,
         region=region,
-        batch=BATCH_CONFIG1,
-        batch_id=BATCH_ID + "-dej-curate-customer",
+        batch=CURATE_CUSTOMER_BATCH_CONFIG,
+        batch_id= BATCH_ID_PREFIX.replace("STUB", "curate-customer"),
     )
     curate_telco_performance_metrics = DataprocCreateBatchOperator(
         task_id="Curate_Telco_Performance_Metrics",
         project_id=project_id,
         region=region,
-        batch=BATCH_CONFIG2,
-        batch_id=BATCH_ID + "-dej-curate-telco",
+        batch=CURATE_TELCO_PERFORMANCE_METRICS_BATCH_CONFIG,
+        batch_id=BATCH_ID_PREFIX.replace("STUB", "curate-cell-tower-metrics"),
     )
     calc_kpis_by_customer = DataprocCreateBatchOperator(
         task_id="Calc_KPIs_By_Customer",
         project_id=project_id,
         region=region,
-        batch=BATCH_CONFIG3,
-        batch_id=BATCH_ID + "-dej-kpis-cust",
+        batch=CALC_KPIS_BY_CUSTOMER_BATCH_CONFIG,
+        batch_id=BATCH_ID_PREFIX.replace("STUB", "kpis-by-customer"),
     )
     calc_kpis_by_cell_tower = DataprocCreateBatchOperator(
         task_id="Calc_KPIs_By_Cell_Tower",
         project_id=project_id,
         region=region,
-        batch=BATCH_CONFIG4,
-        batch_id=BATCH_ID + "-dej-kpis-tower",
+        batch=CALC_KPIS_BY_CELL_TOWER_BATCH_CONFIG,
+        batch_id=BATCH_ID_PREFIX.replace("STUB", "kpis-by-cell-tower"),
     )
 
     curate_customer_master >> curate_telco_performance_metrics

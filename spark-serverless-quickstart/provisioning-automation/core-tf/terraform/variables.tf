@@ -49,6 +49,6 @@ variable "gcp_region" {
 
 variable "spark_runtime_version" {
   description = "The runtime version for Dataproc Serverless"
-  default     = "3.0"
+  default     = "2.3"
 }
 
