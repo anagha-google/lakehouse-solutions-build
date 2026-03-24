@@ -64,7 +64,7 @@ L200 - L300
 ## Solutions
 | # | Solution | Description | Technical Stack |
 | :-- | :--- | :--- | :--- |
-| 1. | [Managed Spark Serverless Quickstart](./spark-serverless-quickstart/) | A quickstart guide to running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services. | PySpark on Managed Spark Serverless Managed Airflow Serverless, BigQuery, Cloud Storage, Terraform |
+| 1. | [Data engineering at scale on Managed Spark Serverless](./spark-serverless-quickstart/) | A quickstart guide to running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services. | PySpark on Managed Spark Serverless Managed Airflow Serverless, BigQuery, Cloud Storage, Terraform |
 
 <hr>
 
