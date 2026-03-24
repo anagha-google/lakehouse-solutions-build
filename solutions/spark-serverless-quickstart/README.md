@@ -34,7 +34,8 @@ This lab is **introductory** in nature and showcases running Apache Spark applic
 | Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
 
 
-You will run 4 Spark jobs and learn to view execution in the Managed Spark console. You will then run the same 4 Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console.
+#### What to expect:
+In this lab, you will provision Google Cloud products/services required for running Apache Spark workloads. You will then run four minimum viable Spark jobs that can be chained into a pipeline, and learn to view execution in the Managed Spark console. You finally run the same four Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console. We will not delve into Managed Airflow in this lab, this service will be covered in a separate blog post and hands-on lab.
 
 <hr>
 
