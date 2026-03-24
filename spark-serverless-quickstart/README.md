@@ -122,18 +122,25 @@ Covered in section 3.3.1
 
 ### 1.12. The data engineering pipeline
 
-![README](images/s8s-qs-17.png)   
+![README](images/s8s-qs-17a.png)   
 <br><br>
 
 <hr>
 
-### 1.13. For success
+### 1.13. The data engineering pipeline orchestration on Managed Airflow Service
+
+![README](images/s8s-qs-17b.png)   
+<br><br>
+
+<hr>
+
+### 1.14. For success
 
 Read the lab - narrative below, review the code, and then start trying out the lab.
 
 <hr>
 
-### 1.14. Credits
+### 1.15. Credits
 
 The code in this lab was originally developed by Tek Systems for Google Cloud.
 
@@ -196,9 +203,30 @@ git clone https://github.com/anagha-google/lakehouse-solutions-build.git
 
 <hr>
 
-## 3.2. Foundational provisioning automation with Terraform
+## 3.2. Initialize active gcloud configuration
 
-The Terraform in this section updates organization policies and enables Google APIs.
+Run the following commands in Cloud Shell to authenticate and configure your active project:
+
+1. Initialization:
+```
+gcloud init
+```
+
+2. Set the active project target:
+```
+gcloud config set project <YOUR_PROJECT_ID>
+```
+
+3. Set the quota project for ADC (Application Default Credentials):
+```
+gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
+```
+
+<hr>
+
+## 3.3. Foundational provisioning automation with Terraform
+
+The Terraform in this section updates organization policies and enables Google APIs. The organization policy updates are needed for the Google Argolis environment but may not be needed in your environment - check with your administrator. If not needed, remove the section for organization policy updates.
 
 1. Paste this in Cloud Shell
 ```
@@ -223,9 +251,9 @@ tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-au
 
 <hr>
 
-## 3.3. Lab resources provisioning automation with Terraform
+## 3.4. Provisioning automation with Terraform of compute and data services
 
-### 3.3.1. Resources provisioned
+### 3.4.1. Resources provisioned
 In this section, we will provision-
 
 1. Network, subnet, firewall rule
@@ -242,28 +270,8 @@ In this section, we will provision-
 
 <hr>
 
-### 3.3.2. Initialize active gcloud configuration
 
-Run the following commands in Cloud Shell to authenticate and configure your active project:
-
-1. Initialization:
-```
-gcloud init
-```
-
-2. Set the active project target:
-```
-gcloud config set project <YOUR_PROJECT_ID>
-```
-
-3. Set the quota project for ADC (Application Default Credentials):
-```
-gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
-```
-
-<hr>
-
-### 3.3.3. Run the terraform scripts
+### 3.4.2. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
 cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
@@ -307,7 +315,7 @@ tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-aut
 
 <hr>
 
-## 3.4. Explore the resources provisioned
+## 3.5. Explore the resources provisioned
 
 Paste the following variables in Cloud Shell-
 ```
@@ -318,7 +326,7 @@ CODE_AND_DATA_BUCKET="qs-s8s-data_and_code_bucket-${PROJECT_NBR}"
 
 <br>
 
-### 3.4.1. GCS bucket for code
+### 3.5.1. GCS bucket for code
 
 Run this command in Cloud Shell-
 ```
@@ -327,7 +335,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 
 <br>
 
-### 3.4.2. GCS bucket for data
+### 3.5.2. GCS bucket for data
 
 Run this command in Cloud Shell-
 ```
@@ -336,7 +344,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 
 <br>
 
-### 3.4.3. BigQuery dataset
+### 3.5.3. BigQuery dataset
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
@@ -344,21 +352,21 @@ Validate the creation of the BigQuery dataset called cell_tower_reporting_mart f
 
 
 
-### 3.4.4. Cloud Composer environment
-From the Cloud Console, navigate to the Cloud Composer service and 
+### 3.5.4. Managed Airflow environment
+From the Cloud Console, navigate to the Managed Airflow service and 
 
 - Browse all the tabs of the deployed "environment".
 - Review the Airflow variables
 - Click on the Airflow UI and view the two DAGs
 - Open the DAG called - "cell-tower-anomaly-detection" and click on "code" and review the same
 
-We will first run the Spark jobs individually and get familiar with the Serverless Spark functionality and then run the precreated Airflow DAG that orchestrates the sample Spark jobs on Cloud Composer.
+We will first run the Spark jobs individually and get familiar with the Serverless Spark functionality and then run the precreated Airflow DAG that orchestrates the sample Spark jobs on Managed Airflow service.
 
 <br>
 
 <hr>
 
-## 3.5. Run the Spark jobs individually
+## 3.6. Run the Spark jobs individually
 
 Paste the following variables in Cloud Shell
 ```
@@ -384,11 +392,11 @@ echo $SPARK_SERVERLESS_RUNTIME_VERSION
 
 <hr>
 
-### 6.1. Curate customer master data
+### 3.6.1. Curate customer master data
 
 In this section, from PySpark, we transform customer master data (parquet) and service threshold data (CSV) and join them, and persist to GCS.<br><br>
 
-#### 6.1.1. Abstract of the Pyspark script
+#### 3.6.1.1. Abstract of the Pyspark script
 This script -<br>
 (a) Reads the customer master data<br>
 (b) Reads the service threshold data<br>
@@ -401,13 +409,13 @@ This script -<br>
 
 <hr>
 
-#### 6.1.2. Code
+#### 3.6.1.2. Code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/curate_customer_data.py) <br>
 
 <hr>
 
-#### 6.1.3. Run the command below in Cloud Shell
+#### 3.6.1.3. Run the command below in Cloud Shell
 ```
 gcloud dataproc batches submit \
 --project $PROJECT_ID \
@@ -422,7 +430,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 
 <br>
 
-#### 6.1.4. Review execution in the Managed Spark batches UI
+#### 3.6.1.4. Review execution in the Managed Spark batches UI
 Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 
@@ -431,7 +439,7 @@ Switch to Dataproc to check the execution under "batches". You should see a batc
 ![README](images/s8s-qs-14.png)   
 <br><br>
 
-#### 6.1.5. Take a quick read of the console output that is just FYI
+#### 3.6.1.5. Take a quick read of the console output that is just FYI
 
 ```
 A) Customer data schema:
@@ -583,12 +591,12 @@ root
  
  <br>
  
-#### 6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
+#### 3.6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
 
 ![README](images/s8s-qs-12.png)   
 <br><br>
  
-#### 6.1.7. Review the results in Cloud Storage
+#### 3.6.1.7. Review the results in Cloud Storage
  
  ```
  gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/customer_augmented
@@ -603,7 +611,7 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/_SU
 gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
 
-#### 6.1.8. Review the execution logs in the Managed Spark History Server
+#### 3.6.1.8. Review the execution logs in the Managed Spark History Server
 
 From the Dataproc "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
  
