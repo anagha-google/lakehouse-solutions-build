@@ -20,52 +20,47 @@ limitations under the License.*
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed Spark Serverless** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. 
+This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed Spark Serverless** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]().
 
 
 |  |  | 
 | -- | :--- | 
-| Focus| **Data Engineering on Google Cloud with Apache Spark** |
-| Use case |  Anomaly Detection |
+| Technical Focus| **Data Engineering at scale on Google Cloud with Apache Spark** |
+| Use case |  Anomaly Detection: Detection of cell towers needing maintenance with Apache Spark  |
 | Domain |  Telecommunications |
-| Showcased | Detection of cell towers needing maintenance with Apache Spark |
 | Process | Rule-based, thresholds-based anomaly detection |
 | Dataset | Kaggle Telco Customer Churn Public (small) Dataset |
-| Technical Use-case | Data engineering at scale |
-| Technology | Spark (PySpark) |
 | Data Engineering Product | Apache Spark on Managed Spark Serverless |
 | Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
+
 
 You will run 4 Spark jobs and learn to view execution in the Managed Spark console. You will then run the same 4 Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console.
 
 <hr>
 
-### 1.2. Duration
-It takes ~1.5 hours to complete and is fully scrpited, including with Terraform for provisioning.
+### 1.2. Lab format
 
+- Includes Terraform for provisioning automation
+- Is fully scripted - the entire solution is provided, and with instructions
+- Is self-paced/self-service
 
 <hr>
 
-### 1.3. Resources provisioned
-Covered in section 3.3.1
 
+### 1.3. Duration
+The hands-on lab takes ~1.5 hours to complete
 
 <hr>
 
 ### 1.4. Prerequisites
 
 - A pre-created project
-- You need to have organization admin rights, and project owner privileges or work with privileged users to complete provisioning.
-
+- You need to have organization admin rights, project owner privileges or work with privileged users to complete provisioning.
 
 <hr>
 
-### 1.5. Lab format
-
-- Includes Terraform for provisioning automation
-- Is fully scripted - the entire solution is provided, and with instructions
-- Is self-paced/self-service
-
+### 1.5. Resources provisioned
+Covered in sections 3.3 and 3.4
 
 <hr>
 
@@ -73,7 +68,6 @@ Covered in section 3.3.1
 
 - A quick read for architects
 - Targeted for hands on practitioners, especially data engineers
-
 
 <hr>
 
@@ -90,51 +84,71 @@ Covered in section 3.3.1
 
 ### 1.8. Lab Architecture
 
+#### 1.8.1. Reference Architecture
 
-![README](./images/s8s-qs-04.png)   
+![README](./images/s8s-qs-04a.png)   
 <br><br>
 
 <hr>
 
-### 1.9. The data
+#### 1.8.2. Solution Architecture
 
-![README](images/s8s-qs-03.png)   
+![README](./images/s8s-qs-04b.png)   
 <br><br>
 
 <hr>
 
-### 1.10. The relationships between the data entities
-
-
-![README](images/s8s-qs-02.png)   
-<br><br>
-
-### 1.11. The data engineering pipeline
-
-![README](images/s8s-qs-17.png)   
-<br><br>
-
-
-### 1.12. Lab Flow
+### 1.9. Lab Flow
 
 ![README](images/s8s-qs-01.png)   
 <br><br>
 
 <hr>
 
-### 1.13. For success
+### 1.10. The data
+
+![README](images/s8s-qs-03.png)   
+<br><br>
+
+<hr>
+
+### 1.11. The relationships between the data entities
+
+
+![README](images/s8s-qs-02.png)   
+<br><br>
+
+<hr>
+
+### 1.12. The data engineering pipeline
+
+![README](images/s8s-qs-17a.png)   
+<br><br>
+
+<hr>
+
+### 1.13. The data engineering pipeline orchestration on Managed Airflow Service
+
+![README](images/s8s-qs-17b.png)   
+<br><br>
+
+<hr>
+
+### 1.14. For success
 
 Read the lab - narrative below, review the code, and then start trying out the lab.
 
 <hr>
 
-### 1.14. Credits
+### 1.15. Credits
 
 The code in this lab was originally developed by Tek Systems for Google Cloud.
 
 <hr>
 
 # 2. Product Highlights
+
+This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless](). Reading the blog is recommended for full understanding of Managed Spark Serverless product. The following is an overview of the product.
 
 ## 2.1. Managed Spark Servreless
 
@@ -145,7 +159,7 @@ Use Managed Spark Serverless to run Spark batch workloads without provisioning a
 There are two ways to run Managed Spark Serverless workloads: batch workloads and interactive sessions.
 
 #### Batch workloads
-Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. 
+Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. **This is the feature covered in this hands-on lab.** 
 
 #### Interactive sessions
 Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. You can create a notebook session in the following ways:
@@ -175,8 +189,6 @@ By using Cloud Composer instead of a local instance of Apache Airflow, you can b
 
 <hr>
 
-
-
 <hr>
 
 # 3. Lab
@@ -191,9 +203,30 @@ git clone https://github.com/anagha-google/lakehouse-solutions-build.git
 
 <hr>
 
-## 3.2. Foundational provisioning automation with Terraform
+## 3.2. Initialize active gcloud configuration
 
-The Terraform in this section updates organization policies and enables Google APIs.
+Run the following commands in Cloud Shell to authenticate and configure your active project:
+
+1. Initialization:
+```
+gcloud init
+```
+
+2. Set the active project target:
+```
+gcloud config set project <YOUR_PROJECT_ID>
+```
+
+3. Set the quota project for ADC (Application Default Credentials):
+```
+gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
+```
+
+<hr>
+
+## 3.3. Foundational provisioning automation with Terraform
+
+The Terraform in this section updates organization policies and enables Google APIs. The organization policy updates are needed for the Google Argolis environment but may not be needed in your environment - check with your administrator. If not needed, remove the section for organization policy updates.
 
 1. Paste this in Cloud Shell
 ```
@@ -218,9 +251,9 @@ tail -f  ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-au
 
 <hr>
 
-## 3.3. Lab resources provisioning automation with Terraform
+## 3.4. Provisioning automation with Terraform of compute and data services
 
-### 3.3.1. Resources provisioned
+### 3.4.1. Resources provisioned
 In this section, we will provision-
 
 1. Network, subnet, firewall rule
@@ -237,28 +270,8 @@ In this section, we will provision-
 
 <hr>
 
-### 3.3.2. Initialize active gcloud configuration
 
-Run the following commands in Cloud Shell to authenticate and configure your active project:
-
-1. Initialization:
-```
-gcloud init
-```
-
-2. Set the active project target:
-```
-gcloud config set project <YOUR_PROJECT_ID>
-```
-
-3. Set the quota project for ADC (Application Default Credentials):
-```
-gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
-```
-
-<hr>
-
-### 3.3.3. Run the terraform scripts
+### 3.4.2. Run the terraform scripts
 Paste this in Cloud Shell after editing the GCP region variable to match your nearest region-
 ```
 cd ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-automation/core-tf/terraform
@@ -302,7 +315,7 @@ tail -f ~/lakehouse-solutions-build/spark-serverless-quickstart/provisioning-aut
 
 <hr>
 
-## 3.4. Explore the resources provisioned
+## 3.5. Explore the resources provisioned
 
 Paste the following variables in Cloud Shell-
 ```
@@ -313,47 +326,59 @@ CODE_AND_DATA_BUCKET="qs-s8s-data_and_code_bucket-${PROJECT_NBR}"
 
 <br>
 
-### 3.4.1. GCS bucket for code
+### 3.5.1. GCS bucket for code
 
 Run this command in Cloud Shell-
 ```
 gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 ```
 
-<br>
+![README](images/s8s-qs-351.png)   
+<br><br>
 
-### 3.4.2. GCS bucket for data
+<hr>
+
+### 3.5.2. GCS bucket for data
 
 Run this command in Cloud Shell-
 ```
 gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 ```
 
-<br>
+![README](images/s8s-qs-352.png)   
+<br><br>
 
-### 3.4.3. BigQuery dataset
+<hr>
+
+### 3.5.3. BigQuery dataset
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
-<br>
+![README](images/s8s-qs-353.png)   
+<br><br>
+
+<hr>
 
 
 
-### 3.4.4. Cloud Composer environment
-From the Cloud Console, navigate to the Cloud Composer service and 
+### 3.5.4. Managed Airflow environment
+From the Cloud Console, navigate to the Managed Airflow service and 
 
 - Browse all the tabs of the deployed "environment".
 - Review the Airflow variables
 - Click on the Airflow UI and view the two DAGs
 - Open the DAG called - "cell-tower-anomaly-detection" and click on "code" and review the same
 
-We will first run the Spark jobs individually and get familiar with the Serverless Spark functionality and then run the precreated Airflow DAG that orchestrates the sample Spark jobs on Cloud Composer.
+We will first run the Spark jobs individually and get familiar with the Serverless Spark functionality and then run the precreated Airflow DAG that orchestrates the sample Spark jobs on Managed Airflow service.
 
 <br>
 
+![README](images/s8s-qs-354.png)   
+<br><br>
+
 <hr>
 
-## 3.5. Run the Spark jobs individually
+## 3.6. Run the Spark jobs individually
 
 Paste the following variables in Cloud Shell
 ```
@@ -379,11 +404,11 @@ echo $SPARK_SERVERLESS_RUNTIME_VERSION
 
 <hr>
 
-### 6.1. Curate customer master data
+### 3.6.1. Curate customer master data
 
 In this section, from PySpark, we transform customer master data (parquet) and service threshold data (CSV) and join them, and persist to GCS.<br><br>
 
-#### 6.1.1. Abstract of the Pyspark script
+#### 3.6.1.1. Abstract of the Pyspark script
 This script -<br>
 (a) Reads the customer master data<br>
 (b) Reads the service threshold data<br>
@@ -391,18 +416,17 @@ This script -<br>
 (d) Then joins them both based on cell tower name and<br>
 (e) Persists to GCS<br>
 
-![README](images/s8s-qs-05.png)   
-<br><br>
+
 
 <hr>
 
-#### 6.1.2. Code
+#### 3.6.1.2. Code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/curate_customer_data.py) <br>
 
 <hr>
 
-#### 6.1.3. Run the command below in Cloud Shell
+#### 3.6.1.3. Run the command below in Cloud Shell
 ```
 gcloud dataproc batches submit \
 --project $PROJECT_ID \
@@ -417,8 +441,8 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 
 <br>
 
-#### 6.1.4. Review execution in the Managed Spark batches UI
-Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
+#### 3.6.1.4. Review execution in the Managed Spark batches UI
+Switch to Managed Spark batches UI to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 
 <br>
@@ -426,7 +450,7 @@ Switch to Dataproc to check the execution under "batches". You should see a batc
 ![README](images/s8s-qs-14.png)   
 <br><br>
 
-#### 6.1.5. Take a quick read of the console output that is just FYI
+#### 3.6.1.5. Take a quick read of the console output that is just FYI
 
 ```
 A) Customer data schema:
@@ -578,12 +602,12 @@ root
  
  <br>
  
-#### 6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
+#### 3.6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
 
 ![README](images/s8s-qs-12.png)   
 <br><br>
  
-#### 6.1.7. Review the results in Cloud Storage
+#### 3.6.1.7. Review the results in Cloud Storage
  
  ```
  gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/customer_augmented
@@ -598,18 +622,23 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/_SU
 gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
 
-#### 6.1.8. Review the execution logs in the Managed Spark History Server
+#### 3.6.1.8. Review the execution logs in the Managed Spark Serverless - Spark UI
 
-From the Dataproc "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
+From the Managed Spark "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
  
-![README](images/s8s-qs-13.png)   
+![README](images/s8s-qs-13a.png)   
 <br><br>
 
-<hr>
+![README](images/s8s-qs-13b.png)   
+<br><br>
+
+![README](images/s8s-qs-13c.png)   
+<br><br>
+
 
 <hr>
 
-### 6.2. Curate telecom performance data
+### 6.2. Curate cell tower performance data
 In this section, from PySpark, we transform telco customer churn data, join with the augmented customer data, and persist to GCS.<br>
 
 Review the [code](cell-tower-anomaly-detection/00-scripts/curate_telco_performance_data.py) first.<br>
@@ -624,8 +653,7 @@ This script -<br>
 
 <br>
 
-![README](images/s8s-qs-06.png)   
-<br><br>
+
 
 #### 6.2.2. The PySpark code
 
@@ -648,7 +676,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_telco_performance_data.py \
 <br>
 
 #### 6.2.4. Review execution in the Managed Spark batches UI
-Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-curate-telco-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
+Switch to Managed Spark service to check the execution under "batches". You should see a batch job called "s8s-curate-telco-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 <br>
 
@@ -814,24 +842,22 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/telco_performance_augmented
 ```
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00000-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00001-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00002-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00003-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00004-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00005-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00006-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00007-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00000-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00001-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00002-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00003-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00004-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00005-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00006-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00007-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
 ```
 This output will be used in subsequent steps.
 
 <br>
 
-
-<hr>
 
 <hr>
 
@@ -850,8 +876,6 @@ This script -<br>
 
 <br>
 
-![README](images/s8s-qs-07.png)   
-<br><br>
 
 <hr>
 
@@ -949,12 +973,12 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_customer
 ```
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00000-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00001-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00002-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00000-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00001-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00002-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
 ```
 This output will be used in subsequent steps.
 
@@ -970,7 +994,8 @@ select customerID,CellName, defect_count from `cell_tower_reporting_mart.kpis_by
 <br>
 
 
-<hr>
+![README](images/s8s-qs-636.png)   
+<br><br>
 
 <hr>
 
@@ -990,8 +1015,6 @@ This script -<br>
 
 <br>
 
-![README](images/s8s-qs-08.png)   
-<br><br>
 
 <hr>
 
@@ -1136,10 +1159,10 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_cell_tower
 ```
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/part-00000-1357d767-f10d-454f-9bea-ecbb310edbcb-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/part-00000-1357d767-f10d-454f-9bea-ecbb310edbcb-c000.snappy.parquet
 ```
 This output will be used in subsequent steps.
 
@@ -1155,7 +1178,8 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 <br>
 
 
-<hr>
+![README](images/s8s-qs-646.png)   
+<br><br>
 
 <hr>
 
@@ -1163,14 +1187,14 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 
 ### 7.1. The data engineering pipeline
 
-![README](images/s8s-qs-16.png)   
+![README](images/s8s-qs-17a.png)   
 <br><br>
 
 <hr>
 
 ### 7.2. Architecture
 
-![README](images/s8s-qs-17.png)   
+![README](images/s8s-qs-17b.png)   
 <br><br>
 
 <hr>
