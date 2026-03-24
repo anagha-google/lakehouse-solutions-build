@@ -416,8 +416,7 @@ This script -<br>
 (d) Then joins them both based on cell tower name and<br>
 (e) Persists to GCS<br>
 
-![README](images/s8s-qs-05.png)   
-<br><br>
+
 
 <hr>
 
@@ -443,7 +442,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 <br>
 
 #### 3.6.1.4. Review execution in the Managed Spark batches UI
-Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
+Switch to Managed Spark batches UI to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 
 <br>
@@ -623,18 +622,23 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/_SU
 gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
 
-#### 3.6.1.8. Review the execution logs in the Managed Spark History Server
+#### 3.6.1.8. Review the execution logs in the Managed Spark Serverless - Spark UI
 
-From the Dataproc "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
+From the Managed Spark "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
  
-![README](images/s8s-qs-13.png)   
+![README](images/s8s-qs-13a.png)   
 <br><br>
 
-<hr>
+![README](images/s8s-qs-13b.png)   
+<br><br>
+
+![README](images/s8s-qs-13c.png)   
+<br><br>
+
 
 <hr>
 
-### 6.2. Curate telecom performance data
+### 6.2. Curate cell tower performance data
 In this section, from PySpark, we transform telco customer churn data, join with the augmented customer data, and persist to GCS.<br>
 
 Review the [code](cell-tower-anomaly-detection/00-scripts/curate_telco_performance_data.py) first.<br>
@@ -649,8 +653,7 @@ This script -<br>
 
 <br>
 
-![README](images/s8s-qs-06.png)   
-<br><br>
+
 
 #### 6.2.2. The PySpark code
 
@@ -673,7 +676,7 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_telco_performance_data.py \
 <br>
 
 #### 6.2.4. Review execution in the Managed Spark batches UI
-Switch to Dataproc to check the execution under "batches". You should see a batch job called "s8s-curate-telco-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
+Switch to Managed Spark service to check the execution under "batches". You should see a batch job called "s8s-curate-telco-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 <br>
 
@@ -839,24 +842,22 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/telco_performance_augmented
 ```
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00000-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00001-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00002-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00003-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00004-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00005-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00006-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00007-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00000-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00001-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00002-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00003-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00004-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00005-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00006-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augmented/part-00007-06106efe-4190-47b2-8565-098ef060f325-c000.snappy.parquet
 ```
 This output will be used in subsequent steps.
 
 <br>
 
-
-<hr>
 
 <hr>
 
@@ -875,8 +876,6 @@ This script -<br>
 
 <br>
 
-![README](images/s8s-qs-07.png)   
-<br><br>
 
 <hr>
 
@@ -974,12 +973,12 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_customer
 ```
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00000-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00001-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00002-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00000-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00001-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_customer/part-00002-41caca8e-43f5-4509-9569-96dff7b7fb2c-c000.snappy.parquet
 ```
 This output will be used in subsequent steps.
 
@@ -995,7 +994,8 @@ select customerID,CellName, defect_count from `cell_tower_reporting_mart.kpis_by
 <br>
 
 
-<hr>
+![README](images/s8s-qs-636.png)   
+<br><br>
 
 <hr>
 
@@ -1015,8 +1015,6 @@ This script -<br>
 
 <br>
 
-![README](images/s8s-qs-08.png)   
-<br><br>
 
 <hr>
 
@@ -1161,10 +1159,10 @@ gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_cell_tower
 ```
 The author's output-
 ```
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/:
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/_SUCCESS
-gs://s8s_data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/part-00000-1357d767-f10d-454f-9bea-ecbb310edbcb-c000.snappy.parquet
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/:
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/_SUCCESS
+gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/part-00000-1357d767-f10d-454f-9bea-ecbb310edbcb-c000.snappy.parquet
 ```
 This output will be used in subsequent steps.
 
@@ -1180,7 +1178,8 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 <br>
 
 
-<hr>
+![README](images/s8s-qs-646.png)   
+<br><br>
 
 <hr>
 
@@ -1188,14 +1187,14 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 
 ### 7.1. The data engineering pipeline
 
-![README](images/s8s-qs-16.png)   
+![README](images/s8s-qs-17a.png)   
 <br><br>
 
 <hr>
 
 ### 7.2. Architecture
 
-![README](images/s8s-qs-17.png)   
+![README](images/s8s-qs-17b.png)   
 <br><br>
 
 <hr>
