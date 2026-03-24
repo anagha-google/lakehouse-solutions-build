@@ -20,52 +20,43 @@ limitations under the License.*
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed Spark Serverless** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. 
+This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed Spark Serverless** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]().
 
 
 |  |  | 
 | -- | :--- | 
-| Focus| **Data Engineering on Google Cloud with Apache Spark** |
-| Use case |  Anomaly Detection |
+| Technical Focus| **Data Engineering at scale on Google Cloud with Apache Spark** |
+| Use case |  Anomaly Detection: Detection of cell towers needing maintenance with Apache Spark  |
 | Domain |  Telecommunications |
-| Showcased | Detection of cell towers needing maintenance with Apache Spark |
 | Process | Rule-based, thresholds-based anomaly detection |
 | Dataset | Kaggle Telco Customer Churn Public (small) Dataset |
-| Technical Use-case | Data engineering at scale |
-| Technology | Spark (PySpark) |
 | Data Engineering Product | Apache Spark on Managed Spark Serverless |
 | Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
+
 
 You will run 4 Spark jobs and learn to view execution in the Managed Spark console. You will then run the same 4 Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console.
 
 <hr>
 
-### 1.2. Duration
-It takes ~1.5 hours to complete and is fully scrpited, including with Terraform for provisioning.
+### 1.2. Lab format
 
+- Includes Terraform for provisioning automation
+- Is fully scripted - the entire solution is provided, and with instructions
+- Is self-paced/self-service
 
-<hr>
-
-### 1.3. Resources provisioned
-Covered in section 3.3.1
-
+### 1.3. Duration
+The hands-on lab takes ~1.5 hours to complete
 
 <hr>
 
 ### 1.4. Prerequisites
 
 - A pre-created project
-- You need to have organization admin rights, and project owner privileges or work with privileged users to complete provisioning.
+- You need to have organization admin rights, project owner privileges or work with privileged users to complete provisioning.
 
 
-<hr>
-
-### 1.5. Lab format
-
-- Includes Terraform for provisioning automation
-- Is fully scripted - the entire solution is provided, and with instructions
-- Is self-paced/self-service
-
+### 1.5. Resources provisioned
+Covered in section 3.3.1
 
 <hr>
 
@@ -73,7 +64,6 @@ Covered in section 3.3.1
 
 - A quick read for architects
 - Targeted for hands on practitioners, especially data engineers
-
 
 <hr>
 
