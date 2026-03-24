@@ -326,6 +326,9 @@ CODE_AND_DATA_BUCKET="qs-s8s-data_and_code_bucket-${PROJECT_NBR}"
 
 <br>
 
+
+<hr>
+
 ### 3.5.1. GCS bucket for code
 
 Run this command in Cloud Shell-
@@ -416,8 +419,6 @@ This script -<br>
 (d) Then joins them both based on cell tower name and<br>
 (e) Persists to GCS<br>
 
-
-
 <hr>
 
 #### 3.6.1.2. Code
@@ -441,6 +442,9 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_customer_data.py \
 
 <br>
 
+
+<hr>
+
 #### 3.6.1.4. Review execution in the Managed Spark batches UI
 Switch to Managed Spark batches UI to check the execution under "batches". You should see a batch job called "s8s-spark-curate-customer-master-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
@@ -449,6 +453,9 @@ Switch to Managed Spark batches UI to check the execution under "batches". You s
 
 ![README](images/s8s-qs-14.png)   
 <br><br>
+
+
+<hr>
 
 #### 3.6.1.5. Take a quick read of the console output that is just FYI
 
@@ -601,11 +608,17 @@ root
  ```
  
  <br>
+
+ 
+<hr>
  
 #### 3.6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
 
 ![README](images/s8s-qs-12.png)   
 <br><br>
+
+
+<hr>
  
 #### 3.6.1.7. Review the results in Cloud Storage
  
@@ -621,6 +634,9 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/
 gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/_SUCCESS
 gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/part-00000-b06a1fa4-3427-4d94-8ef7-e213fdd2a66f-c000.snappy.parquet
  ```
+
+
+<hr>
 
 #### 3.6.1.8. Review the execution logs in the Managed Spark Serverless - Spark UI
 
@@ -654,10 +670,16 @@ This script -<br>
 <br>
 
 
+<hr>
+
+
 
 #### 6.2.2. The PySpark code
 
 Review the [code](provisioning-automation/core-tf/scripts/pyspark/curate_telco_performance_data.py) <br>
+
+
+<hr>
 
 
 #### 6.2.3. Execute the command below
@@ -675,10 +697,16 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/curate_telco_performance_data.py \
 
 <br>
 
+
+<hr>
+
 #### 6.2.4. Review execution in the Managed Spark batches UI
 Switch to Managed Spark service to check the execution under "batches". You should see a batch job called "s8s-curate-telco-..." there. Review its execution through completion. Review the code for the process and then explore the results in GCS.
 
 <br>
+
+
+<hr>
 
 
 #### 6.2.5. Take a quick read of the console output that is just FYI
@@ -836,6 +864,9 @@ only showing top 20 rows
 
 <br>
 
+
+<hr>
+
 #### 6.2.6. List the results in the GCS bucket
 ```
 gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/telco_performance_augmented
@@ -857,6 +888,9 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/telco_performance_augm
 This output will be used in subsequent steps.
 
 <br>
+
+
+<hr>
 
 
 <hr>
@@ -967,6 +1001,9 @@ only showing top 3 rows
 Note the defect count which is a netric derived that indicates issues with the cell tower.<br>
 
 
+<hr>
+
+
 #### 6.3.5. List the results in the GCS bucket
 ```
 gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_customer
@@ -984,6 +1021,9 @@ This output will be used in subsequent steps.
 
 <br>
 
+
+<hr>
+
 #### 6.3.6. Analyze results in BigQuery
 
 Run the query below-
@@ -996,6 +1036,9 @@ select customerID,CellName, defect_count from `cell_tower_reporting_mart.kpis_by
 
 ![README](images/s8s-qs-636.png)   
 <br><br>
+
+<hr>
+
 
 <hr>
 
@@ -1040,6 +1083,9 @@ gs://$CODE_AND_DATA_BUCKET/scripts/pyspark/kpis_by_cell_tower.py \
 
 ```
 <br>
+
+
+<hr>
 
 #### 6.4.4. Take a quick read of the console output that is just FYI
 
@@ -1153,6 +1199,9 @@ only showing top 20 rows
 A metric has been added called "Maintenance_Required" to reflect defects beyond a threshold.<br>
 
 
+<hr>
+
+
 #### 6.4.5. List the results in the GCS bucket-
 ```
 gsutil ls -r gs://$CODE_AND_DATA_BUCKET/output_data/kpis_by_cell_tower
@@ -1167,6 +1216,9 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/kpis_by_cell_tower/par
 This output will be used in subsequent steps.
 
 <br>
+
+
+<hr>
 
 #### 6.4.6. Analyze results in BigQuery
 
@@ -1227,10 +1279,14 @@ Familaize yourself with the UI if new to Airflow
  ![README](images/s8s-qs-10.png)   
 <br><br>
 
+<hr>
+
 ### 7.6. Run the DAG for Cell Tower Anomaly Detection
 
  ![README](images/s8s-qs-11.png)   
 <br><br>
+
+<hr>
 
 ### 7.7. Review the job execution in the Managed Spark "Batches" UI
 
@@ -1244,8 +1300,8 @@ Familaize yourself with the UI if new to Airflow
 
 
 ##### =====================================================================================================
-##### THIS CONCLUDES THE LAB - CELL TOWER ANOMALY DETECTION WITH MANAGED SPARK SERVERLESS
-##### SHUT DOWN THE LAB TO AVOID BILLING, UNLESS YOU ARE WORKING ON OTHER LABS
+##### THIS CONCLUDES THE LAB - CELL TOWER ANOMALY DETECTION ON MANAGED SPARK SERVERLESS
+##### SHUT DOWN THE LAB TO AVOID BILLING
 ##### =====================================================================================================
 
 
