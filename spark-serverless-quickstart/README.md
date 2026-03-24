@@ -86,12 +86,16 @@ Covered in sections 3.3 and 3.4
 
 #### 1.8.1. Reference Architecture
 
+Please refer to the [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]() blog post for an explanation.
+
 ![README](./images/s8s-qs-04a.png)   
 <br><br>
 
 <hr>
 
 #### 1.8.2. Solution Architecture
+
+Please refer to the [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]() blog post for an explanation.
 
 ![README](./images/s8s-qs-04b.png)   
 <br><br>
