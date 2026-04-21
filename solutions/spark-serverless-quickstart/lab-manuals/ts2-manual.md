@@ -80,14 +80,14 @@ Nothing new.
 
 ### 1.7. Features & Functionality covered
 
-| Features & Functionality | 
-| -- | 
-| Interactive sessions creation from command line and walk through of the UI |
-| Interactive sessions template creation from command line and walk through of the UI |
-| Colab Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Spark Connect sessions template  |
-| Vertex AI Workbench creation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
-| Local Jupyter server installation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
-| Data Cloud Extension installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+|| Features & Functionality | 
+| -- | :--- | 
+| 1|Interactive sessions creation from command line and walk through of the UI |
+| 2|Interactive sessions template creation from command line and walk through of the UI |
+| 3|Colab Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Spark Connect sessions template  |
+| 4|Vertex AI Workbench creation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+| 5|Local Jupyter server installation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+| 6|Data Cloud Extension installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
 
 <hr>
 
