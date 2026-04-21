@@ -123,25 +123,25 @@ Read the lab - narrative below, review the code, and then start trying out the l
 
 # 2. Product Highlights
 
-This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless](). Reading the blog is recommended for full understanding of Managed Spark Serverless product. The following is an overview of the product.
+This hands-on lab complements the blog post [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks](). Reading the blog is recommended for full understanding of serverless Managed service for Apache Spark product. The following is an overview of the product.
 
-## 2.1. Managed Spark Servreless
+## 2.1. Serverless Managed Service for Apache Spark 
 
 ### About
-Use Managed Spark Serverless to run Spark batch workloads without provisioning and managing your own cluster. Specify workload parameters, and then submit the workload to the service. The service will run the workload on a managed compute infrastructure, autoscaling resources as needed. Managed Spark Serverless charges apply only to the time when the workload is executing.
+Use Serverless Managed Service for Apache Spark  to run Spark batch workloads without provisioning and managing your own cluster. Specify workload parameters, and then submit the workload to the service. The service will run the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless Managed Service for Apache Spark  charges apply only to the time when the workload is executing.
 
 ### Supported workload types
-There are two ways to run Managed Spark Serverless workloads: batch workloads and interactive sessions.
+There are two ways to run Serverless Managed Service for Apache Spark workloads: batch workloads and interactive sessions.
 
 #### Batch workloads
-Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload.  
+Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark (Java or Scala). You can specify Spark properties when you submit a serverless Spark batch workload.  
 
 #### Interactive sessions
 Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. **This is the feature covered in this hands-on lab.** You can create a notebook session in the following ways:
 
 - Run PySpark code in BigQuery Studio notebooks. Open a BigQuery Python notebook to create a Spark-Connect-based Serverless for Apache Spark interactive session. Each BigQuery notebook can have only one active Serverless for Apache Spark session associated with it.
   
-- Use the Managed Service for Apache Spark JupyterLab plugin to create multiple Jupyter notebook sessions from templates that you create and manage. When you install the plugin on a local machine or Compute Engine VM, different cards that correspond to different Spark kernel configurations appear on the JupyterLab launcher page. Click a card to create a Serverless for Apache Spark notebook session, then start writing and testing your code in the notebook.
+- Use the Managed Service for Apache Spark JupyterLab plugin to create multiple Jupyter notebook sessions from templates that you create and manage. When you install the plugin on a local machine or Compute Engine VM, different cards that correspond to different Spark kernel configurations appear on the JupyterLab launcher page. Click a card to create a Serverless for Apache Spark notebook session, then start writing and testing your code in the notebook. There are other notebook options covered in this lab.
 
 [Learn more](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates)
 
