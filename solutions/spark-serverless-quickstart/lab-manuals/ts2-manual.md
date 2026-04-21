@@ -30,19 +30,8 @@ This lab is **introductory** in nature and showcases **serverless Managed Servic
 | Notebook platforms |  Colab notebooks in BigQuery Studio<br>Notebooks on Vertex AI Workbench<br>Notebooks on BYO Jupyter<br>Notebooks in VS Code |
 
 #### What to expect:
-In this lab, you will reuse the setup from technical solution 1. Here is what you will be doing:<br>
-1. Create an 'interative sessions template' for Spark Connect
-2. Create an 'interative sessions template' for Jupyter  
-3. Upload a notebook in this repo to Colab Enterprise in BigQuery studio, import the 'interactive sessions template' for Spark Connect in your notebook, and analyze Chicago crimes
-4. Create a Vertex AI Workbench instance, upload the same notebook, pick the kernel for Jupyter ('interactive sessions template' for Jupyter) and analyze Chicago crimes
-5. Install Jupyter on your machine, upload the same notebook, pick the kernel for Jupyter ('interactive sessions template' for Jupyter) and analyze Chicago crimes
-6. Use VS Code with Data Cloud Extension plugin, and use the notebook feature with 'interactive sessions template' for Jupyter and analyze Chicago crimes
 
-Steps 3-4-5-6 are independent of each other. We recommend trying at least one option that is Jupyter based.
-
-Note: Spark BQ connector and the catalog component - Lakehouse runtime catalog are featured in the next technical solution (TODO - ADD LINK)
-
-
+See the "Lab Flow" section below.
 
 <hr>
 
@@ -93,7 +82,9 @@ Nothing new.
 
 ### 1.8. Lab Architecture
 
-#### 1.8.2. Managed Service for Apache Spark - Integration Landscape
+#### 1.8.1. Managed Service for Apache Spark - Integration Landscape
+
+Please refer to the blog post [Lakehouse Demystified - Part 2: Managed service for Apache Spark - serverless batches]() for an explanation of this diagram.
 
 ![README](../images/ts2-02.png)   
 <br><br>
@@ -123,7 +114,7 @@ And a little easier on the eyes-
 
 ### 1.9. Lab Flow
 
-![README](images/TODO.png)   
+![README](images/ts2-04.png)   
 <br><br>
 
 <hr>
