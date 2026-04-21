@@ -93,11 +93,29 @@ Nothing new.
 
 ### 1.8. Lab Architecture
 
+#### 1.8.2. Managed Service for Apache Spark - Integration Landscape
+
+![README](../images/ts2-02.png)   
+<br><br>
+
+
 #### 1.8.1. Reference Architecture
 
-Please refer to the [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]() blog post for an explanation.
+Please refer to the [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]() blog post for a narrative.
 
-![README](./images/TODO.png)   
+![README](../images/ts2-03.png)   
+<br><br>
+
+And a little easier on the eyes-
+
+![README](../images/ts2-01.png)   
+<br><br>
+
+<hr>
+
+#### 1.8.2. Solution Architecture
+
+![README](../images/TODO.png)   
 <br><br>
 
 <hr>
