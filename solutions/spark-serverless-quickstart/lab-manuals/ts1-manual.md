@@ -98,7 +98,7 @@ Please refer to the [Lakehouse Deconstructed - Part 2: Just enough about Managed
 
 Please refer to the [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]() blog post for an explanation.
 
-![README](./images/s8s-qs-04b.png)   
+![README](../images/s8s-qs-04b.png)   
 <br><br>
 
 <hr>
