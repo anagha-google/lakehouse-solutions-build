@@ -15,12 +15,12 @@ limitations under the License.*
 
 <hr>
 
-# Technical Solution 1: Data Engineering at Scale with Managed Apache Spark on Google Cloud
+# Technical Solution 1: Data Engineering at Scale with Serverless Managed Service for Apache Spark on Google Cloud
 
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed Spark Serverless** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]().
+This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Serverless Managed service for Apache Spark** and **Managed service for Apache Airflow** with a minimum viable example. The goal of the lab is to demystify **Serverless Managed service for Apache Spark** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Serverless Managed service for Apache Spark]().
 
 
 |  |  | 
