@@ -20,28 +20,30 @@ limitations under the License.*
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab is **introductory** in nature and showcases running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed products/services - **Managed service for Apache Spark** and **Managed Airflow Serverless** with a minimum viable example. The goal of the lab is to demystify **Managed Spark Serverless** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless]().
+This lab is **introductory** in nature and showcases **serverless Managed Service for Apache Spark** - interactive sessions feature.  The goal of the lab is to demystify **Serverless Spark Interactive Sessions** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]().
 
 
 |  |  | 
 | -- | :--- | 
-| Technical Focus| **Data Engineering at scale on Google Cloud with Apache Spark** |
-| Use case |  Anomaly Detection: Detection of cell towers needing maintenance with Apache Spark  |
-| Domain |  Telecommunications |
-| Process | Rule-based, thresholds-based anomaly detection |
-| Dataset | Kaggle Telco Customer Churn Public (small) Dataset |
-| Data Engineering Product | Apache Spark on Managed Spark Serverless |
-| Scheduling and Orchestration Product | Apache Airflow on Managed Airflow Serverless |
-
+| Technical Focus| **Spark notebooks powered by serverless Managed Service for Apache Spark on Google Cloud** |
+| Use case |  Chicago Crimes Analysis |
+| Notebook platforms |  Colab notebooks in BigQuery Studio<br>Notebooks on Vertex AI Workbench<br>Notebooks on BYO Jupyter<br>Notebooks in VS Code |
 
 #### What to expect:
-In this lab, you will provision Google Cloud products/services required for running Apache Spark workloads. You will then run four minimum viable Spark jobs that can be chained into a pipeline, and learn to view execution in the Managed Spark console. You finally run the same four Spark jobs as part of an Airflow DAG on Managed Airflow, and view the execution in the Managed Airflow service console. We will not delve into Managed Airflow in this lab, this service will be covered in a separate blog post and hands-on lab.
+In this lab, you will reuse the setup from technical solution 1. Here is what you will be doing:<br>
+1. Create an 'interative sessions template' for Spark Connect
+2. Create an 'interative sessions template' for Jupyter  
+3. Upload a notebook in this repo to Colab Enterprise in BigQuery studio, import the 'interative sessions template' for Spark Connect and analyze Chicago crimes
+4. Create a Vertex AI Workbench instance, upload the same notebook, pick the kernel for Jupyter ('interative sessions template' for Jupyter) and analyze Chicago crimes
+5. Install Jupyter on your machine, upload the same notebook, pick the kernel for Jupyter ('interative sessions template' for Jupyter) and analyze Chicago crimes
+6. Use VS Code with Data Cloud Extension plugin, and use the notebook feature with 'interative sessions template' for Jupyter and analyze Chicago crimes
+
+Steps 3-4-5-6 are independent of each other.
 
 <hr>
 
 ### 1.2. Lab format
 
-- Includes Terraform for provisioning automation
 - Is fully scripted - the entire solution is provided, and with instructions
 - Is self-paced/self-service
 
@@ -49,37 +51,39 @@ In this lab, you will provision Google Cloud products/services required for runn
 
 
 ### 1.3. Duration
-The hands-on lab takes ~1.5 hours to complete
+The hands-on lab takes ~0.5 hours or less to complete
 
 <hr>
 
 ### 1.4. Prerequisites
 
-- A pre-created project
-- You need to have organization admin rights, project owner privileges or work with privileged users to complete provisioning.
+- Completion of Technical Solution 1.
+- VS Code insatlled on your machine if you want to try out Spark notebooks powered by serverless interactive sessions
 
 <hr>
 
 ### 1.5. Resources provisioned
-Covered in sections 3.3 and 3.4
+Nothing new.
 
 <hr>
 
 ### 1.6. Audience
 
 - A quick read for architects
-- Targeted for hands on practitioners, especially data engineers
+- Targeted for hands on practitioners, especially data engineers, data analysts and data scientists
 
 <hr>
 
-### 1.7. Features covered
+### 1.7. Features & Functionality covered
 
-| Functionality | Feature | 
-| -- | :--- | 
-| Provisioning Automation | Terraform for enabling Google APIs, service account creation, IAM permissions, organizational policy updates, network and firewall rules creation, storage buckets creation, file uploads to buckets, provisioning of Managed Airflow 3.0 environment |
-| Data Engineering |  Submitting Managed Apache Spark Serverless  **batches**, viewing the execution on the Cloud Console |
-| Scheduling and Orchestration | Executing an Apache Airflow DAG on Managed Airflow Serverless |
-
+| Features & Functionality | 
+| -- | 
+| Interactive sessions creation from command line and walk through of the UI |
+| Interactive sessions template creation from command line and walk through of the UI |
+| Colab Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Spark Connect sessions template  |
+| Vertex AI Workbench creation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+| Local Jupyter server installation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+| Data Cloud Extension installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
 
 <hr>
 
