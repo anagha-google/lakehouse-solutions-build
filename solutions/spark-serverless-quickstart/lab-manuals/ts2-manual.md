@@ -33,12 +33,14 @@ This lab is **introductory** in nature and showcases **serverless Managed Servic
 In this lab, you will reuse the setup from technical solution 1. Here is what you will be doing:<br>
 1. Create an 'interative sessions template' for Spark Connect
 2. Create an 'interative sessions template' for Jupyter  
-3. Upload a notebook in this repo to Colab Enterprise in BigQuery studio, import the 'interative sessions template' for Spark Connect and analyze Chicago crimes
-4. Create a Vertex AI Workbench instance, upload the same notebook, pick the kernel for Jupyter ('interative sessions template' for Jupyter) and analyze Chicago crimes
-5. Install Jupyter on your machine, upload the same notebook, pick the kernel for Jupyter ('interative sessions template' for Jupyter) and analyze Chicago crimes
-6. Use VS Code with Data Cloud Extension plugin, and use the notebook feature with 'interative sessions template' for Jupyter and analyze Chicago crimes
+3. Upload a notebook in this repo to Colab Enterprise in BigQuery studio, import the 'interactive sessions template' for Spark Connect in your notebook, and analyze Chicago crimes
+4. Create a Vertex AI Workbench instance, upload the same notebook, pick the kernel for Jupyter ('interactive sessions template' for Jupyter) and analyze Chicago crimes
+5. Install Jupyter on your machine, upload the same notebook, pick the kernel for Jupyter ('interactive sessions template' for Jupyter) and analyze Chicago crimes
+6. Use VS Code with Data Cloud Extension plugin, and use the notebook feature with 'interactive sessions template' for Jupyter and analyze Chicago crimes
 
 Steps 3-4-5-6 are independent of each other. We recommend trying at least one option that is Jupyter based.
+
+Note: This lab does not include the catalog - Lakehouse runtime catalog. The next solution introduces the catalog and includes notebooks.
 
 <hr>
 
