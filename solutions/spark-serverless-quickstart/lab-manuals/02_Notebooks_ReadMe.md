@@ -20,7 +20,7 @@ limitations under the License.*
 ## 1.0. About the lab
 
 ### 1.1. Abstract
-This lab is **introductory** in nature and showcases **serverless Managed Service for Apache Spark** - interactive sessions feature.  The goal of the lab is to demystify **Serverless Spark Interactive Sessions** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]().
+This lab is **introductory** in nature and showcases **serverless Managed Service for Apache Spark - Interactive Sessions** feature.  The goal of the lab is to demystify **Serverless Spark Interactive Sessions** through a (zero fluff, zero dazzle) minimum viable end to end sample to accelerate adoption. This hands-on lab complements the blog post [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]().
 
 
 |  |  | 
