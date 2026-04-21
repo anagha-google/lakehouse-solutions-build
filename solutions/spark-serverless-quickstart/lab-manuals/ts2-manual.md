@@ -78,6 +78,8 @@ Nothing new.
 | 5|Local Jupyter server installation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
 | 6|Data Cloud Extension installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
 
+Note: The catalog component, Lakehouse runtime catalog is covered in the next technical solution.
+
 <hr>
 
 ### 1.8. Lab Architecture
@@ -90,7 +92,7 @@ Please refer to the blog post [Lakehouse Demystified - Part 2: Managed service f
 <br><br>
 
 
-#### 1.8.1. Reference Architecture
+#### 1.8.2. Reference Architecture
 
 Please refer to the [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]() blog post for a narrative.
 
@@ -104,7 +106,7 @@ A more simplistic version...
 
 <hr>
 
-#### 1.8.2. Solution Architecture
+#### 1.8.3. Solution Architecture
 
 ![README](../images/ts2-05.png)   
 <br><br>
@@ -119,16 +121,9 @@ A more simplistic version...
 
 <hr>
 
-### 1.10. The data
+### 1.10. For success
 
-![README](images/TODO.png)   
-<br><br>
-
-<hr>
-
-### 1.11. For success
-
-Read the lab - narrative below, review the code, and then start trying out the lab.
+Read the blog posts and the lab narrative below, review the code, and then start trying out the lab.
 
 <hr>
 
@@ -136,27 +131,19 @@ Read the lab - narrative below, review the code, and then start trying out the l
 
 # 2. Product Highlights
 
-This hands-on lab complements the blog post [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks](). Reading the blog is recommended for full understanding of serverless Managed service for Apache Spark product. The following is an overview of the product.
+Read the blog post [Lakehouse Demystified - Part 2: Managed service for Apache Spark - serverless batches]() for a comprehensive of managed serverless Spark on Google Cloud. Please refer to the [Lakehouse Demystified - Part 3: Managed service for Apache Spark - serverless interactive sessions for Spark notebooks]() blog post for comprehensive coverage on interactive sessions.
 
-## 2.1. Serverless Managed Service for Apache Spark 
+## 2.1.  Interactive sessions
+Interactive sessions on serverless Managed Service for Apache Spark are essentially dedicated serverless Spark infrastructure that can be attached to notebooks for interactive authoring of Spark code. There are two options to connect notebooks to interactive sessions - Spark Connect and Jupyter. BigQuery studio offers Colab notebooks that work with Spark Connect, any Jupyter compatible notebook platform works well with remote Jupyter kernels. Google Cloud's Data Cloud Extension for IDEs allow you to author notebooks in your IDEs with remote Jupyter kernels. 
 
-### About
-Use Serverless Managed Service for Apache Spark  to run Spark batch workloads without provisioning and managing your own cluster. Specify workload parameters, and then submit the workload to the service. The service will run the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless Managed Service for Apache Spark  charges apply only to the time when the workload is executing.
+## 2.2. Language support
+Google Cloud is strategically investing in supporting PySpark. 
 
-### Supported workload types
-There are two ways to run Serverless Managed Service for Apache Spark workloads: batch workloads and interactive sessions.
+## 2.3. Interactive session templates
+Interactive session templates are a construct that can be used to define the core and common serverless infrastructure specifications & guardrails - such as runtime versions, baseline resources for driver & executor, min-max thresholds for executors, custom containers, packages, metastore/catalog configurations and more. These promote consistency and reduce toil of defining the configs over and over again in each notebook. These templates can be imported into the Spark session creation command to take advantage of the predefined configurations. This is demonstrated in the lab. [Read the product documenation](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates)
 
-#### Batch workloads
-Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark (Java or Scala). You can specify Spark properties when you submit a serverless Spark batch workload.  
-
-#### Interactive sessions
-Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. **This is the feature covered in this hands-on lab.** You can create a notebook session in the following ways:
-
-- Run PySpark code in BigQuery Studio notebooks. Open a BigQuery Python notebook to create a Spark-Connect-based Serverless for Apache Spark interactive session. Each BigQuery notebook can have only one active Serverless for Apache Spark session associated with it.
-  
-- Use the Managed Service for Apache Spark JupyterLab plugin to create multiple Jupyter notebook sessions from templates that you create and manage. When you install the plugin on a local machine or Compute Engine VM, different cards that correspond to different Spark kernel configurations appear on the JupyterLab launcher page. Click a card to create a Serverless for Apache Spark notebook session, then start writing and testing your code in the notebook. There are other notebook options covered in this lab.
-
-[Learn more](https://docs.cloud.google.com/dataproc-serverless/docs/guides/create-serverless-sessions-templates)
+## 2.4. Identity supported
+Interactive sessions support both User Managed Service Accounts (UMSAs - non human application IDs) as well as end user credentials (EUC). You can configure this at the session template level.
 
 <hr>
 
@@ -164,9 +151,7 @@ Write and run code in Jupyter notebooks during a Serverless for Apache Spark int
 
 <hr>
 
-## 3.1. Setup
-
-### 3.1.1. Initialize active gcloud configuration
+## 3.1. Setup -  initialize active gcloud configuration
 
 Run the following commands in Cloud Shell to authenticate and configure your active project:
 
@@ -187,52 +172,43 @@ gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
 
 <hr>
 
-### 3.1.2. Provision Vertex AI Workbench instance
+
+## 3.2. Setup - create an interactive sessions template for Spark Connect, for PySpark and using a Service Account 
+
+<hr>
+
+## 3.3. Setup - create an interactive sessions template for Jupyter, for PySpark and using a Service Account 
+<hr>
+
+
+## 3.4. Setup - Provision Vertex AI Workbench instance
 
 
 <hr>
 
-### 3.1.3. Install local Jupyter on your machine
+## 3.5. Setup - Install local Jupyter on your machine
 
 <hr>
 
-### 3.1.4. Explore the resources specific to this lab 
-
-#TODO
 
 
-<hr>
 
-## 3.2. Create an 'Interactive Sessions' templates
-
-### 3.2.1. Create a template for Spark Connect
-
+## 3.6. Execute a Spark notebook in Colab in BigQuery studio with Spark Connect
 
 
 <hr>
 
-### 3.2.1. Create a template for Jupyter
-
-
-
-<hr>
-
-## 3.3. Execute a Spark notebook in Colab in BigQuery studio with Spark Connect
+## 3.7. Execute a Spark notebook on Vertex AI Workbench with Jupyter
 
 
 <hr>
 
-## 3.4. Execute a Spark notebook on Vertex AI Workbench with Jupyter
+## 3.8. Execute a Spark notebook in VS Code on your machine
 
 
 <hr>
 
-## 3.5. Execute a Spark notebook in VS Code on your machine
-
-
-<hr>
-
-## 3.6. Execute a Spark notebook on local Jupyter on your machine
+## 3.9. Execute a Spark notebook on local Jupyter on your machine
 
 
 <hr>
