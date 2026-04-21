@@ -40,7 +40,9 @@ In this lab, you will reuse the setup from technical solution 1. Here is what yo
 
 Steps 3-4-5-6 are independent of each other. We recommend trying at least one option that is Jupyter based.
 
-Note: This lab does not include the catalog - Lakehouse runtime catalog. The next solution introduces the catalog and includes notebooks.
+Note: Spark BQ connector and the catalog component - Lakehouse runtime catalog are featured in the next technical solution (TODO - ADD LINK)
+
+
 
 <hr>
 
