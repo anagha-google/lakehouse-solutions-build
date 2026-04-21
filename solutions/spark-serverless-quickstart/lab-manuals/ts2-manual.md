@@ -97,7 +97,7 @@ Please refer to the [Lakehouse Demystified - Part 3: Managed service for Apache 
 ![README](../images/ts2-03.png)   
 <br><br>
 
-And a little easier on the eyes-
+A more simplistic version...
 
 ![README](../images/ts2-01.png)   
 <br><br>
@@ -106,7 +106,7 @@ And a little easier on the eyes-
 
 #### 1.8.2. Solution Architecture
 
-![README](../images/TODO.png)   
+![README](../images/ts2-05.png)   
 <br><br>
 
 <hr>
