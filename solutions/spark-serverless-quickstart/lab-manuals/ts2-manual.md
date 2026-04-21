@@ -114,7 +114,7 @@ And a little easier on the eyes-
 
 ### 1.9. Lab Flow
 
-![README](images/ts2-04.png)   
+![README](../images/ts2-04.png)   
 <br><br>
 
 <hr>
