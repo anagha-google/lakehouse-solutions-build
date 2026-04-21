@@ -105,14 +105,14 @@ Please refer to the [Lakehouse Deconstructed - Part 2: Just enough about Managed
 
 ### 1.9. Lab Flow
 
-![README](images/s8s-qs-01.png)   
+![README](../images/s8s-qs-01.png)   
 <br><br>
 
 <hr>
 
 ### 1.10. The data
 
-![README](images/s8s-qs-03.png)   
+![README](../images/s8s-qs-03.png)   
 <br><br>
 
 <hr>
@@ -120,21 +120,21 @@ Please refer to the [Lakehouse Deconstructed - Part 2: Just enough about Managed
 ### 1.11. The relationships between the data entities
 
 
-![README](images/s8s-qs-02.png)   
+![README](../images/s8s-qs-02.png)   
 <br><br>
 
 <hr>
 
 ### 1.12. The data engineering pipeline
 
-![README](images/s8s-qs-17a.png)   
+![README](../images/s8s-qs-17a.png)   
 <br><br>
 
 <hr>
 
 ### 1.13. The data engineering pipeline orchestration on Managed Airflow Service
 
-![README](images/s8s-qs-17b.png)   
+![README](../images/s8s-qs-17b.png)   
 <br><br>
 
 <hr>
@@ -153,7 +153,7 @@ The code in this lab was originally developed by Tek Systems for Google Cloud.
 
 # 2. Product Highlights
 
-This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Managed Spark Serverless](). Reading the blog is recommended for full understanding of Managed Spark Serverless product. The following is an overview of the product.
+This hands-on lab complements the blog post [Lakehouse Deconstructed - Part 2: Just enough about Serverless Managed Spark Service for Apache Spark](). Reading the blog is recommended for full understanding of Managed Spark Serverless product. The following is an overview of the product.
 
 ## 2.1. Managed Spark Servreless
 
@@ -164,7 +164,7 @@ Use Managed Spark Serverless to run Spark batch workloads without provisioning a
 There are two ways to run Managed Spark Serverless workloads: batch workloads and interactive sessions.
 
 #### Batch workloads
-Submit a batch workload to the Serverless for Apache Spark service using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. **This is the feature covered in this hands-on lab.** 
+Submit a batch workload to the Serverless Managed Spark Service for Apache Spark using the Google Cloud console, Google Cloud CLI, or Dataproc API. The service runs the workload on a managed compute infrastructure, autoscaling resources as needed. Serverless for Apache Spark charges apply only to the time when the workload is executing. You can run applications in PySpark, Spark SQL, Spark R, Spark (Java or Scala). You can specify Spark properties when you submit a Serverless for Apache Spark batch workload. You can schedule a Spark batch workload as part of an Airflow workflow using an Airflow batch operator. **This is the feature covered in this hands-on lab.** 
 
 #### Interactive sessions
 Write and run code in Jupyter notebooks during a Serverless for Apache Spark interactive session. You can create a notebook session in the following ways:
@@ -341,7 +341,7 @@ Run this command in Cloud Shell-
 gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/scripts"
 ```
 
-![README](images/s8s-qs-351.png)   
+![README](../images/s8s-qs-351.png)   
 <br><br>
 
 <hr>
@@ -353,7 +353,7 @@ Run this command in Cloud Shell-
 gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 ```
 
-![README](images/s8s-qs-352.png)   
+![README](../images/s8s-qs-352.png)   
 <br><br>
 
 <hr>
@@ -362,7 +362,7 @@ gsutil ls -r "gs://$CODE_AND_DATA_BUCKET/datasets"
 
 Validate the creation of the BigQuery dataset called cell_tower_reporting_mart from the Cloud Console, BigQuery UI
 
-![README](images/s8s-qs-353.png)   
+![README](../images/s8s-qs-353.png)   
 <br><br>
 
 <hr>
@@ -381,7 +381,7 @@ We will first run the Spark jobs individually and get familiar with the Serverle
 
 <br>
 
-![README](images/s8s-qs-354.png)   
+![README](../images/s8s-qs-354.png)   
 <br><br>
 
 <hr>
@@ -456,7 +456,7 @@ Switch to Managed Spark batches UI to check the execution under "batches". You s
 
 <br>
 
-![README](images/s8s-qs-14.png)   
+![README](../images/s8s-qs-14.png)   
 <br><br>
 
 
@@ -619,7 +619,7 @@ root
  
 #### 3.6.1.6. Review the complete output in the Managed Spark Serverless batches UI for the job
 
-![README](images/s8s-qs-12.png)   
+![README](../images/s8s-qs-12.png)   
 <br><br>
 
 
@@ -647,13 +647,13 @@ gs://qs-s8s-data_and_code_bucket-159504796045/output_data/customer_augmented/par
 
 From the Managed Spark "batches" UI, click on the job that is running/completed and at the top right, click on "View History Server" to get directly to the Spark application executed in the Spark UI
  
-![README](images/s8s-qs-13a.png)   
+![README](../images/s8s-qs-13a.png)   
 <br><br>
 
-![README](images/s8s-qs-13b.png)   
+![README](../images/s8s-qs-13b.png)   
 <br><br>
 
-![README](images/s8s-qs-13c.png)   
+![README](../images/s8s-qs-13c.png)   
 <br><br>
 
 
@@ -1039,7 +1039,7 @@ select customerID,CellName, defect_count from `cell_tower_reporting_mart.kpis_by
 <br>
 
 
-![README](images/s8s-qs-636.png)   
+![README](../images/s8s-qs-636.png)   
 <br><br>
 
 <hr>
@@ -1235,7 +1235,7 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 <br>
 
 
-![README](images/s8s-qs-646.png)   
+![README](../images/s8s-qs-646.png)   
 <br><br>
 
 <hr>
@@ -1244,14 +1244,14 @@ select CellName, Maintainence_Required from `cell_tower_reporting_mart.kpis_by_c
 
 ### 7.1. The data engineering pipeline
 
-![README](images/s8s-qs-17a.png)   
+![README](../images/s8s-qs-17a.png)   
 <br><br>
 
 <hr>
 
 ### 7.2. Architecture
 
-![README](images/s8s-qs-17b.png)   
+![README](../images/s8s-qs-17b.png)   
 <br><br>
 
 <hr>
@@ -1270,7 +1270,7 @@ Review the code to understand the DAG construct, variables and how serverless Sp
 
 Familiarize yourself with the UI of Managed Airflow service. And then navigate to the "Environment Variables" tab and review the variables supplied at provision time that get used in the DAG at runtime.
 
- ![README](images/s8s-qs-09.png)   
+ ![README](../images/s8s-qs-09.png)   
 <br><br>
 
 
@@ -1281,21 +1281,21 @@ Familiarize yourself with the UI of Managed Airflow service. And then navigate t
 ### 7.5. Open the Airflow UI from the Managed Airflow service UI on Cloud Console
 Familaize yourself with the UI if new to Airflow
 
- ![README](images/s8s-qs-10.png)   
+ ![README](../images/s8s-qs-10.png)   
 <br><br>
 
 <hr>
 
 ### 7.6. Run the DAG for Cell Tower Anomaly Detection
 
- ![README](images/s8s-qs-11.png)   
+ ![README](../images/s8s-qs-11.png)   
 <br><br>
 
 <hr>
 
 ### 7.7. Review the job execution in the Managed Spark "Batches" UI
 
-![README](images/s8s-qs-15.png)   
+![README](../images/s8s-qs-15.png)   
 <br><br>
 
 <br>
