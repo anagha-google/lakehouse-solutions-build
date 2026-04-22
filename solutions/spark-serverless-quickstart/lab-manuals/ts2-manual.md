@@ -324,6 +324,49 @@ Lets try a notebook.
 
 ## 3.5. Setup - Install local Jupyter on your machine
 
+This is the documentation page. https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions#install-jupyterlab-extension
+The author used a slightly different approach as detailed below.
+
+### 3.5.1. Authenticate to gcloud
+
+1. Run the command below - it will use the credentials obtained from the login flow to also update the Application Default Credentials, making them available to client libraries
+```
+gcloud auth login --update-adc
+```
+
+2. Create a virtual environment
+```
+python -m venv .venv
+source .venv/bin/activate
+```
+
+3. Install jupyterlab and more
+```
+pip install --upgrade pip
+pip install jupyterlab
+pip install bigquery-jupyter-plugin
+pip install pyOpenSSL
+```
+
+4. Launch JupyterLab
+```
+jupyter lab
+```
+
+![README](../images/ts2-11a.png)   
+<br><br>
+
+
+
+5. This will open a browser window with a launcher as shown below. Click on the session template.
+![README](../images/ts2-11b.png)   
+<br><br>
+
+6. Quick test
+
+![README](../images/ts2-11c.png)   
+<br><br>
+
 <hr>
 
 
