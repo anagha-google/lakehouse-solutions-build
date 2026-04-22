@@ -188,6 +188,8 @@ Navigate to Cloud IAM and find the service account as show below and copy it.
 ![README](../images/ts2-06.png)   
 <br><br>
 
+<hr>
+
 ### 3.2.2. Navigate to the Managed Service for Apache Spark 'session templates' UI
 
 Follow the screenshots below to navigate to the Managed Service for Apache Spark 'session templates' UI
@@ -198,6 +200,8 @@ Follow the screenshots below to navigate to the Managed Service for Apache Spark
 ![README](../images/ts2-07b.png)   
 <br><br>
 
+<hr>
+
 ### 3.2.3. Create the session template
 
 Follow the screenshots below to create a session template. Ensure you make the same selections.
@@ -205,11 +209,17 @@ Follow the screenshots below to create a session template. Ensure you make the s
 ![README](../images/ts2-08a.png)   
 <br><br>
 
+<hr>
+
 ![README](../images/ts2-08b.png)   
 <br><br>
 
+<hr>
+
 ![README](../images/ts2-08c.png)   
 <br><br>
+
+<hr>
 
 ![README](../images/ts2-08d.png)   
 <br><br>
@@ -217,8 +227,12 @@ Follow the screenshots below to create a session template. Ensure you make the s
 ![README](../images/ts2-08e.png)   
 <br><br>
 
+<hr>
+
 ![README](../images/ts2-08f.png)   
 <br><br>
+
+<hr>
 
 ![README](../images/ts2-08g.png)   
 <br><br>
