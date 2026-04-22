@@ -242,10 +242,78 @@ Follow the screenshots below to create a session template. Ensure you make the s
 ## 3.3. Setup - create an interactive sessions template for Jupyter, for PySpark and using a Service Account 
 
 
+Follow the screenshots below to create a session template. Ensure you make the same selections.
+
+![README](../images/ts2-09a.png)   
+<br><br>
+
+<hr>
+
+![README](../images/ts2-09b.png)   
+<br><br>
+
+<hr>
+
+![README](../images/ts2-09c.png)   
+<br><br>
+
+<hr>
+
+![README](../images/ts2-09d.png)   
+<br><br>
+
+![README](../images/ts2-09e.png)   
+<br><br>
+
+<hr>
+
+![README](../images/ts2-09f.png)   
+<br><br>
+
 <hr>
 
 
-## 3.4. Setup - Provision Vertex AI Workbench instance
+## 3.4. Setup - Provision Gemini Enterprise Workbench instance
+
+Gemini Enterprise Workbench instance (formerly called Vertex AI Workbench instance) is an optional notebook server that can be created for Data Scientists and ML engineers to experiment. Spark notebooks powered by Managed Service for Apache Spark interactive sessions are supported. Lets create the workbench instance.
+
+Follow the screenshots below to stand up Gemini Enterprise Workbench instance and start up a notebook with a session.
+
+![README](../images/ts2-10a.png)   
+<br><br>
+
+![README](../images/ts2-10b.png)   
+<br><br>
+
+![README](../images/ts2-10c.png)   
+<br><br>
+
+![README](../images/ts2-10d.png)   
+<br><br>
+
+![README](../images/ts2-10e.png)   
+<br><br>
+
+![README](../images/ts2-10f.png)   
+<br><br>
+
+![README](../images/ts2-10g.png)   
+<br><br>
+
+![README](../images/ts2-10h.png)   
+<br><br>
+
+![README](../images/ts2-10i.png)   
+<br><br>
+
+![README](../images/ts2-10j.png)   
+<br><br>
+
+![README](../images/ts2-10k.png)   
+<br><br>
+
+![README](../images/ts2-10l.png)   
+<br><br>
 
 
 <hr>
