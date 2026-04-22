@@ -56,7 +56,7 @@ The hands-on lab takes ~0.5 hours or less to complete
 <hr>
 
 ### 1.5. Resources provisioned
-Nothing new.
+We will reuse the resources provisioned in technical solution 1, and only create something called 'Interactive Sessions Template'.
 
 <hr>
 
@@ -82,7 +82,7 @@ Note: The catalog component, Lakehouse runtime catalog is covered in the next te
 
 <hr>
 
-### 1.8. Lab Architecture
+### 1.8. Architecture
 
 #### 1.8.1. Managed Service for Apache Spark - Integration Landscape
 
@@ -160,7 +160,7 @@ Run the following commands in Cloud Shell to authenticate and configure your act
 gcloud init
 ```
 
-2. Set the active project target:
+2. Set the active Google Cloud project target:
 ```
 gcloud config set project <YOUR_PROJECT_ID>
 ```
