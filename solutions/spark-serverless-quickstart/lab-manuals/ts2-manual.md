@@ -106,7 +106,9 @@ A more simplistic version...
 
 <hr>
 
-#### 1.8.3. Solution Architecture
+#### 1.8.3. Lab Solution Architecture
+
+In the lab, we will simulate a data analyst that read data, transforms it a bit for analysis and visualizes it. We will read Chicago crimes public dataset in BigQuery with the Spark BigQuery connector from Google Cloud, from the different notebook flavors. We will analyze crimes and visualize them in the notebooks. Note that the lab is less about Apache Spark and more about the serverless Spark sessions support in notebooks, so the labs are basic.
 
 ![README](../images/ts2-05.png)   
 <br><br>
@@ -162,12 +164,12 @@ gcloud init
 
 2. Set the active Google Cloud project target:
 ```
-gcloud config set project <YOUR_PROJECT_ID>
+gcloud config set project <YOUR_GCP_PROJECT_ID>
 ```
 
 3. Set the quota project for ADC (Application Default Credentials):
 ```
-gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
+gcloud auth application-default set-quota-project <YOUR_GCP_PROJECT_ID>
 ```
 
 <hr>
@@ -175,9 +177,57 @@ gcloud auth application-default set-quota-project <YOUR_PROJECT_ID>
 
 ## 3.2. Setup - create an interactive sessions template for Spark Connect, for PySpark and using a Service Account 
 
+To recap - session template is to bootstrap of common configurations to standardize, reduce toil, and spped development/analysis cycles. 
+1. There is no gcloud command to create session templates, so we will use the Console.
+2. We will use a service account for the session template instead of individual user for simplicity. Our service account already has all permissions. This means that Spark will run and access data as the configured service account.
+
+### 3.2.1. Capture the service account fully qualified name (FQN)
+
+Navigate to Cloud IAM and find the service account as show below and copy it.
+
+![README](../images/ts2-06.png)   
+<br><br>
+
+### 3.2.2. Navigate to the Managed Service for Apache Spark 'session templates' UI
+
+Follow the screenshots below to navigate to the Managed Service for Apache Spark 'session templates' UI
+
+![README](../images/ts2-07a.png)   
+<br><br>
+
+![README](../images/ts2-07b.png)   
+<br><br>
+
+### 3.2.3. Create the session template
+
+Follow the screenshots below to create a session template. Ensure you make the same selections.
+
+![README](../images/ts2-08a.png)   
+<br><br>
+
+![README](../images/ts2-08b.png)   
+<br><br>
+
+![README](../images/ts2-08c.png)   
+<br><br>
+
+![README](../images/ts2-08d.png)   
+<br><br>
+
+![README](../images/ts2-08e.png)   
+<br><br>
+
+![README](../images/ts2-08f.png)   
+<br><br>
+
+![README](../images/ts2-08g.png)   
+<br><br>
+
 <hr>
 
 ## 3.3. Setup - create an interactive sessions template for Jupyter, for PySpark and using a Service Account 
+
+
 <hr>
 
 
