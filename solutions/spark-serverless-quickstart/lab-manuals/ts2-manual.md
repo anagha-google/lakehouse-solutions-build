@@ -76,7 +76,7 @@ We will reuse the resources provisioned in technical solution 1, and only create
 | 3|Colab Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Spark Connect sessions template  |
 | 4|Vertex AI Workbench creation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
 | 5|Local Jupyter server installation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
-| 6|Data Cloud Extension installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+| 6|Data Agent Kit plugin installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
 
 Note: The catalog component, Lakehouse runtime catalog is covered in the next technical solution.
 
