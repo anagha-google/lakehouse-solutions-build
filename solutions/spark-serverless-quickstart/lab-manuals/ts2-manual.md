@@ -297,6 +297,10 @@ Follow the screenshots below to stand up Gemini Enterprise Workbench instance an
 ![README](../images/ts2-10f.png)   
 <br><br>
 
+<hr>
+
+Lets try a notebook.
+
 ![README](../images/ts2-10g.png)   
 <br><br>
 
