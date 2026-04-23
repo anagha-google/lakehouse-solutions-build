@@ -89,7 +89,7 @@ Please note that this project is released with a Contributor Code of Conduct. By
 <hr>
 
 ## Authors
-This repository and content is maintained by the Google AI Ready Data Cloud Solution Architect team.
+This repository and content is maintained by the Google Agentic Data Cloud Solution Architect team.
 
 | # | Contributor  | Role |
 | -- | :-- |  :--- |
