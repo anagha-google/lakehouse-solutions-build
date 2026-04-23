@@ -117,7 +117,7 @@ A more simplistic version...
 
 #### 1.8.3. Lab Solution Architecture
 
-In the lab, we will simulate a data analyst that read data, transforms it a bit for analysis and visualizes it. We will read Chicago crimes public dataset in BigQuery with the Spark BigQuery connector from Google Cloud, from the different notebook flavors. We will analyze crimes and visualize them in the notebooks. Note that the lab is less about Apache Spark and more about the serverless Spark sessions support in notebooks, so the labs are basic.
+In the lab, we will simulate a data analyst that reads data, transforms it a bit for analysis and visualizes it. We will read Chicago crimes public dataset in BigQuery with the Spark BigQuery connector from Google Cloud, from the different notebook flavors. We will analyze crimes and visualize them in the notebooks. Note that the lab is less about Apache Spark and more about the serverless Spark sessions support in notebooks, so the labs are basic.
 
 ![README](../images/ts2-05.png)   
 <br><br>
