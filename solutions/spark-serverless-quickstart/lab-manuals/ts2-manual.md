@@ -15,7 +15,7 @@ limitations under the License.*
 
 <hr>
 
-# Technical Solution 2: Interactive notebooks with serverless Managed Service for Apache Spark on Google Cloud
+# Technical Solution 2: Spark notebooks with interactive serverless Managed Service for Apache Spark on Google Cloud
 
 ## 1.0. About the lab
 
@@ -25,7 +25,7 @@ This lab is **introductory** in nature and showcases **serverless Managed Servic
 
 |  |  | 
 | -- | :--- | 
-| Technical Focus| **Spark notebooks powered by serverless Managed Service for Apache Spark on Google Cloud** |
+| Technical Focus| **Spark notebooks powered by serverless interactive Managed Service for Apache Spark on Google Cloud** |
 | Use case |  Chicago Crimes Analysis |
 | Notebook platforms |  Colab notebooks in BigQuery Studio<br>Notebooks on Vertex AI Workbench<br>Notebooks on BYO Jupyter<br>Notebooks in VS Code |
 
@@ -51,7 +51,7 @@ The hands-on lab takes ~0.5 hours or less to complete
 ### 1.4. Prerequisites
 
 - Completion of [technical solution 1](./ts1-manual.md).
-- VS Code insatlled on your machine if you want to try out Spark notebooks powered by serverless interactive sessions
+- VS Code installed on your machine if you want to try out Spark notebooks powered by serverless interactive sessions
 
 <hr>
 
@@ -92,7 +92,7 @@ Note: The catalog component, Lakehouse runtime catalog is covered in the next te
 
 ### 1.8. Architecture
 
-#### 1.8.1. Managed Service for Apache Spark - Integration Landscape
+#### 1.8.1. Serverless Managed Service for Apache Spark - Integration Landscape
 
 Please refer to the blog post [Lakehouse Demystified - Part 2: Managed service for Apache Spark - serverless batches]() for an explanation of this diagram.
 
@@ -117,7 +117,7 @@ A more simplistic version...
 
 #### 1.8.3. Lab Solution Architecture
 
-In the lab, we will simulate a data analyst that read data, transforms it a bit for analysis and visualizes it. We will read Chicago crimes public dataset in BigQuery with the Spark BigQuery connector from Google Cloud, from the different notebook flavors. We will analyze crimes and visualize them in the notebooks. Note that the lab is less about Apache Spark and more about the serverless Spark sessions support in notebooks, so the labs are basic.
+In the lab, we will simulate a data analyst that reads data, transforms it a bit for analysis and visualizes it. We will read Chicago crimes public dataset in BigQuery with the Spark BigQuery connector from Google Cloud, from the different notebook flavors. We will analyze crimes and visualize them in the notebooks. Note that the lab is less about Apache Spark and more about the serverless Spark sessions support in notebooks, so the labs are basic.
 
 ![README](../images/ts2-05.png)   
 <br><br>
