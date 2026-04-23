@@ -64,7 +64,8 @@ L200 - L300
 ## Solutions
 | # | Solution | Description | Technical Stack |
 | :-- | :--- | :--- | :--- |
-| 1. | [Data engineering at scale on Managed Spark Serverless](./solutions/spark-serverless-quickstart/) | A quickstart guide to running Apache Spark applications on Google Cloud Platform with Airflow orchestration on managed services. | PySpark on Managed Spark Serverless Managed Airflow Serverless, BigQuery, Cloud Storage, Terraform |
+| 1. | [Data engineering at scale with Apache Spark](./solutions/spark-serverless-quickstart/lab-manuals/ts1-manual.md) | A quickstart guide to running Spark batch jobs  | PySpark on Managed Spark Serverless, BigQuery, Cloud Storage, Terraform |
+| 2. | [Spark notebooks for data analysis, and data science](./solutions/spark-serverless-quickstart/lab-manuals/ts2-manual.md) | A quickstart guide to running Spark notebooks | Same infra as above, Spark in Colab notebooks, Spark on Jupyter on Gemini Agent Platform Workbench instance, Spark on BYO Jupyter notebook, Spark notebooks in IDEs with Data Agent Kit plugin |
 
 <hr>
 
