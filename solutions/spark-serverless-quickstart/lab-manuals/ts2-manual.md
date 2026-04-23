@@ -92,7 +92,7 @@ Note: The catalog component, Lakehouse runtime catalog is covered in the next te
 
 ### 1.8. Architecture
 
-#### 1.8.1. Managed Service for Apache Spark - Integration Landscape
+#### 1.8.1. Serverless Managed Service for Apache Spark - Integration Landscape
 
 Please refer to the blog post [Lakehouse Demystified - Part 2: Managed service for Apache Spark - serverless batches]() for an explanation of this diagram.
 
