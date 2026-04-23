@@ -67,16 +67,24 @@ We will reuse the resources provisioned in [technical solution 1](./ts1-manual.m
 
 <hr>
 
-### 1.7. Features & Functionality covered
+### 1.7. Table of contents
 
-|| Features & Functionality | 
+|Section | Focus | 
 | -- | :--- | 
-| 1|Interactive sessions creation from command line and walk through of the UI |
-| 2|Interactive sessions template creation from command line and walk through of the UI |
-| 3|Colab Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Spark Connect sessions template  |
-| 4|Vertex AI Workbench creation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
-| 5|Local Jupyter server installation and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
-| 6|Data Agent Kit plugin installation in VS Code and Spark notebook execution powered by serverless interactive spark sessions, based off of configs in the Jupyter sessions template  |
+| 1.8 | [Reference architcture and lab solution architecture](./ts2-manual.md#18-architecture) |
+| 1.9 | [What to expect from this lab](./ts2-manual.md#19-lab-flow) |
+| 2.0 | [Product highlights](https://github.com/anagha-google/lakehouse-solutions-build/blob/TS2/solutions/spark-serverless-quickstart/lab-manuals/ts2-manual.md#2-product-highlights) |
+| 3.1 | [SETUP: Initialize active gcloud configuration](./ts2-manual.md#31-setup----initialize-active-gcloud-configuration) |
+| 3.2 | [SETUP: Create an interactive sessions template for Spark Connect, for PySpark and using a Service Account](./ts2-manual.md#32-setup---create-an-interactive-sessions-template-for-spark-connect-for-pyspark-and-using-a-service-account) |
+| 3.3 | [SETUP: Create an interactive sessions template for Jupyter, for PySpark and using a Service Account](./ts2-manual.md#33-setup---create-an-interactive-sessions-template-for-jupyter-for-pyspark-and-using-a-service-account) |
+| 3.4 | [SETUP: Provision Gemini Enterprise Workbench instance](./ts2-manual.md#34-setup---provision-gemini-enterprise-workbench-instance) |
+| 3.5 | [SETUP: Install local Jupyter on your machine](./ts2-manual.md#35-setup---install-local-jupyter-on-your-machine) |
+| 4.1 | [LAB: Execute a Spark notebook in Colab in BigQuery studio with Spark Connect](./ts2-manual.md#41-execute-a-spark-notebook-in-colab-in-bigquery-studio-with-spark-connect) |
+| 4.2 | [LAB: Execute a Spark notebook on Gemini Agent Platform Workbench](./ts2-manual.md#42-execute-a-spark-notebook-on-gemini-agent-platform-workbench) |
+| 4.3 | [LAB: Execute a Spark notebook on local Jupyter on your machine](./ts2-manual.md#43-execute-a-spark-notebook-on-local-jupyter-on-your-machine) |
+| 4.4 | [LAB: Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)](./ts2-manual.md#44-execute-a-spark-notebook-in-vs-code-on-your-machine-after-installing-google-cloud-data-agent-kit-extension-dak) |
+| 5.0 | [DAK: Pictorial overview of Data Agent Kit for VS Code](./ts2-manual.md#5-quick-review-of-data-agent-kit-for-vs-code) |
+
 
 Note: The catalog component, Lakehouse runtime catalog is covered in the next technical solution.
 
@@ -662,11 +670,11 @@ Follow the steps detailed in the screenshots below:
 <hr>
 <hr>
 
-## 5. Quick review of Data Agent Kit for VS Code
+## 5. Pictorial of Data Agent Kit for VS Code
 
 I have a separate blog post on DAK, but here is a visual tour.
 
-![README](../images/ts2-15w.png)   
+![README](../images/ts2-15x.png)   
 <br><br>
 
 <hr>
