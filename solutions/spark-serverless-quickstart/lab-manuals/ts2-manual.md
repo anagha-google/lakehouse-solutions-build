@@ -128,7 +128,7 @@ In the lab, we will simulate a data analyst that read data, transforms it a bit 
 Read the blog posts and the lab narrative below, review the code, and then start trying out the lab.
 
 <hr>
-
+<hr>
 
 
 # 2. Product Highlights
@@ -147,6 +147,7 @@ Interactive session templates are a construct that can be used to define the cor
 ## 2.4. Identity supported
 Interactive sessions support both User Managed Service Accounts (UMSAs - non human application IDs) as well as end user credentials (EUC). You can configure this at the session template level.
 
+<hr>
 <hr>
 
 # 3. Lab
@@ -368,7 +369,6 @@ jupyter lab
 <br><br>
 
 <hr>
-
 <hr>
 
 
@@ -378,8 +378,88 @@ In this section, we will try the [notebook](../notebooks/chicago-crimes-analytic
 
 ### 3.6.1. Navigate to Colab
 
+Follow the screnshots below to navigate to Colab.
 
+![README](../images/ts2-12a.png)   
+<br><br>
 
+![README](../images/ts2-12b.png)   
+<br><br>
+
+### 3.6.2. Upload the lab notebook
+
+1. Grab the URL for the lab notebook from [here](../notebooks/chicago-crimes-analytics.ipynb).
+
+2. Upload the notebook as shown the screenshots below-
+
+![README](../images/ts2-12c.png)   
+<br><br>
+
+![README](../images/ts2-12d.png)   
+<br><br>
+
+![README](../images/ts2-12e.png)   
+<br><br>
+
+### 3.6.3. Create a Colab runtime (compute) & connect to it
+
+Follow the screenshots below to set up a runtime & connect to it
+
+![README](../images/ts2-12f.png)   
+<br><br>
+
+![README](../images/ts2-12g.png)   
+<br><br>
+
+![README](../images/ts2-12h.png)   
+<br><br>
+
+### 3.6.4. Create a spark session off of the session template we created
+
+We created a session template for Spark Connect on [section 3.2.3](./ts2-manual.md#323-create-the-session-template). Here is how we create a spark session in the notebook that connects with a managed serverless interactive session (infrastructure) off of a predefined template.<br>
+To customize the session further, refer [docs](https://docs.cloud.google.com/bigquery/docs/use-spark).<br>
+
+1. Run the first cell to see understand what happens.
+
+![README](../images/ts2-12i.png)   
+<br><br>
+
+2. It takes 2 minutes or less to create the interactive session. 
+   
+![README](../images/ts2-12i.png)   
+<br><br>
+
+3. Run the second cell
+
+![README](../images/ts2-12n.png)   
+<br><br> 
+
+4. From the first executable cell, click on 'View Session Details'
+
+![README](../images/ts2-12j.png)   
+<br><br>
+
+5. It opens the serverless 'Interactive Sessions' UI of the Managed Service for Apache Spark product. Click on 'View Spark UI'
+
+![README](../images/ts2-12k.png)   
+<br><br>
+
+![README](../images/ts2-12l.png)   
+<br><br>
+
+6. It opens the serverless managed Spark UI
+
+![README](../images/ts2-12m.png)   
+<br><br>
+
+7. Run the rest of the notebook
+
+![README](../images/ts2-12o.png)   
+<br><br>
+
+The BigQuery Spark connector was used to query Bigquery. This concludes the tutorial for Spark in Colab notebook.
+   
+<hr>
 <hr>
 
 ## 3.7. Execute a Spark notebook on Vertex AI Workbench with Jupyter
