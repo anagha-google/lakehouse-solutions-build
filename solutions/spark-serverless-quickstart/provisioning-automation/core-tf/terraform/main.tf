@@ -69,7 +69,9 @@ module "umsa_role_grants" {
     "roles/bigquery.dataEditor",
     "roles/bigquery.admin",
     "roles/composer.worker",
-    "roles/composer.admin"
+    "roles/composer.admin",
+    "roles/aiplatform.admin",
+    "roles/aiplatform.user"
   ]
   depends_on = [
     module.umsa_creation
@@ -313,7 +315,21 @@ resource "google_storage_bucket_object" "pyspark_scripts_upload_to_gcs" {
 }
 
 /******************************************
-8b. Copy the Airflow DAG scripts to s8s_data_and_code_bucket
+8b. Copy the notebooks scripts to s8s_data_and_code_bucket
+ *****************************************/
+
+resource "google_storage_bucket_object" "notebooks_upload_to_gcs" {
+  for_each = fileset("../notebooks/", "*")
+  source = "../notebooks/${each.value}"
+  name = "notebooks/${each.value}"
+  bucket = "${local.s8s_data_and_code_bucket}"
+  depends_on = [
+    time_sleep.sleep_after_bucket_creation
+  ]
+}
+
+/******************************************
+8c. Copy the Airflow DAG scripts to s8s_data_and_code_bucket
  *****************************************/
 
 resource "google_storage_bucket_object" "airflow_dag_upload_to_gcs" {
@@ -326,7 +342,7 @@ resource "google_storage_bucket_object" "airflow_dag_upload_to_gcs" {
 }
 
 /******************************************
-8c. Copy the data to s8s_data_and_code_bucket
+8d. Copy the data to s8s_data_and_code_bucket
  *****************************************/
 
 resource "google_storage_bucket_object" "csv_files_upload_to_gcs" {
