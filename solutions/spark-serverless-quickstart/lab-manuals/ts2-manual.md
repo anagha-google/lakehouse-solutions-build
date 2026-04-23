@@ -150,7 +150,7 @@ Interactive sessions support both User Managed Service Accounts (UMSAs - non hum
 <hr>
 <hr>
 
-# 3. Lab
+# 3. Lab Setup
 
 <hr>
 
@@ -371,12 +371,17 @@ jupyter lab
 <hr>
 <hr>
 
+# 4. Lab
 
-## 3.6. Execute a Spark notebook in Colab in BigQuery studio with Spark Connect
+<h4>
+
+
+
+## 4.1. Execute a Spark notebook in Colab in BigQuery studio with Spark Connect
 
 In this section, we will try the [notebook](../notebooks/chicago-crimes-analytics.ipynb) in Colab in BigQuery studio.
 
-### 3.6.1. Navigate to Colab
+### 4.1.1. Navigate to Colab
 
 Follow the screnshots below to navigate to Colab.
 
@@ -386,7 +391,7 @@ Follow the screnshots below to navigate to Colab.
 ![README](../images/ts2-12b.png)   
 <br><br>
 
-### 3.6.2. Upload the lab notebook
+### 4.1.2. Upload the lab notebook
 
 1. Grab the URL for the lab notebook from [here](../notebooks/chicago-crimes-analytics-spark-connect.ipynb).
 
@@ -401,7 +406,7 @@ Follow the screnshots below to navigate to Colab.
 ![README](../images/ts2-12e.png)   
 <br><br>
 
-### 3.6.3. Create a Colab runtime (compute) & connect to it
+### 4.1.3. Create a Colab runtime (compute) & connect to it
 
 Follow the screenshots below to set up a runtime & connect to it
 
@@ -414,7 +419,7 @@ Follow the screenshots below to set up a runtime & connect to it
 ![README](../images/ts2-12h.png)   
 <br><br>
 
-### 3.6.4. Create a spark session off of the session template we created
+### 4.1.4. Create a spark session off of the session template we created
 
 We created a session template for Spark Connect on [section 3.2.3](./ts2-manual.md#323-create-the-session-template). Here is how we create a spark session in the notebook that connects with a managed serverless interactive session (infrastructure) off of a predefined template.<br>
 To customize the session further, refer [docs](https://docs.cloud.google.com/bigquery/docs/use-spark).<br>
@@ -462,7 +467,7 @@ The BigQuery Spark connector was used to query Bigquery. This concludes the tuto
 <hr>
 <hr>
 
-## 3.7. Execute a Spark notebook on Gemini Agent Platform Workbench 
+## 4.2. Execute a Spark notebook on Gemini Agent Platform Workbench 
 In section [3.4](./ts2-manual.md#34-setup---provision-gemini-enterprise-workbench-instance), we created a workbench instance. Lets upload the crimes notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) and execute it, this time with Jupyter kernel.<br>
 Note: File-Open from URL option does not work. Please download the notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) to local, we will upload from local.
 
@@ -515,10 +520,10 @@ Note: File-Open from URL option does not work. Please download the notebook [her
 This concludes the tutorial for Spark notebooks in Gemini Agent Platform Workbench instance.
 
 <hr>
+<hr>
 
 
-
-## 3.8. Execute a Spark notebook on local Jupyter on your machine
+## 4.3. Execute a Spark notebook on local Jupyter on your machine
 
 In section [3.5](./ts2-manual.md#35-setup---install-local-jupyter-on-your-machine), we installed local Jupyter. Lets upload the same notebook as the section 3.7 in the Jupyter UI.
 
@@ -550,9 +555,9 @@ This concludes the tutorial for Spark notebooks in local Jupyter.
 <hr>
 <hr>
 
-## 3.8. Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)
+## 4.4. Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)
 
-### 3.8.1. Install Google Cloud Data Agent Kit extension (DAK) in VS Code
+### 4.4.1. Install Google Cloud Data Agent Kit extension (DAK) in VS Code
 
 Install VS Code if you dont already have it, and then follow the steps below.
 
@@ -570,7 +575,7 @@ Install VS Code if you dont already have it, and then follow the steps below.
 
 <hr>
 
-### 3.8.2. Login to Google Cloud in VS Code
+### 4.4.2. Login to Google Cloud in VS Code
 
 ![README](../images/ts2-15i.png)   
 <br><br>
@@ -589,7 +594,7 @@ Install VS Code if you dont already have it, and then follow the steps below.
 
 <hr>
 
-### 3.8.3. Configure your Google Cloud project and location
+### 4.4.3. Configure your Google Cloud project and location
 
 ![README](../images/ts2-15j.png)   
 <br><br>
@@ -602,7 +607,7 @@ Install VS Code if you dont already have it, and then follow the steps below.
 
 
 
-### 3.8.4. Clone this repo locally and open it in VS Code
+### 4.4.4. Clone this repo locally and open it in VS Code
 
 ![README](../images/ts2-15m.png)   
 <br><br>
@@ -615,7 +620,7 @@ Install VS Code if you dont already have it, and then follow the steps below.
 
 <hr>
 
-### 3.8.5. Open the lab notebook for Jupyter
+### 4.4.5. Open the lab notebook for Jupyter
 
 Follow the steps detailed in the screenshots below:
 
@@ -624,7 +629,7 @@ Follow the steps detailed in the screenshots below:
 
 <hr>
 
-### 3.8.6. Select remote kernel & connect
+### 4.4.6. Select remote kernel & connect
 
 Follow the steps detailed in the screenshots below:
 
@@ -646,7 +651,7 @@ Follow the steps detailed in the screenshots below:
 
 <hr>
 
-### 3.8.7. Run the notebook
+### 4.4.7. Run the notebook
 
 ![README](../images/ts2-15v.png)   
 <br><br>
@@ -657,7 +662,7 @@ Follow the steps detailed in the screenshots below:
 <hr>
 <hr>
 
-## 3.9. Quick review of Data Agent Kit for VS Code
+## 5. Quick review of Data Agent Kit for VS Code
 
 I have a separate blog post on DAK, but here is a visual tour.
 
