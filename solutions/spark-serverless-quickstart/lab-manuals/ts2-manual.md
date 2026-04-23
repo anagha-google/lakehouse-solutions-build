@@ -83,7 +83,7 @@ We will reuse the resources provisioned in [technical solution 1](./ts1-manual.m
 | 4.2 | [LAB: Execute a Spark notebook on Gemini Agent Platform Workbench](./ts2-manual.md#42-execute-a-spark-notebook-on-gemini-agent-platform-workbench) |
 | 4.3 | [LAB: Execute a Spark notebook on local Jupyter on your machine](./ts2-manual.md#43-execute-a-spark-notebook-on-local-jupyter-on-your-machine) |
 | 4.4 | [LAB: Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)](./ts2-manual.md#44-execute-a-spark-notebook-in-vs-code-on-your-machine-after-installing-google-cloud-data-agent-kit-extension-dak) |
-| 5.0 | [DAK: Pictorial overview of Data Agent Kit for VS Code](./ts2-manual.md#5-quick-review-of-data-agent-kit-for-vs-code) |
+| 5.0 | [DAK: Pictorial overview of Data Agent Kit for VS Code](./ts2-manual.md##5-quick-review-of-data-agent-kit-for-vs-code) |
 
 
 Note: The catalog component, Lakehouse runtime catalog is covered in the next technical solution.
