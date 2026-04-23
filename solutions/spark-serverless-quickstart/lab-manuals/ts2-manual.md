@@ -388,7 +388,7 @@ Follow the screnshots below to navigate to Colab.
 
 ### 3.6.2. Upload the lab notebook
 
-1. Grab the URL for the lab notebook from [here](../notebooks/chicago-crimes-analytics.ipynb).
+1. Grab the URL for the lab notebook from [here](../notebooks/chicago-crimes-analytics-spark-connect.ipynb).
 
 2. Upload the notebook as shown the screenshots below-
 
@@ -462,7 +462,46 @@ The BigQuery Spark connector was used to query Bigquery. This concludes the tuto
 <hr>
 <hr>
 
-## 3.7. Execute a Spark notebook on Vertex AI Workbench with Jupyter
+## 3.7. Execute a Spark notebook on Gemini Agent Platform Workbench 
+In section [3.4](./ts2-manual.md#34-setup---provision-gemini-enterprise-workbench-instance), we created a workbench instance. Lets upload the crimes notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) and execute it, this time with Jupyter kernel.<br>
+Note: File-Open from URL option does not work. Please download the notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) to local, we will upload from local.
+
+![README](../images/ts2-13a.png)   
+<br><br>
+
+![README](../images/ts2-13b.png)   
+<br><br>
+
+![README](../images/ts2-13c.png)   
+<br><br>
+
+![README](../images/ts2-13d.png)   
+<br><br>
+
+![README](../images/ts2-13e.png)   
+<br><br>
+
+![README](../images/ts2-13f.png)   
+<br><br>
+
+![README](../images/ts2-13g.png)   
+<br><br>
+
+![README](../images/ts2-13h.png)   
+<br><br>
+
+![README](../images/ts2-13i.png)   
+<br><br>
+
+![README](../images/ts2-13j.png)   
+<br><br>
+
+![README](../images/ts2-13a.png)   
+<br><br>
+
+![README](../images/ts2-13a.png)   
+<br><br>
+
 
 
 <hr>
