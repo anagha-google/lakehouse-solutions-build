@@ -99,6 +99,7 @@ Please refer to the blog post [Lakehouse Demystified - Part 2: Managed service f
 ![README](../images/ts2-02.png)   
 <br><br>
 
+<hr>
 
 #### 1.8.2. Reference Architecture
 
