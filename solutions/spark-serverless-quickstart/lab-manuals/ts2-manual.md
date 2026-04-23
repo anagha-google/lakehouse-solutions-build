@@ -71,9 +71,9 @@ We will reuse the resources provisioned in [technical solution 1](./ts1-manual.m
 
 |Section | Focus | 
 | -- | :--- | 
-| 1.8 | [Reference architcture and lab solution architecture](./ts2-manual.md#18-architecture) |
-| 1.9 | [What to expect from this lab](./ts2-manual.md#19-lab-flow) |
-| 2.0 | [Product highlights](https://github.com/anagha-google/lakehouse-solutions-build/blob/TS2/solutions/spark-serverless-quickstart/lab-manuals/ts2-manual.md#2-product-highlights) |
+| 1.8 | [ARCHITECTURE: Reference architcture and lab solution architecture](./ts2-manual.md#18-architecture) |
+| 1.9 | [ABOUT THE LAB: What to expect from this lab](./ts2-manual.md#19-lab-flow) |
+| 2.0 | [PRODUCT: Highlights of the featured product](https://github.com/anagha-google/lakehouse-solutions-build/blob/TS2/solutions/spark-serverless-quickstart/lab-manuals/ts2-manual.md#2-product-highlights) |
 | 3.1 | [SETUP: Initialize active gcloud configuration](./ts2-manual.md#31-setup----initialize-active-gcloud-configuration) |
 | 3.2 | [SETUP: Create an interactive sessions template for Spark Connect, for PySpark and using a Service Account](./ts2-manual.md#32-setup---create-an-interactive-sessions-template-for-spark-connect-for-pyspark-and-using-a-service-account) |
 | 3.3 | [SETUP: Create an interactive sessions template for Jupyter, for PySpark and using a Service Account](./ts2-manual.md#33-setup---create-an-interactive-sessions-template-for-jupyter-for-pyspark-and-using-a-service-account) |
@@ -83,7 +83,7 @@ We will reuse the resources provisioned in [technical solution 1](./ts1-manual.m
 | 4.2 | [LAB: Execute a Spark notebook on Gemini Agent Platform Workbench](./ts2-manual.md#42-execute-a-spark-notebook-on-gemini-agent-platform-workbench) |
 | 4.3 | [LAB: Execute a Spark notebook on local Jupyter on your machine](./ts2-manual.md#43-execute-a-spark-notebook-on-local-jupyter-on-your-machine) |
 | 4.4 | [LAB: Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)](./ts2-manual.md#44-execute-a-spark-notebook-in-vs-code-on-your-machine-after-installing-google-cloud-data-agent-kit-extension-dak) |
-| 5.0 | [OICTORIAL OVERVIEW: Data Agent Kit extension for VS Code](./ts2-manual.md##5-quick-review-of-data-agent-kit-for-vs-code) |
+| 5.0 | [PICTORIAL OVERVIEW: Data Agent Kit extension for VS Code](./ts2-manual.md#5-pictorial-overview-of-google-clouds-data-agent-kit-for-vs-code) |
 
 
 Note: The catalog component, Lakehouse runtime catalog is covered in the next technical solution.
