@@ -466,8 +466,14 @@ The BigQuery Spark connector was used to query Bigquery. This concludes the tuto
 In section [3.4](./ts2-manual.md#34-setup---provision-gemini-enterprise-workbench-instance), we created a workbench instance. Lets upload the crimes notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) and execute it, this time with Jupyter kernel.<br>
 Note: File-Open from URL option does not work. Please download the notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) to local, we will upload from local.
 
+1. Open 'JupyterLab' on your workbench instance
+
 ![README](../images/ts2-13a.png)   
 <br><br>
+
+2. Download the notebook [here](../notebooks/chicago-crimes-analytics-jupyter.ipynb) locally.
+
+3. Upload the notebook from local
 
 ![README](../images/ts2-13b.png)   
 <br><br>
@@ -475,14 +481,29 @@ Note: File-Open from URL option does not work. Please download the notebook [her
 ![README](../images/ts2-13c.png)   
 <br><br>
 
+4. Choose the interactive session kernel
+
 ![README](../images/ts2-13d.png)   
+<br><br>
+
+![README](../images/ts2-13f.png)   
 <br><br>
 
 ![README](../images/ts2-13e.png)   
 <br><br>
 
-![README](../images/ts2-13f.png)   
+5. Open another browser tab and navigate to the Managed Service for Apache Spark interactive session UI
+
+![README](../images/ts2-13i.png)   
 <br><br>
+
+6. Switch back to Jupyter, you should see the kernel ready
+
+![README](../images/ts2-13j.png)   
+<br><br>
+
+7. Run all cells
+
 
 ![README](../images/ts2-13g.png)   
 <br><br>
@@ -490,28 +511,22 @@ Note: File-Open from URL option does not work. Please download the notebook [her
 ![README](../images/ts2-13h.png)   
 <br><br>
 
-![README](../images/ts2-13i.png)   
-<br><br>
 
-![README](../images/ts2-13j.png)   
-<br><br>
+This concludes the tutorial for Spark notebooks in Gemini Agent Platform Workbench instance.
 
-![README](../images/ts2-13a.png)   
-<br><br>
+<hr>
 
-![README](../images/ts2-13a.png)   
-<br><br>
+
+
+## 3.8. Execute a Spark notebook on local Jupyter on your machine
+
+In section x.x, we installed local Jupyter. Lets upload the same notebook as the section 3.7 in the Jupyter UI.
 
 
 
 <hr>
 
 ## 3.8. Execute a Spark notebook in VS Code on your machine
-
-
-<hr>
-
-## 3.9. Execute a Spark notebook on local Jupyter on your machine
 
 
 <hr>
