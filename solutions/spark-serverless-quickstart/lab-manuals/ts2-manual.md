@@ -15,7 +15,7 @@ limitations under the License.*
 
 <hr>
 
-# Technical Solution 2: Interactive notebooks with serverless Managed Service for Apache Spark on Google Cloud
+# Technical Solution 2: Spark notebooks with interactive serverless Managed Service for Apache Spark on Google Cloud
 
 ## 1.0. About the lab
 
