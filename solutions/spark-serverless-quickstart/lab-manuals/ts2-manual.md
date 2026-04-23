@@ -50,13 +50,13 @@ The hands-on lab takes ~0.5 hours or less to complete
 
 ### 1.4. Prerequisites
 
-- Completion of Technical Solution 1.
+- Completion of [Technical Solution 1](./ts1-manual.md).
 - VS Code insatlled on your machine if you want to try out Spark notebooks powered by serverless interactive sessions
 
 <hr>
 
 ### 1.5. Resources provisioned
-We will reuse the resources provisioned in technical solution 1, and only create something called 'Interactive Sessions Template'.
+We will reuse the resources provisioned in [technical solution 1](./ts1-manual.md), and only create something called 'Interactive Sessions Template'.
 
 <hr>
 
@@ -155,7 +155,7 @@ Interactive sessions support both User Managed Service Accounts (UMSAs - non hum
 
 ## 3.1. Setup -  initialize active gcloud configuration
 
-Run the following commands in Cloud Shell to authenticate and configure your active project:
+Run the following commands in Cloud Shell to authenticate and configure your active project. Ensure its the same project as technical solution 1.
 
 1. Initialization:
 ```
