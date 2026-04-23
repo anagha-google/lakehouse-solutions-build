@@ -520,8 +520,32 @@ This concludes the tutorial for Spark notebooks in Gemini Agent Platform Workben
 
 ## 3.8. Execute a Spark notebook on local Jupyter on your machine
 
-In section x.x, we installed local Jupyter. Lets upload the same notebook as the section 3.7 in the Jupyter UI.
+In section [3.5](./ts2-manual.md#35-setup---install-local-jupyter-on-your-machine), we installed local Jupyter. Lets upload the same notebook as the section 3.7 in the Jupyter UI.
 
+1. Upload the notebook like you did in the previous section.
+
+![README](../images/ts2-14a.png)   
+<br><br>
+
+![README](../images/ts2-14b.png)   
+<br><br>
+   
+3. Note the remote kernel automatically starting - defaults to the session template for Jupyter
+
+![README](../images/ts2-14c.png)   
+<br><br>
+
+4. Note the interactive session being created
+
+![README](../images/ts2-14d.png)   
+<br><br>
+
+6. Run the entire notebook like you did in the previous section.
+
+![README](../images/ts2-14e.png)   
+<br><br>
+
+This concludes the tutorial for Spark notebooks in local Jupyter.
 
 
 <hr>
