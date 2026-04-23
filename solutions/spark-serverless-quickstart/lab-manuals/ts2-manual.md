@@ -369,10 +369,15 @@ jupyter lab
 
 <hr>
 
-
+<hr>
 
 
 ## 3.6. Execute a Spark notebook in Colab in BigQuery studio with Spark Connect
+
+In this section, we will try the [notebook](../notebooks/chicago-crimes-analytics.ipynb) in Colab in BigQuery studio.
+
+### 3.6.1. Navigate to Colab
+
 
 
 <hr>
