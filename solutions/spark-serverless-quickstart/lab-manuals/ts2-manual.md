@@ -540,7 +540,7 @@ In section [3.5](./ts2-manual.md#35-setup---install-local-jupyter-on-your-machin
 ![README](../images/ts2-14d.png)   
 <br><br>
 
-6. Run the entire notebook like you did in the previous section.
+5. Run the entire notebook like you did in the previous section.
 
 ![README](../images/ts2-14e.png)   
 <br><br>
@@ -550,8 +550,37 @@ This concludes the tutorial for Spark notebooks in local Jupyter.
 
 <hr>
 
-## 3.8. Execute a Spark notebook in VS Code on your machine
+## 3.8. Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)
 
+### 3.8.1. Install Google Cloud Data Agent Kit extension (DAK) in VS Code
+
+Install VS Code if you dont already have it, and then follow the steps below.
+
+![README](../images/ts2-15a.png)   
+<br><br>
+
+![README](../images/ts2-15b.png)   
+<br><br>
+
+![README](../images/ts2-15c.png)   
+<br><br>
+
+![README](../images/ts2-15d.png)   
+<br><br>
+
+### 3.8.2. Login to Google Cloud
+
+![README](../images/ts2-15e.png)   
+<br><br>
+
+![README](../images/ts2-15f.png)   
+<br><br>
+
+![README](../images/ts2-15g.png)   
+<br><br>
+
+![README](../images/ts2-15h.png)   
+<br><br>
 
 <hr>
 
