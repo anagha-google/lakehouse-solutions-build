@@ -547,7 +547,7 @@ In section [3.5](./ts2-manual.md#35-setup---install-local-jupyter-on-your-machin
 
 This concludes the tutorial for Spark notebooks in local Jupyter.
 
-
+<hr>
 <hr>
 
 ## 3.8. Execute a Spark notebook in VS Code on your machine after installing Google Cloud Data Agent Kit extension (DAK)
@@ -568,7 +568,12 @@ Install VS Code if you dont already have it, and then follow the steps below.
 ![README](../images/ts2-15d.png)   
 <br><br>
 
-### 3.8.2. Login to Google Cloud
+<hr>
+
+### 3.8.2. Login to Google Cloud in VS Code
+
+![README](../images/ts2-15i.png)   
+<br><br>
 
 ![README](../images/ts2-15e.png)   
 <br><br>
@@ -584,8 +589,83 @@ Install VS Code if you dont already have it, and then follow the steps below.
 
 <hr>
 
+### 3.8.3. Configure your Google Cloud project and location
+
+![README](../images/ts2-15j.png)   
+<br><br>
+
+![README](../images/ts2-15k.png)   
+<br><br>
+
+![README](../images/ts2-15l.png)   
+<br><br>
 
 
+
+### 3.8.4. Clone this repo locally and open it in VS Code
+
+![README](../images/ts2-15m.png)   
+<br><br>
+
+![README](../images/ts2-15n.png)   
+<br><br>
+
+![README](../images/ts2-15o.png)   
+<br><br>
+
+<hr>
+
+### 3.8.5. Open the lab notebook for Jupyter
+
+Follow the steps detailed in the screenshots below:
+
+![README](../images/ts2-15p.png)   
+<br><br>
+
+<hr>
+
+### 3.8.6. Select remote kernel & connect
+
+Follow the steps detailed in the screenshots below:
+
+![README](../images/ts2-15q.png)   
+<br><br>
+
+![README](../images/ts2-15r.png)   
+<br><br>
+
+![README](../images/ts2-15s.png)   
+<br><br>
+
+![README](../images/ts2-15t.png)   
+<br><br>
+
+![README](../images/ts2-15u.png)   
+<br><br>
+
+
+<hr>
+
+### 3.8.7. Run the notebook
+
+![README](../images/ts2-15v.png)   
+<br><br>
+
+![README](../images/ts2-15w.png)   
+<br><br>
+
+<hr>
+<hr>
+
+## 3.9. Quick review of Data Agent Kit for VS Code
+
+I have a separate blog post on DAK, but here is a visual tour.
+
+![README](../images/ts2-15w.png)   
+<br><br>
+
+<hr>
+<hr>
 
 
 ##### =====================================================================================================
