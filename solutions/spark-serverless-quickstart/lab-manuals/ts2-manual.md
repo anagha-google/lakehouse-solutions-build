@@ -674,8 +674,21 @@ Follow the steps detailed in the screenshots below:
 
 I have a separate blog post on DAK, but here is a visual tour.
 
+### 5.1. Features at a glance
 ![README](../images/ts2-15x.png)   
 <br><br>
+
+### 5.2. Skills at a glance
+
+![README](../images/ts2-15y.png)   
+<br><br>
+
+![README](../images/ts2-15z.png)   
+<br><br>
+
+![README](../images/ts2-15aa.png)   
+<br><br>
+
 
 <hr>
 <hr>
