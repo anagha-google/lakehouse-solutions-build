@@ -25,7 +25,7 @@ This lab is **introductory** in nature and showcases **serverless Managed Servic
 
 |  |  | 
 | -- | :--- | 
-| Technical Focus| **Spark notebooks powered by serverless Managed Service for Apache Spark on Google Cloud** |
+| Technical Focus| **Spark notebooks powered by serverless interactive Managed Service for Apache Spark on Google Cloud** |
 | Use case |  Chicago Crimes Analysis |
 | Notebook platforms |  Colab notebooks in BigQuery Studio<br>Notebooks on Vertex AI Workbench<br>Notebooks on BYO Jupyter<br>Notebooks in VS Code |
 
