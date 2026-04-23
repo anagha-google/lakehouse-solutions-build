@@ -670,7 +670,7 @@ Follow the steps detailed in the screenshots below:
 <hr>
 <hr>
 
-## 5. Pictorial of Data Agent Kit for VS Code
+## 5. Pictorial overview of Google Cloud's Data Agent Kit for VS Code
 
 I have a separate blog post on DAK, but here is a visual tour.
 
