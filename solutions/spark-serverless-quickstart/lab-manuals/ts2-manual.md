@@ -50,7 +50,7 @@ The hands-on lab takes ~0.5 hours or less to complete
 
 ### 1.4. Prerequisites
 
-- Completion of [Technical Solution 1](./ts1-manual.md).
+- Completion of [technical solution 1](./ts1-manual.md).
 - VS Code insatlled on your machine if you want to try out Spark notebooks powered by serverless interactive sessions
 
 <hr>
