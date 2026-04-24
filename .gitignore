@@ -1,7 +1,7 @@
 # Local .terraform directories
 **/.terraform/*
 .terraform/
-terraform.zip
+**/terraform.zip
 
 # .tfstate files
 *.tfstate
@@ -50,6 +50,11 @@ __pycache__/
 *.py[cod]
 *.pyc
 *$py.class
+
+# Antigravity module
+antigravity.pyc
+antigravity.so
+/.antigravity
 **/dist
 /tmp
 /out-tsc
