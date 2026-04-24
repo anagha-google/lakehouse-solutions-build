@@ -20,7 +20,7 @@ Welcome to the **Google Cloud Lakehouse Solution** repository!
 This is a repository of Lakehouse (horizontal) solutions powered by Google Cloud products with robust open-source support. 
 
 ## Motivation
-The primary motivation of this repository is to demystify the Lakehouse stack on Google Cloud. By providing concrete, deployable examples and solutions, we aim to share reference architectures, design patterns, and best practices for building scalable, modern data platforms on Google Cloud using an open ecosystem.
+The primary motivation of this repository is to demystify the lakehouse stack on Google Cloud. By providing simple, concrete, deployable sample solutions, reference architecture, design patterns, and best practices for building lakehouses on Google Cloud using an open ecosystem we hope to simplify your lakehouse adoption journey on Google Cloud.
 
 <hr>
 
@@ -101,9 +101,9 @@ This repository and content is maintained by the Google Agentic Data Cloud Solut
 ## Credits
 Special thanks to all the contributors, partners, and the open-source community who have supported and provided feedback on these reference architectures.
 
-| # | Name | Contribution |
-| -- | :-- |  :--- |
-| 1. |  |  |
+| # | Name | Role | Contribution type |
+| -- | :-- |  :--- | :--- |
+|  |  |  | |
 
 <hr>
 
